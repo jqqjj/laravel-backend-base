@@ -1,7 +1,7 @@
 <?php
 
 
-$router->group(['prefix' => 'admin', 'namespace' => 'Admin'], function($router){
+$router->group(['prefix' => 'admin', 'namespace' => 'Backend'], function($router){
     
     $router->get('/', function(){
         return redirect()->route("adminindex");

@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
