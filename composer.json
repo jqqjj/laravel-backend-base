@@ -9,13 +9,13 @@
             "email": "jqqjj@qq.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
 		"illuminate/support": "~5.2"
 	},
 	"autoload": {
 		"psr-4": {
-		  "Jqqjj\\LaravelBackendBase\\": "src/"
+		  "Jqqjj\\BackendBase\\": "src/"
 		}
 	}
 }
