@@ -1,0 +1,21 @@
+{
+    "name": "jqqjj/laravel-backend-base",
+    "description": "This is a backend base of laravel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jason",
+            "email": "jqqjj@qq.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+		"illuminate/support": "~5.0"
+	},
+	"autoload": {
+		"psr-4": {
+		  "Jqqjj\\LaravelBackendBase\\": "src/"
+		}
+	}
+}
