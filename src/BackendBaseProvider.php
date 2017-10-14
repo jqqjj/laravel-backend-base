@@ -19,21 +19,21 @@ class BackendBaseProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . "facades"=> app_path("Facades"),
-            __DIR__ . "helpers"=> app_path("Helpers"),
-            __DIR__ . "business"=> app_path("Http/Business"),
-            __DIR__ . "controllers"=> app_path("Http/Controllers"),
-            __DIR__ . "middleware"=> app_path("Http/Middleware"),
-            __DIR__ . "view-helper"=> app_path("Http/ViewHelper"),
-            __DIR__ . "model"=> app_path("Model"),
-            __DIR__ . "config"=> base_path("config"),
-            __DIR__ . "database/migrations"=> database_path("migrations"),
-            __DIR__ . "database/seeds"=> database_path("seeds"),
-            __DIR__ . "public/css"=> public_path("css"),
-            __DIR__ . "public/js"=> public_path("js"),
-            __DIR__ . "public/images"=> public_path("images"),
-            __DIR__ . "views"=> resource_path("views"),
-            __DIR__ . "routes"=> base_path("routes"),
+            __DIR__ . "/facades"=> app_path("Facades"),
+            __DIR__ . "/helpers"=> app_path("Helpers"),
+            __DIR__ . "/business"=> app_path("Http/Business"),
+            __DIR__ . "/controllers"=> app_path("Http/Controllers"),
+            __DIR__ . "/middleware"=> app_path("Http/Middleware"),
+            __DIR__ . "/view-helper"=> app_path("Http/ViewHelper"),
+            __DIR__ . "/model"=> app_path("Model"),
+            __DIR__ . "/config"=> base_path("config"),
+            __DIR__ . "/database/migrations"=> database_path("migrations"),
+            __DIR__ . "/database/seeds"=> database_path("seeds"),
+            __DIR__ . "/public/css"=> public_path("css"),
+            __DIR__ . "/public/js"=> public_path("js"),
+            __DIR__ . "/public/images"=> public_path("images"),
+            __DIR__ . "/views"=> resource_path("views"),
+            __DIR__ . "/routes"=> base_path("routes"),
         ]);
         
         Blade::directive('permission', function($expression){
