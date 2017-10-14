@@ -51,7 +51,7 @@ class BackendBaseProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('admin_response_message', function(){
+        $this->app->bind('backend_response_message', function(){
             return new BackendResponseMessage();
         });
         $this->app->bind('pagination', function(){

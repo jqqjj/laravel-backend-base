@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Business\RoleBusiness;
 use App\Http\Business\RolePermissionsBusiness;
 use Illuminate\Support\Facades\Validator;
-use App\Facades\AdminMessage as Message;
+use App\Facades\BackendMessage as Message;
 use App\Facades\Pagination;
 
 class RoleController extends Controller

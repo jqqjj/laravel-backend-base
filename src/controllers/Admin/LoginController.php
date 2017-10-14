@@ -11,7 +11,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Facades\AdminMessage as Message;
+use App\Facades\BackendMessage as Message;
 
 class LoginController extends Controller
 {

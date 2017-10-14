@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use App\Facades\AdminMessage as Message;
+use App\Facades\BackendMessage as Message;
 
 class Permission
 {

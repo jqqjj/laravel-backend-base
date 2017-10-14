@@ -8,7 +8,7 @@ use App\Http\Business\AdminBusiness;
 use App\Http\Business\RoleBusiness;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Facades\AdminMessage as Message;
+use App\Facades\BackendMessage as Message;
 use App\Facades\Pagination;
 
 class AdminController extends Controller
