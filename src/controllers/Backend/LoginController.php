@@ -27,13 +27,12 @@ class LoginController extends Controller
     {
         $name = $reqeust->get('username');
         $password = $reqeust->get('password');
-        if (Auth::guard('backend')->attempt(['name' => $name, 'password' => $password])) {
-            $admin = Auth::guard('backend')->user();
-            if(!$admin->enabled){
-                Auth::guard('backend')->logout();
-                return Message::error('账号被冻结', ['label'=>'','url'=>route('adminindex')]);
-            }
+        $remember = $reqeust->get('remember');
+        if (Auth::guard('backend')->attempt(['name' => $name, 'password' => $password,'enabled'=>1],(bool)$remember)) {
             return redirect()->route("adminindex");
+        }
+        elseif (Auth::guard('backend')->attempt(['name' => $name, 'password' => $password],false,false)) {
+            return Message::error('账号被冻结', ['label'=>'','url'=>route('adminindex')]);
         }
         else{
             return Message::error('账号或者密码错误', ['label'=>'','url'=>route('adminindex')]);
