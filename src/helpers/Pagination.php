@@ -40,7 +40,7 @@ class Pagination
      */
     public function paginate(Builder $builder,array $condition=[])
     {
-        $page_size = !empty($condition['page_size']) ? $condition['page_size'] : config("site.list.page_size");
+        $page_size = !empty($condition['page_size']) ? $condition['page_size'] : config("backend.list.page_size");
         return $this->sort($builder,$condition)->paginate($page_size);
     }
     
