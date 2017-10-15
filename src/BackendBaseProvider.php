@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Blade;
 use App\Helpers\BackendResponseMessage;
 use App\Helpers\Pagination;
 use App\Helpers\Documents;
+use App\Helpers\Human;
 use App\Http\ViewHelper\Base\ViewHelper;
 
 class BackendBaseProvider extends ServiceProvider
@@ -59,6 +60,9 @@ class BackendBaseProvider extends ServiceProvider
         });
         $this->app->bind('documents', function(){
             return new Documents();
+        });
+        $this->app->bind('human', function(){
+            return new Human();
         });
         
         $this->app->singleton('viewhelper', ViewHelper::class);
