@@ -2,14 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="verydows-baseurl" content="http://verydows.me">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <title>面板</title>
-<link rel="stylesheet" type="text/css" href="{{asset('css/verydows.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('css/backend.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('css/dashboard.css')}}" />
 <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/verydows.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/backend.js')}}"></script>
 </head>
 <body>
 <div class="content">

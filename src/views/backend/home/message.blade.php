@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <title>温馨提示</title>
-<link rel="stylesheet" type="text/css" href="{{asset('css/verydows.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('css/backend.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}" />
 <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
 <script type="text/javascript">

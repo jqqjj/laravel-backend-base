@@ -94,21 +94,16 @@ function random_chars(length){
   //表单验证
   $.fn.vdsFormChecker = function(options){
     var defaults = {
-      isSubmit: true,
       beforeSubmit: function(){},
     }, opts = $.extend(defaults, options);
     
     var form = this;
     
-    if(form.find('span.vdsfielderr').size() == 0){
-      if(opts.isSubmit){
+    if(form.find('span.vdsfielderr').size() === 0){
         if($.isFunction(opts.beforeSubmit)){
           opts.beforeSubmit.apply(this, arguments);
         }
-        this.submit();
-      }else{
         return true;
-      }
     }
     return false;
   }

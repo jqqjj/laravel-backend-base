@@ -4,10 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <title>添加新角色</title>
-<link rel="stylesheet" type="text/css" href="{{asset('css/verydows.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('css/backend.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}" />
 <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/verydows.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/backend.js')}}"></script>
 </head>
 <body>
 <script type="text/javascript">
@@ -19,13 +19,14 @@ $(function(){
     }else{
       cbs.prop('checked', false);
     }
+    
+    $('form').submit(function(){
+        $('#role_name').vdsFieldChecker({rules:{required:[true, '角色名不能为空'], maxlen:[50, '角色名不能超过50个字符']}});
+        $('#role_desc').vdsFieldChecker({rules:{maxlen:[240, '角色描述不能超过240个字符']}, tipsPos:'br'});
+        return $('form').vdsFormChecker();
+    });
   });
 });
-function submitForm(){
-  $('#role_name').vdsFieldChecker({rules:{required:[true, '角色名不能为空'], maxlen:[50, '角色名不能超过50个字符']}});
-  $('#role_desc').vdsFieldChecker({rules:{maxlen:[240, '角色描述不能超过240个字符']}, tipsPos:'br'});
-  $('form').vdsFormChecker();
-}
 </script>
 <div class="content">
 	<div class="loc">
@@ -65,7 +66,7 @@ function submitForm(){
 				</table>
 			</div>
 			<div class="submitbtn">
-				<button type="button" class="ubtn btn" onclick="submitForm()">保存并提交</button>
+                <button type="submit" class="ubtn btn">保存提交</button>
 				<button type="reset" class="fbtn btn">重置表单</button>
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 			</div>

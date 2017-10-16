@@ -89,6 +89,9 @@ class AdminBusiness
         if(!empty($data['nick_name'])){
             $builder->nick_name = $data['nick_name'];
         }
+        if(isset($data['enabled'])){
+            $builder->enabled = $data['enabled'] ? 1 : 0;
+        }
         if(!empty($data['remember_token'])){
             $builder->remember_token = $data['remember_token'];
         }

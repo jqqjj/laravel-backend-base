@@ -4,10 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <title>角色列表</title>
-<link rel="stylesheet" type="text/css" href="{{asset('css/verydows.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('css/backend.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}" />
 <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/verydows.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/backend.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/list.js')}}"></script>
 </head>
 <body>

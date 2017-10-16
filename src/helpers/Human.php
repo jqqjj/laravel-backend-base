@@ -25,6 +25,15 @@ class Human
         return $this->manager->check();
     }
     
+    public function attempt($status=false)
+    {
+        if($status){
+            return $this->manager->attemptSuccess();
+        }else{
+            return $this->manager->attemptFailure();
+        }
+    }
+    
     public function queueCookie()
     {
         Cookie::queue(

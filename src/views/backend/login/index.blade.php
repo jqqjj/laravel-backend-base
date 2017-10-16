@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('css/login.css')}}" />
 <title>后台管理系统登录</title>
 <script type="text/javascript" src="{{asset('js/ani.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/verydows.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/backend.js')}}"></script>
 </head>
 <body>
 <div class="frontHome page" id="loginbox">
@@ -39,6 +39,21 @@
 											<input class="textinput textInput" id="password" name="password" placeholder="密码" type="password"/>
 										</div>
 									</div>
+                                    @if($captcha)
+                                    <div id="div_id_captcha" class="clearfix control-group">
+										<label for="password" class="control-label requiredField">验证码
+										<span class="asteriskField">*</span>
+										</label>
+										<div class="controls">
+                                            <input class="textinput textInput" id="captcha" name="captcha" placeholder="验证码" type="text"/>
+										</div>
+                                        <div class="captchaImage">
+                                            <a title="点击刷新验证码" href="javascript:;">
+                                                <img id="captcha-img" src="{{route("admincaptcha",['path'=>'adminlogin'])}}" />
+                                            </a>
+                                        </div>
+									</div>
+                                    @endif
 									<div id="div_id_remember" class="clearfix control-group">
 										<div class="controls">
 											<label for="id_remember" class="checkbox ">
@@ -80,13 +95,16 @@
             if($('#captcha').size() > 0){
               $('#captcha').vdsFieldChecker({rules: {required:[true, '请输入验证码']}, tipsPos:'abs'});
             }
-            $('form').vdsFormChecker({
+            return $('form').vdsFormChecker({
               beforeSubmit: function(){
-                $(btn).addClass('disabled').text('正在登陆').prop('disabled', true);
-                //vdsSetCipher('password', 'Verydows');
+                $(".login_btn").addClass('disabled').text('正在登录').prop('disabled', true);
               }
             });
-            return false;
+        });
+        $('#captcha-img').click(function(){
+            var rand = Math.random();
+            var src = "{{route('admincaptcha',['path'=>'adminlogin'])}}&"+rand;
+            $('#captcha-img').attr('src', src);
         });
     });
     function resize(){
@@ -97,11 +115,6 @@
         }else{
             $('#home_container').css({paddingTop:"0"});
         }
-    }
-    function resetCaptcha(){
-      var rand = Math.random();
-      var src = "/index.php?m=api&c=captcha&a=image&v="+rand;
-      $('#captcha-img').attr('src', src);	
     }
 </script>
 </body>

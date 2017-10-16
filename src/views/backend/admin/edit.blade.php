@@ -4,20 +4,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <title>编辑后台用户</title>
-<link rel="stylesheet" type="text/css" href="{{asset('css/verydows.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('css/backend.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}" />
 <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/verydows.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/backend.js')}}"></script>
 <script type="text/javascript">
-function submitForm(){
-  $('#username').vdsFieldChecker({rules:{username:[/^[_a-zA-Z0-9]{4,15}$/.test($('#username').val()), '登录名称不符合格式要求']}});
-  if($('#resetpwd').val() == 1){
-    $('#password').vdsFieldChecker({rules:{required:[true, '请设置密码'], password:[true, '密码不符合格式要求']}});
-  }
-  $('#repassword').vdsFieldChecker({rules:{equal:[$('#password').val(), '两次密码不一致']}});
-  $('#email').vdsFieldChecker({rules:{required:[true, '电子邮箱不能为空'], email:[true, '无效的电子邮箱地址']}});
-  $('form').vdsFormChecker();
-}
+$(document).ready(function(){
+    $('form').submit(function(){
+        $('#username').vdsFieldChecker({rules:{username:[/^[_a-zA-Z0-9]{4,15}$/.test($('#username').val()), '登录名称不符合格式要求']}});
+        if($('#resetpwd').val() == 1){
+          $('#password').vdsFieldChecker({rules:{required:[true, '请设置密码'], password:[true, '密码不符合格式要求']}});
+        }
+        $('#repassword').vdsFieldChecker({rules:{equal:[$('#password').val(), '两次密码不一致']}});
+        $('#email').vdsFieldChecker({rules:{required:[true, '电子邮箱不能为空'], email:[true, '无效的电子邮箱地址']}});
+        return $('form').vdsFormChecker();
+    });
+});
 function resetPwd(btn){
   $('.setpwd').removeClass('hide');
   $('#resetpwd').val(1);
@@ -156,7 +158,7 @@ function resetPwd(btn){
 				</table>
 			</div>
 			<div class="submitbtn">
-				<button type="button" class="ubtn btn" onclick="submitForm()">保存并更新</button>
+                <button type="submit" class="ubtn btn">保存并更新</button>
 				<button type="reset" class="fbtn btn">重置表单</button>
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 			</div>

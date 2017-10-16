@@ -9,7 +9,7 @@ body{margin:0; padding:0; font-size:9pt;font-family:"微软雅黑";background:#0
   padding: 28px;
 }
 
-.logininput #div_id_username .controls,.logininput #div_id_password .controls {
+.logininput #div_id_username .controls,.logininput #div_id_password .controls,.logininput #div_id_captcha .controls {
   width: 240px;
   height: 42px;
   line-height: 42px;
@@ -34,7 +34,7 @@ body{margin:0; padding:0; font-size:9pt;font-family:"微软雅黑";background:#0
   outline: none; background:none;
 }
 
-.logininput #div_id_username .controls,.logininput #div_id_password .controls {
+.logininput #div_id_username .controls,.logininput #div_id_password .controls,.logininput #div_id_captcha .controls {
   width: 329px;
   height: 41px;
   -webkit-border-radius: 3px;
@@ -61,6 +61,7 @@ body{margin:0; padding:0; font-size:9pt;font-family:"微软雅黑";background:#0
 
 .lfAutoLogin,#div_id_remember {
   margin: 0 auto;
+  clear: both;
 }
 
 .loginFormBtn {
@@ -143,3 +144,6 @@ body{margin:0; padding:0; font-size:9pt;font-family:"微软雅黑";background:#0
 }
 .lfAutoLogin { text-align:right; margin-top:-14px;}
 .lfAutoLogin a {color:#555; text-decoration:none;}
+
+.logininput #div_id_captcha .controls{float: left;width: 140px;margin-top: 10px;}
+.captchaImage{margin-top: 10px;float: right;}

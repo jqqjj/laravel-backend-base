@@ -21,9 +21,9 @@ class Captcha
     
     public function validate($path,$phrase)
     {
-        if(Session::exists(config("backend.captcha_session_key_prefix").$path) || empty($phrase)){
+        if(!Session::exists(config("backend.captcha_session_key_prefix").$path) || empty($phrase)){
             return false;
         }
-        return Session::get(config("backend.captcha_session_key_prefix").$path) != $phrase;
+        return Session::get(config("backend.captcha_session_key_prefix").$path) == $phrase;
     }
 }
