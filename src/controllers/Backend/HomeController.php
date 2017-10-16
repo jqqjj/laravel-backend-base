@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Facades\Documents;
 use App\Helpers\BytesFormat;
+use App\Facades\Captcha;
 
 class HomeController extends Controller
 {
@@ -27,6 +28,15 @@ class HomeController extends Controller
         return view('backend.home.dashboard',[
             'db_version'=>$version,
             'format_size'=>$bytes_format->format($bytes_size),
+        ]);
+    }
+    
+    public function captcha(Request $request)
+    {
+        $path = $request->get('path');
+        $content = Captcha::generate($path);
+        return response($content, 200, [
+            'Content-Type' => 'image/jpeg',
         ]);
     }
     

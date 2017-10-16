@@ -14,7 +14,7 @@
 <!-- 头部开始 -->
 <div class="header" id="header">
 	<div class="logo fl">
-		<a href="/index.php?m=backend&c=main&a=panel">Verydows Panel</a>
+		<a href="{{route("adminindex")}}">CMS</a>
 	</div>
 	<div class="top-links fr cut">
 		<a title="前端首页" class="icon front" target="_blank" href="/">前端首页</a>
@@ -193,7 +193,7 @@
 <!-- 页脚开始 -->
 <div class="footer" id="footer">
 	<p>
-		Powered by CRM © 2017
+		Powered by CMS © 2017
 	</p>
 </div>
 <!-- 页脚结束-->

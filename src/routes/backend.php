@@ -9,6 +9,7 @@ $router->group(['prefix' => 'admin', 'namespace' => 'Backend'], function($router
     $router->get('/login', 'LoginController@index')->name('adminlogin');
     $router->post('/login', 'LoginController@login')->name('adminlogin');
     $router->get('/logout', 'LoginController@logout')->name('adminlogout');
+    $router->get('/captcha', 'HomeController@captcha')->name('admincaptcha');
     $router->get('/success-message', 'HomeController@successMessage')->name('success-message');
     $router->get('/error-message', 'HomeController@errorMessage')->name('error-message');
     
