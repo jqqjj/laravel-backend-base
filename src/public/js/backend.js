@@ -1,5 +1,3 @@
-var baseUrl = $('meta[name="verydows-baseurl"]').attr('content') || window.location.protocol + "//" + window.location.host;
-
 //格式化Unix时间戳
 function formatTimestamp(time, format) {
   var d = new Date(parseInt(time) * 1000), month = d.getMonth() + 1, day = d.getDate(), hour = d.getHours(), minute = d.getMinutes(), second = d.getSeconds();
@@ -15,16 +13,6 @@ function formatTimestamp(time, format) {
   if(second < 10) second = '0' + second;
   format = format.replace(/s/, second);
   return format;
-}
-
-//随机字符串
-function random_chars(length){
-  var words = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@%#*_=',
-  m = words.length,
-  chars = '';
-  length = length || 20;
-  for (i = 0;i < length;i++) chars += words.charAt(Math.floor(Math.random()*m));
-  return chars;
 }
 
 (function($){
@@ -52,7 +40,7 @@ function random_chars(length){
         case 'seq': return right === /^$|^([1-9]\d|\d)$/.test(val); break;
         default: if(typeof(right) == 'boolean') return right; alert('Validation Rule "'+rule+'" is incorrect!');
       }
-    }
+    };
     
     var tips = $("<span class='vdsfielderr'></span>").css({
           display: 'inline-block',
@@ -90,7 +78,7 @@ function random_chars(length){
       }
     });
     return res;
-  }
+  };
   //表单验证
   $.fn.vdsFormChecker = function(options){
     var defaults = {
@@ -106,8 +94,7 @@ function random_chars(length){
         return true;
     }
     return false;
-  }
-  
+  };
   //列表请求
   $.asynList = function(url, dataset, success){
     $.ajax({
@@ -122,8 +109,7 @@ function random_chars(length){
         $('body').vdsAlert({msg:'处理请求时发生错误'});
       }
     });
-  }
-  
+  };
   //进度条窗口
   $.vdsLoadingBar = function(sw){
     if(sw){
@@ -135,8 +121,7 @@ function random_chars(length){
       $('div#vdsloadingbar').remove();
       $.vdsMasker(false);
     }
-  }
-  
+  };
   //遮罩层
   $.vdsMasker = function(sw){
     if(sw){
@@ -146,8 +131,7 @@ function random_chars(length){
     }else{
       $('div#vdsmasker').remove();
     }
-  }
-	
+  };
   //横竖居中于窗口
   $.fn.vdsMidst = function(options){
     var defaults = {   
@@ -160,8 +144,7 @@ function random_chars(length){
       left: ($(window).width() - this.outerWidth()) / 2 + opts.goleft,
     });
     return this;
-  }
-	
+  };
   //提示窗口
   $.fn.vdsAlert = function(options){
     var defaults = {    
@@ -187,8 +170,7 @@ function random_chars(length){
       'box-shadow': '2px 2px 2px #ccc',
       'z-index': 9999
     }).delay(opts.time).fadeOut(1000);
-  }
-	
+  };
   //确认窗口
   $.fn.vdsConfirm = function(options){
     var defaults = {text: '', left: 0, top: 0, confirmed: function(){}}, opts = $.extend(defaults, options), btn = this, obj;
@@ -229,8 +211,7 @@ function random_chars(length){
   $.fn.vdsRowHover = function(cls){
     cls = cls || 'hover';
     this.hover(function(){$(this).addClass(cls);}, function(){$(this).removeClass(cls);}); 
-  }
-	
+  };
   //选项卡切换
   $.fn.vdsTabsSwitch = function(options){
     var defaults = {sw: 'li', maps: '.swcon'}, opts = $.extend(defaults, options);
@@ -239,6 +220,5 @@ function random_chars(length){
       $(this).addClass('cur').siblings().removeClass('cur');
       $(opts.maps).hide().eq(i).show();
     });
-  }
-	
+  };
 })(jQuery);
