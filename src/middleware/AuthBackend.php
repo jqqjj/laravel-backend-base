@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use App\Facades\BackendMessage as Message;
 
 class AuthBackend
 {
@@ -16,12 +17,17 @@ class AuthBackend
      */
     public function handle($request, Closure $next, $guard)
     {
-        if (Auth::guard($guard)->guest()) {
+        $user = Auth::guard($guard)->user();
+        if (empty($user)) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } else {
                 return redirect()->route('adminlogin');
             }
+        }
+        if(!$user->enabled){
+            Auth::guard($guard)->logout();
+            return Message::error('账号被冻结', ['label'=>'','url'=>route('adminlogin')]);
         }
         return $next($request);
     }

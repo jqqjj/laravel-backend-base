@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Facades\BackendMessage as Message;
 use App\Facades\Human;
 use App\Facades\Captcha;
+use App\Http\Business\AdminBusiness;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,7 @@ class LoginController extends Controller
         return view('backend.login.index',['captcha'=>!Human::check()]);
     }
     
-    public function login(Request $reqeust)
+    public function login(Request $reqeust,AdminBusiness $b_admin)
     {
         $name = $reqeust->get('username');
         $password = $reqeust->get('password');
@@ -37,6 +38,7 @@ class LoginController extends Controller
         }
         if (Auth::guard('backend')->attempt(['name' => $name, 'password' => $password,'enabled'=>1],(bool)$remember)) {
             Human::attempt(true);
+            $b_admin->update(Auth::guard('backend')->id(), ['last_login_ip'=>$reqeust->server('REMOTE_ADDR'),'last_login_time'=>date("Y-m-d H:i:s")]);
             return redirect()->route("adminindex");
         }
         elseif (Auth::guard('backend')->attempt(['name' => $name, 'password' => $password],false,false)) {
