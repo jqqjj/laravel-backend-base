@@ -11,7 +11,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-		"illuminate/support": "~5.3.*",
+		"illuminate/support": "~5.3.0",
 		"gregwar/captcha": "~1.1",
 		"jqqjj/easy-human-auth": ">=1.2.2"
 	},
