@@ -15,7 +15,7 @@ class CreateTableHumanAuth extends Migration
     {
         Schema::create('handshake', function (Blueprint $table) {
             $table->char('handshake_id',32);
-            $table->integer('remaining')->unsigned()->default(0);
+            $table->tinyInteger('remaining')->unsigned()->default(0);
             $table->timestamp('expired_time')->nullable();
             $table->primary('handshake_id');
         });
@@ -23,7 +23,7 @@ class CreateTableHumanAuth extends Migration
             $table->char('handshake_id',32);
             $table->tinyInteger('status')->unsigned()->default(0);
             $table->timestamp('add_time')->nullable();
-            $table->char('ip')->default("");
+            $table->char('ip',15)->default("");
             $table->index('handshake_id');
             $table->index('status');
             $table->index('add_time');
