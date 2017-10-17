@@ -11,9 +11,9 @@
     ],
     "minimum-stability": "dev",
     "require": {
-		"illuminate/support": "~5.3",
+		"illuminate/support": "~5.3.*",
 		"gregwar/captcha": "~1.1",
-		"jqqjj/easy-human-auth": ">=1.1"
+		"jqqjj/easy-human-auth": ">=1.2.2"
 	},
 	"autoload": {
 		"psr-4": {
