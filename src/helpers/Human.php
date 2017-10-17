@@ -16,7 +16,7 @@ class Human
     {
         $pdo = DB::connection()->getPdo();
         $adapter = new DBTableGateway($pdo);
-        $adapter->setHandshakeTable(env('DB_PREFIX', '')."hanshake");
+        $adapter->setHandshakeTable(env('DB_PREFIX', '')."handshake");
         $adapter->setAttemptTable(env('DB_PREFIX', '')."attempt");
         $this->manager = new Manager($adapter,Cookie::get(Manager::$cookie_key));
         $this->queueCookie();
