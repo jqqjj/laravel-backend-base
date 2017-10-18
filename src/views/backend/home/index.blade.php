@@ -116,6 +116,7 @@
 @push("inline")
 <script>
 $(document).ready(function(){
+    $('#slide').vdsVertical();
     $("#slide").click(function(){
         if($(this).hasClass('on')){
             $(this).removeClass('on');

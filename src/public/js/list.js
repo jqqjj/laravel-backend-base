@@ -4,7 +4,7 @@ $(function(){
 });
 
 $(document).ready(function(){
-    $('a[dosingle]').click(function(e){
+    $('a[do]').click(function(e){
         e.preventDefault();
         var msg = $(this).attr('msg') || "确定操作?";
         var action = $(this).attr('href') || document.location.pathname;
@@ -29,7 +29,7 @@ $(document).ready(function(){
             return $('body').vdsAlert({msg:'只能同时从列表中选择一项'});
         }
         
-        if($(this).attr('dosingle')==='confirm'){
+        if($(this).attr('do')==='confirm'){
             $(this).vdsConfirm({
                 text: msg,
                 confirmed: function(){

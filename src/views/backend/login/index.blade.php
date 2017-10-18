@@ -6,6 +6,7 @@
 @endpush
 
 @push('script')
+<script type="text/javascript" src="{{asset('backend/js/backend.js')}}"></script>
 <script type="text/javascript" src="{{asset('backend/js/ani.js')}}"></script>
 @endpush
 
@@ -88,11 +89,8 @@
 
 @push("inline")
 <script type="text/javascript">
-    $(window).resize(function(){
-        resize();
-    });
     $(document).ready(function(){
-        resize();
+        $('#home_container').vdsVertical();
         $('form').submit(function(){
             $('#username').vdsFieldChecker({rules: {required:[true, '请输入登录名']}, tipsPos:'abs'});
             $('#password').vdsFieldChecker({rules: {required:[true, '请输入密码']}, tipsPos:'abs'});
@@ -111,14 +109,5 @@
             $('#captcha-img').attr('src', src);
         });
     });
-    function resize(){
-        var box_height = $('#home_container').height();
-        var window_height = $(window).height();
-        if(box_height<window_height){
-            $('#home_container').css({paddingTop:Math.floor((window_height - box_height) / 3)+'px'});
-        }else{
-            $('#home_container').css({paddingTop:"0"});
-        }
-    }
 </script>
 @endpush

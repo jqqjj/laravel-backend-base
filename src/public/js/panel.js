@@ -34,8 +34,7 @@ function resetPwd(){
 
 function popAc(id){
   $.vdsMasker(true);
-  $('#'+id).vdsMidst({wrapper:$(window), gotop:-100});
-  $('#'+id).show();
+  $('#'+id).show().vdsVertical().vdsHorizontal();
 }
 
 function closeAc(id){

@@ -125,9 +125,9 @@ function formatTimestamp(time, format) {
   //遮罩层
   $.vdsMasker = function(sw){
     if(sw){
-      var masker = $('<div id="vdsmasker" class="masker"></div>');
-      masker.css({width: $(window).width(),height: Math.max($(window).height(), $('body').height())});
+      var masker = $('<div id="vdsmasker" class="masker fullscreen"></div>');
       $('body').append(masker);
+      masker.vdsFullScreen();
     }else{
       $('div#vdsmasker').remove();
     }
@@ -221,4 +221,67 @@ function formatTimestamp(time, format) {
       $(opts.maps).hide().eq(i).show();
     });
   };
+  $.fn.vdsFullScreen = function(){
+      if(!$(this).hasClass('vds-full-screen')){
+        $(this).addClass('vds-full-screen');
+      }
+      $(this).css({
+          width:$(window).width()+"px",
+          height:$(window).height()+"px",
+      });
+      return this;
+  };
+  $.fn.vdsVertical = function(){
+      if(!$(this).hasClass('vds-vertical-box')){
+        $(this).addClass('vds-vertical-box');
+      }
+      var window_height = $(window).height();
+      var box_height = $(this).height();
+      if($(this).css("position")==='absolute' || $(this).css("position")==='relative'){
+        if(box_height<window_height){
+          $(this).css({top:Math.floor((window_height - box_height) / 3)+'px'});
+        }else{
+          $(this).css({top:"0"});
+        }
+      }else{
+        if(box_height<window_height){
+          $(this).css({marginTop:Math.floor((window_height - box_height) / 3)+'px'});
+        }else{
+          $(this).css({marginTop:"0"});
+        }
+      }
+      return this;
+  };
+  $.fn.vdsHorizontal = function(){
+      if(!$(this).hasClass('vds-horizontal-box')){
+        $(this).addClass('vds-horizontal-box');
+      }
+      var window_width = $(window).width();
+      var box_width = $(this).width();
+      if($(this).css("position")==='absolute' || $(this).css("position")==='relative'){
+        if(box_width<window_width){
+          $(this).css({left:Math.floor((window_width - box_width) / 2)+'px'});
+        }else{
+          $(this).css({left:"0"});
+        }
+      }else{
+        if(box_width<window_width){
+          $(this).css({marginLeft:Math.floor((window_width - box_width) / 2)+'px'});
+        }else{
+          $(this).css({marginLeft:"0"});
+        }
+      }
+      return this;
+  };
+  $(window).resize(function(){
+      $('.vds-full-screen').each(function(){
+          $(this).vdsFullScreen();
+      });
+      $('.vds-vertical-box').each(function(){
+          $(this).vdsVertical();
+      });
+      $('.vds-horizontal-box').each(function(){
+          $(this).vdsHorizontal();
+      });
+  });
 })(jQuery);

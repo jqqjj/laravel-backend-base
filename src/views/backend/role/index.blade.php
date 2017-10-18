@@ -45,7 +45,7 @@
             </table>
         </div>
         @else
-        <div class="nors mt5">未找到相关数据记录...</div>
+        <div class="nors mt5">无数据记录...</div>
         @endif
         {!! $list->appends(\Illuminate\Support\Facades\Input::get())->links("layouts.backend.pager") !!}
     </div>
