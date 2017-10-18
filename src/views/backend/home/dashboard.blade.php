@@ -1,18 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<title>面板</title>
-<link rel="stylesheet" type="text/css" href="{{asset('backend/css/backend.css')}}" />
-<link rel="stylesheet" type="text/css" href="{{asset('backend/css/main.css')}}" />
+@extends("layouts.backend.layout")
+@section("title","后台中心")
+
+@push('css')
 <link rel="stylesheet" type="text/css" href="{{asset('backend/css/dashboard.css')}}" />
-<script type="text/javascript" src="{{asset('backend/js/jquery.js')}}"></script>
-<script type="text/javascript" src="{{asset('backend/js/backend.js')}}"></script>
-</head>
-<body>
+@endpush
+
+@push('script')
+@endpush
+
+@section("content")
 <div class="content">
-  <div class="loc"><h2><i class="dashboard icon"></i>面板首页</h2></div>
+  <div class="loc"><h2><i class="dashboard icon"></i>后台中心</h2></div>
   <div class="box">
     <div class="notice" id="notice"></div>
     <!-- 数据统计开始 -->
@@ -92,5 +90,4 @@
     <!-- 系统信息结束 -->
   </div>
 </div>
-
-</body>
+@endsection

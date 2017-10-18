@@ -1,32 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<title>编辑角色</title>
-<link rel="stylesheet" type="text/css" href="{{asset('backend/css/backend.css')}}" />
-<link rel="stylesheet" type="text/css" href="{{asset('backend/css/main.css')}}" />
-<script type="text/javascript" src="{{asset('backend/js/jquery.js')}}"></script>
-<script type="text/javascript" src="{{asset('backend/js/backend.js')}}"></script>
-</head>
-<body>
-<script type="text/javascript">
-$(function(){
-  $('div.ckrow h4 label').click( function(){
-    var cbs = $(this).parent().next('ul').children('li').find('input[type="checkbox"]');
-    if($(this).find('input[type="checkbox"]').prop('checked')){
-      cbs.prop('checked', true);
-    }else{
-      cbs.prop('checked', false);
-    }
-    $('form').submit(function(){
-        $('#role_name').vdsFieldChecker({rules:{required:[true, '角色名不能为空'], maxlen:[50, '角色名不能超过50个字符']}});
-        $('#role_desc').vdsFieldChecker({rules:{maxlen:[240, '角色描述不能超过240个字符']}, tipsPos:'br'});
-        return $('form').vdsFormChecker();
-    });
-  });
-});
-</script>
+@extends("layouts.backend.layout")
+@section("title","编辑角色")
+@push('css')
+@endpush
+
+@push('script')
+@endpush
+
+@section("content")
 <div class="content">
 	<div class="loc">
 		<h2><i class="icon"></i>编辑角色</h2>
@@ -76,5 +56,24 @@ $(function(){
 		</div>
 	</form>
 </div>
-</body>
-</html>
+@endsection
+
+@push('inline')
+<script type="text/javascript">
+$(function(){
+  $('div.ckrow h4 label').click( function(){
+    var cbs = $(this).parent().next('ul').children('li').find('input[type="checkbox"]');
+    if($(this).find('input[type="checkbox"]').prop('checked')){
+      cbs.prop('checked', true);
+    }else{
+      cbs.prop('checked', false);
+    }
+  });
+    $('form').submit(function(){
+        $('#role_name').vdsFieldChecker({rules:{required:[true, '角色名不能为空'], maxlen:[50, '角色名不能超过50个字符']}});
+        $('#role_desc').vdsFieldChecker({rules:{maxlen:[240, '角色描述不能超过240个字符']}, tipsPos:'br'});
+        return $('form').vdsFormChecker();
+    });
+});
+</script>
+@endpush

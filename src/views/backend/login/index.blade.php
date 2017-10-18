@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="{{asset('backend/js/jquery.js')}}"></script>
+@extends("layouts.backend.layout")
+@section("title","后台管理系统登录")
+
+@push('css')
 <link rel="stylesheet" type="text/css" href="{{asset('backend/css/login.css')}}" />
-<title>后台管理系统登录</title>
+@endpush
+
+@push('script')
 <script type="text/javascript" src="{{asset('backend/js/ani.js')}}"></script>
-<script type="text/javascript" src="{{asset('backend/js/backend.js')}}"></script>
-</head>
-<body>
+@endpush
+
+@section("content")
 <div class="frontHome page" id="loginbox">
 	<div class="wrap-container">
 		<div id="home_container" class="clearfix">
@@ -83,6 +84,9 @@
 <div id="container" class="mpage">
 	<div id="anitOut" class="anitOut"></div>
 </div>
+@endsection
+
+@push("inline")
 <script type="text/javascript">
     $(window).resize(function(){
         resize();
@@ -117,5 +121,4 @@
         }
     }
 </script>
-</body>
-</html>
+@endpush

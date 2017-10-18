@@ -1,16 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<title>后台管理系统</title>
-<link rel="stylesheet" type="text/css" href="{{asset('backend/css/backend.css')}}" />
+@extends("layouts.backend.layout")
+@section("title","后台管理系统")
+
+@push('css')
 <link rel="stylesheet" type="text/css" href="{{asset('backend/css/panel.css')}}" />
-<script type="text/javascript" src="{{asset('backend/js/jquery.js')}}"></script>
-<script type="text/javascript" src="{{asset('backend/js/backend.js')}}"></script>
+@endpush
+
+@push('script')
 <script type="text/javascript" src="{{asset('backend/js/panel.js')}}"></script>
-</head>
-<body>
+@endpush
+
+@section("content")
 <!-- 头部开始 -->
 <div class="header" id="header">
 	<div class="logo fl">
@@ -97,89 +96,7 @@
 <!-- 头部结束 -->
 <div class="container">
 	<!-- 菜单开始 -->
-	<div class="nav fl" id="nav">
-		<h2>常用菜单</h2>
-		<div class="nochild">
-			<ul>
-				<li onclick="jump('dashboard')"><a><i class="arrow"></i>面板首页</a></li>
-			</ul>
-		</div>
-<!--		<div>
-			<h3><a><i class="arrow"></i>商品管理</a></h3>
-			<ul>
-				<li onclick="jump('c=goods&amp;a=index')"><a><i class="arrow"></i>商品列表</a></li>
-				<li onclick="jump('c=goods_cate&amp;a=index')"><a><i class="arrow"></i>商品分类</a></li>
-				<li onclick="jump('c=brand&amp;a=index')"><a><i class="arrow"></i>品牌列表</a></li>
-				<li onclick="jump('c=goods_optional_type&amp;a=index')"><a><i class="arrow"></i>选项类型</a></li>
-				<li onclick="jump('c=goods_review&amp;a=index')"><a><i class="arrow"></i>商品评价</a></li>
-			</ul>
-		</div>
-		<div>
-			<h3><a><i class="arrow"></i>订单管理</a></h3>
-			<ul>
-				<li onclick="jump('c=order&amp;a=index')"><a><i class="arrow"></i>订单列表</a></li>
-				<li onclick="jump('c=order_shipping&amp;a=index')"><a><i class="arrow"></i>发货列表</a></li>
-				<li onclick="jump('c=order_log&amp;a=index')"><a><i class="arrow"></i>订单日志</a></li>
-			</ul>
-		</div>-->
-		<div>
-			<h3><a><i class="arrow"></i>用户管理</a></h3>
-			<ul>
-				<li onclick="jump('c=user&amp;a=index')"><a><i class="arrow"></i>用户列表</a></li>
-				<li onclick="jump('c=user_group&amp;a=index')"><a><i class="arrow"></i>用户组</a></li>
-				<li onclick="jump('c=user_account_log&amp;a=index')"><a><i class="arrow"></i>账户日志</a></li>
-			</ul>
-		</div>
-<!--		<div>
-			<h3><a><i class="arrow"></i>文章管理</a></h3>
-			<ul>
-				<li onclick="jump('c=article&amp;a=index')"><a><i class="arrow"></i>资讯列表</a></li>
-				<li onclick="jump('c=article_cate&amp;a=index')"><a><i class="arrow"></i>资讯分类</a></li>
-				<li onclick="jump('c=help&amp;a=index')"><a><i class="arrow"></i>帮助列表</a></li>
-				<li onclick="jump('c=help_cate&amp;a=index')"><a><i class="arrow"></i>帮助分类</a></li>
-			</ul>
-		</div>
-		<div>
-			<h3><a><i class="arrow"></i>邮件管理</a></h3>
-			<ul>
-				<li onclick="jump('c=email_subscription&amp;a=index')"><a><i class="arrow"></i>订阅列表</a></li>
-				<li onclick="jump('c=email_tpl&amp;a=index')"><a><i class="arrow"></i>邮件模板</a></li>
-				<li onclick="jump('c=email_queue&amp;a=index')"><a><i class="arrow"></i>邮件队列</a></li>
-			</ul>
-		</div>-->
-		<h2>系统核心</h2>
-        @permission('admin.list|role.list')
-		<div>
-			<h3><a><i class="arrow"></i>权限管理</a></h3>
-			<ul>
-                @permission('admin.list')
-				<li onclick="jump('{{route("adminlist")}}')"><a><i class="arrow"></i>后台用户列表</a></li>
-                @endpermission
-                @permission('role.list')
-				<li onclick="jump('{{route("rolelist")}}')"><a><i class="arrow"></i>角色列表</a></li>
-                @endpermission
-			</ul>
-		</div>
-        @endpermission
-		<div>
-			<h3><a><i class="arrow"></i>系统配置</a></h3>
-			<ul>
-				<li onclick="jump('c=setting&amp;a=index')"><a><i class="arrow"></i>系统设置</a></li>
-				<li onclick="jump('c=nav&amp;a=index')"><a><i class="arrow"></i>导航设置</a></li>
-				<li onclick="jump('c=shipping_method&amp;a=index')"><a><i class="arrow"></i>配送方式</a></li>
-				<li onclick="jump('c=payment_method&amp;a=index')"><a><i class="arrow"></i>支付方式</a></li>
-				<li onclick="jump('c=shipping_carrier&amp;a=index')"><a><i class="arrow"></i>物流承运商</a></li>
-			</ul>
-		</div>
-<!--		<div>
-			<h3><a><i class="arrow"></i>系统工具</a></h3>
-			<ul>
-				<li onclick="jump('c=file&amp;a=index')"><a><i class="arrow"></i>文件管理</a></li>
-				<li onclick="jump('c=database&amp;a=backup')"><a><i class="arrow"></i>数据库</a></li>
-				<li onclick="jump('c=cleaner&amp;a=index')"><a><i class="arrow"></i>系统清理</a></li>
-			</ul>
-		</div>-->
-	</div>
+    @include("layouts.backend.menubar")
 	<!-- 菜单结束 -->
     <div class="fl gap on" id="gap" style="height: 212px;"></div>
 	<!-- 主体开始 -->
@@ -192,15 +109,12 @@
 </div>
 <!-- 页脚开始 -->
 <div class="footer" id="footer">
-	<p>
-		Powered by CMS © 2017
-	</p>
+	<p>Powered by CMS © 2017</p>
 </div>
-<!-- 页脚结束-->
+@endsection
+
+@push("inline")
 <script>
-function jump(uri){
-  parent.$('#main').attr('src', uri);
-}
 $(document).ready(function(){
     $("#slide").click(function(){
         if($(this).hasClass('on')){
@@ -216,5 +130,4 @@ $(document).ready(function(){
     });
 });
 </script>
-</body>
-</html>
+@endpush

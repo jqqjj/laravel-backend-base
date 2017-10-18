@@ -1,33 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<title>编辑后台用户</title>
-<link rel="stylesheet" type="text/css" href="{{asset('backend/css/backend.css')}}" />
-<link rel="stylesheet" type="text/css" href="{{asset('backend/css/main.css')}}" />
-<script type="text/javascript" src="{{asset('backend/js/jquery.js')}}"></script>
-<script type="text/javascript" src="{{asset('backend/js/backend.js')}}"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-    $('form').submit(function(){
-        $('#username').vdsFieldChecker({rules:{username:[/^[_a-zA-Z0-9]{4,15}$/.test($('#username').val()), '登录名称不符合格式要求']}});
-        if($('#resetpwd').val() == 1){
-          $('#password').vdsFieldChecker({rules:{required:[true, '请设置密码'], password:[true, '密码不符合格式要求']}});
-        }
-        $('#repassword').vdsFieldChecker({rules:{equal:[$('#password').val(), '两次密码不一致']}});
-        $('#email').vdsFieldChecker({rules:{required:[true, '电子邮箱不能为空'], email:[true, '无效的电子邮箱地址']}});
-        return $('form').vdsFormChecker();
-    });
-});
-function resetPwd(btn){
-  $('.setpwd').removeClass('hide');
-  $('#resetpwd').val(1);
-  $(btn).parentsUntil('tr').parent().addClass('hide');
-}
-</script>
-</head>
-<body>
+@extends("layouts.backend.layout")
+@section("title","编辑后台用户")
+@push('css')
+@endpush
+
+@push('script')
+@endpush
+
+@section("content")
 <div class="content">
 	<div class="loc">
 		<h2><i class="icon"></i>编辑后台用户:<font class="ml5"></font></h2>
@@ -165,5 +144,25 @@ function resetPwd(btn){
 		</div>
 	</form>
 </div>
-</body>
-</html>
+@endsection
+
+@push("inline")
+<script type="text/javascript">
+$(document).ready(function(){
+    $('form').submit(function(){
+        $('#username').vdsFieldChecker({rules:{username:[/^[_a-zA-Z0-9]{4,15}$/.test($('#username').val()), '登录名称不符合格式要求']}});
+        if($('#resetpwd').val() == 1){
+          $('#password').vdsFieldChecker({rules:{required:[true, '请设置密码'], password:[true, '密码不符合格式要求']}});
+        }
+        $('#repassword').vdsFieldChecker({rules:{equal:[$('#password').val(), '两次密码不一致']}});
+        $('#email').vdsFieldChecker({rules:{required:[true, '电子邮箱不能为空'], email:[true, '无效的电子邮箱地址']}});
+        return $('form').vdsFormChecker();
+    });
+});
+function resetPwd(btn){
+  $('.setpwd').removeClass('hide');
+  $('#resetpwd').val(1);
+  $(btn).parentsUntil('tr').parent().addClass('hide');
+}
+</script>
+@endpush
