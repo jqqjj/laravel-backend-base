@@ -4,11 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <title>后台管理系统</title>
-<link rel="stylesheet" type="text/css" href="{{asset('css/backend.css')}}" />
-<link rel="stylesheet" type="text/css" href="{{asset('css/panel.css')}}" />
-<script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/backend.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/panel.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{asset('backend/css/backend.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('backend/css/panel.css')}}" />
+<script type="text/javascript" src="{{asset('backend/js/jquery.js')}}"></script>
+<script type="text/javascript" src="{{asset('backend/js/backend.js')}}"></script>
+<script type="text/javascript" src="{{asset('backend/js/panel.js')}}"></script>
 </head>
 <body>
 <!-- 头部开始 -->

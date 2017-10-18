@@ -2,11 +2,11 @@
 <html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
-<link rel="stylesheet" type="text/css" href="{{asset('css/login.css')}}" />
+<script type="text/javascript" src="{{asset('backend/js/jquery.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{asset('backend/css/login.css')}}" />
 <title>后台管理系统登录</title>
-<script type="text/javascript" src="{{asset('js/ani.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/backend.js')}}"></script>
+<script type="text/javascript" src="{{asset('backend/js/ani.js')}}"></script>
+<script type="text/javascript" src="{{asset('backend/js/backend.js')}}"></script>
 </head>
 <body>
 <div class="frontHome page" id="loginbox">

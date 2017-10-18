@@ -4,11 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <title>角色列表</title>
-<link rel="stylesheet" type="text/css" href="{{asset('css/backend.css')}}" />
-<link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}" />
-<script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/backend.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/list.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{asset('backend/css/backend.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('backend/css/main.css')}}" />
+<script type="text/javascript" src="{{asset('backend/js/jquery.js')}}"></script>
+<script type="text/javascript" src="{{asset('backend/js/backend.js')}}"></script>
+<script type="text/javascript" src="{{asset('backend/js/list.js')}}"></script>
 </head>
 <body>
 <div class="content">

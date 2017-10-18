@@ -31,9 +31,9 @@ class BackendBaseProvider extends ServiceProvider
             __DIR__ . "/config"=> base_path("config"),
             __DIR__ . "/database/migrations"=> database_path("migrations"),
             __DIR__ . "/database/seeds"=> database_path("seeds"),
-            __DIR__ . "/public/css"=> public_path("css"),
-            __DIR__ . "/public/js"=> public_path("js"),
-            __DIR__ . "/public/images"=> public_path("images"),
+            __DIR__ . "/public/css"=> public_path("backend/css"),
+            __DIR__ . "/public/js"=> public_path("backend/js"),
+            __DIR__ . "/public/images"=> public_path("backend/images"),
             __DIR__ . "/views"=> resource_path("views"),
             __DIR__ . "/routes"=> base_path("routes"),
         ]);

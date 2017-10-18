@@ -64,7 +64,7 @@ $(function() {
 		})
 	};
 	if (!!document.createElement("canvas").getContext) {
-		$.getScript("/js/cav.js", function() {
+		$.getScript("/backend/js/cav.js", function() {
 			var t = {
 				width: 1.5,
 				height: 1.5,
