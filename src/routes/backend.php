@@ -17,6 +17,7 @@ $router->group(['prefix' => 'admin', 'namespace' => 'Backend'], function($router
         $router->get('/index', ['uses'=>'HomeController@index'])->name('adminindex');
         $router->get('/dashboard', ['uses'=>'HomeController@dashboard'])->name('dashboard');
         $router->post('/clearcache', ['uses'=>'HomeController@clearcache'])->name('clearsystemcache');
+        $router->post('/change-password', ['uses'=>'HomeController@changePassword'])->name('admin-change-password');
         //管理员
         $router->get('/adminlist', ['uses'=>'AdminController@index','middleware'=>'permission:admin.list'])->name('adminlist');
         $router->get('/adminadd', ['uses'=>'AdminController@add','middleware'=>'permission:admin.add'])->name('adminadd');

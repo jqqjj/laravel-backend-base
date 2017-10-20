@@ -82,7 +82,11 @@ class AdminController extends Controller
         ], [
             'name'=>'登录名称',
             'email'=>'电子邮箱',
+            'password'=>"密码",
         ]);
+        $validator->sometimes("password",['required','between:6,32'],function($input){
+            return !empty($input['resetpwd']) && !empty($input['password']) && strlen($input['password'])>0;
+        });
         if ($validator->fails()) {
             return Message::error($validator->messages()->first());
         }

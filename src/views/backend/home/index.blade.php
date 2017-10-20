@@ -17,7 +17,7 @@
 	</div>
 	<div class="top-links fr cut">
 		<a title="前端首页" class="icon front" target="_blank" href="/">前端首页</a>
-		<a title="设置" class="icon sets" href="/index.php?m=backend&c=setting&a=index">设置</a>
+		<a title="设置" class="icon sets" href="javascript:;">设置</a>
 		<a title="用户信息" class="icon user" onclick="popAc('pop-user')">用户信息</a>
 		<a title="清理缓存" class="icon wipe" onclick="popAc('pop-clean')">清理缓存</a>
 		<a title="退出登录" class="icon logout" href="{{route("adminlogout")}}">退出登录</a>
@@ -27,28 +27,28 @@
 </div>
 <div class="acpop hide" id="pop-user">
 	<a class="close" onclick="closeUser()">×</a>
-	<h2 class="c999">登录用户: <font class="f14 c666 ml5">admin</font></h2>
-	<div class="module poinfo cut">
-		<dl>
-			<dt>姓名</dt>
-			<dd><font class="c999">未设置</font></dd>
-		</dl>
-		<dl>
-			<dt>邮箱</dt>
-			<dd>jqqjj@qq.com</dd>
-		</dl>
-		<dl>
-			<dt>上次登录时间</dt>
-			<dd>2017-07-26 13:54:11</dd>
-		</dl>
-		<dl>
-			<dt>上次登录IP</dt>
-			<dd>127.0.0.1</dd>
-		</dl>
-		<div class="bl">
-		</div>
-		<div class="pwd mt15 hide" id="pwd">
-			<form method="post" action="/index.php?m=backend&c=main&a=reset_password">
+	<h2 class="c999">登录用户: <font class="f14 c666 ml5">{{Auth::guard("backend")->user()->name}}</font></h2>
+    <form method="post" name="resetpassword" action="{{route("admin-change-password")}}">
+        <div class="module poinfo cut">
+            <dl>
+                <dt>姓名</dt>
+                <dd>@if(Auth::guard("backend")->user()->nick_name) Auth::guard("backend")->user()->nick_name @else<font class="c999">未设置</font>@endif</dd>
+            </dl>
+            <dl>
+                <dt>邮箱</dt>
+                <dd>@if(Auth::guard("backend")->user()->email) Auth::guard("backend")->user()->email @else<font class="c999">未设置</font>@endif</dd>
+            </dl>
+            <dl>
+                <dt>上次登录时间</dt>
+                <dd>{{Session::get("backend_last_login_time")}}</dd>
+            </dl>
+            <dl>
+                <dt>上次登录IP</dt>
+                <dd>{{Session::get("backend_last_login_ip")}}</dd>
+            </dl>
+            <div class="bl">
+            </div>
+            <div class="pwd mt15 hide" id="pwd">
 				<dl>
 					<dt>原密码</dt>
 					<dd><input class="txt" name="old_password" id="old_password" type="password"/></dd>
@@ -61,15 +61,16 @@
 					<dt>确认新密码</dt>
 					<dd><input class="txt" name="repassword" id="repassword" type="password"/></dd>
 				</dl>
-			</form>
-		</div>
-	</div>
-	<div class="ta-c">
-		<button type="button" class="ubtn sm btn hide" onclick="submitPwd()">确定修改</button>
-		<button type="button"class="fbtn sm btn" onclick="resetPwd()">重设密码</button>
-		<span class="sep20"></span>
-		<button type="button" class="fbtn sm btn" onclick="closeUser()">关闭</button>
-	</div>
+            </div>
+        </div>
+        <div class="ta-c">
+            <input type="hidden" name="_token" value="{{csrf_token()}}" />
+            <button type="submit" class="ubtn sm btn hide">确定修改</button>
+            <button type="button"class="fbtn sm btn" onclick="resetPwd()">重设密码</button>
+            <span class="sep20"></span>
+            <button type="button" class="fbtn sm btn" onclick="closeUser()">关闭</button>
+        </div>
+    </form>
 </div>
 <div class="acpop hide" id="pop-clean">
 	<a class="close" onclick="closeAc('pop-clean')">×</a>
@@ -161,6 +162,12 @@ $(document).ready(function(){
             $('body').vdsAlert({msg:"处理请求时发生错误"});
           }
         });
+    });
+    $('form[name="resetpassword"]').submit(function(){
+        $('#old_password').vdsFieldChecker({rules: {required:[true, '请输入旧密码']}, tipsPos:'br'});
+        $('#new_password').vdsFieldChecker({rules: {required:[true, '请设置新密码'], password:[true, '新密码不符合格式要求']}, tipsPos:'br'});
+        $('#repassword').vdsFieldChecker({rules: {equal:[$('#new_password').val(), '两次密码不一致']}, tipsPos:'br'});
+        return $('form[name="resetpassword"]').vdsFormChecker();
     });
 });
 </script>

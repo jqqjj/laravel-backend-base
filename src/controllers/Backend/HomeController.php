@@ -11,6 +11,9 @@ use App\Facades\Captcha;
 use Illuminate\Support\Facades\Artisan;
 use App\Exceptions\BackendException;
 use App\Facades\BackendMessage as Message;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Business\AdminBusiness;
 
 class HomeController extends Controller
 {
@@ -37,21 +40,47 @@ class HomeController extends Controller
     public function clearcache(Request $request)
     {
         $clean = $request->input("clean");
-        if(empty($clean)){
+        if(empty($clean) || !is_array($clean)){
             throw new BackendException(10000,"请选择清理类型");
         }
-        if(!empty($clean['data'])){
+        if(in_array('data', $clean)){
             Artisan::call("cache:clear");
         }
-        if(!empty($clean['template'])){
+        if(in_array('template', $clean)){
             Artisan::call("view:clear");
         }
-        if(!empty($clean['config'])){
+        if(in_array('config', $clean)){
             Artisan::call("clear-compiled");
             Artisan::call("config:clear");
             Artisan::call("route:clear");
         }
         return Message::json(0,"清理完成");
+    }
+    
+    public function changePassword(Request $request,AdminBusiness $b_admin)
+    {
+        $params = $request->all();
+        
+        $validator = Validator::make($params, [
+            'new_password' => ['required','between:6,32'],
+            'old_password' => ['required'],
+        ], [
+            'required' => ':attribute 不能为空',
+            'between' => ':attribute 长度应在 :min - :max 之间',
+        ], [
+            'old_password'=>'旧密码',
+            'new_password'=>'新密码',
+        ]);
+        if ($validator->fails()) {
+            return Message::error($validator->messages()->first());
+        }
+        $id = Auth::guard('backend')->id();
+        if(Auth::guard('backend')->attempt(['admin_id' => $id, 'password' => $params['old_password']],false,false)){
+            $b_admin->update($id, ['password'=>$params['new_password']]);
+            return Message::success("修改密码成功");
+        }else{
+            return Message::error("原始密码不正确");
+        }
     }
     
     public function captcha(Request $request)

@@ -50,10 +50,3 @@ function checkAllClean(){
     $('#clean-select').find('input[type="checkbox"]').prop('checked', false);
   }
 }
-
-function submitPwd(){
-  $('#old_password').vdsFieldChecker({rules: {required:[true, '请输入旧密码']}, tipsPos:'br'});
-  $('#new_password').vdsFieldChecker({rules: {required:[true, '请设置新密码'], password:[true, '新密码不符合格式要求']}, tipsPos:'br'});
-  $('#repassword').vdsFieldChecker({rules: {equal:[$('#new_password').val(), '两次密码不一致']}, tipsPos:'br'});
-  $('#pwd form').vdsFormChecker();
-}
