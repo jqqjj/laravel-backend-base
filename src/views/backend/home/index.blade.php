@@ -146,13 +146,13 @@ $(document).ready(function(){
           data: {clean:clean,_token:"{{csrf_token()}}"},
           beforeSend: function(){$('#clean-select').hide();$('#cleaning').show();},
           success: function(res){
-            closeAc('pop-clean');
             $('#clean-select').show();
             $('#cleaning').hide();
-            if(res.status === 'success'){
-              $('body').vdsAlert({msg:'清理完成', time:1});
+            if(res.ret === 0){
+                closeAc('pop-clean');
+                $('body').vdsAlert({msg:res.message, time:1});
             }else{
-              $('body').vdsAlert({msg:res.msg, time:2});
+              $('body').vdsAlert({msg:res.message, time:2});
             }
           },
           error: function(){

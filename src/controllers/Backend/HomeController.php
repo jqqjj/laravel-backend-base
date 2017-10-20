@@ -9,7 +9,8 @@ use App\Facades\Documents;
 use App\Helpers\BytesFormat;
 use App\Facades\Captcha;
 use Illuminate\Support\Facades\Artisan;
-use App\Exceptions\ResponseException;
+use App\Exceptions\BackendException;
+use App\Facades\BackendMessage as Message;
 
 class HomeController extends Controller
 {
@@ -37,7 +38,7 @@ class HomeController extends Controller
     {
         $clean = $request->input("clean");
         if(empty($clean)){
-            throw new ResponseException(10000);
+            throw new BackendException(10000,"请选择清理类型");
         }
         if(!empty($clean['data'])){
             Artisan::call("cache:clear");
@@ -50,7 +51,7 @@ class HomeController extends Controller
             Artisan::call("config:clear");
             Artisan::call("route:clear");
         }
-        
+        return Message::json(0,"清理完成");
     }
     
     public function captcha(Request $request)

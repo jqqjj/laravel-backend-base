@@ -5,9 +5,8 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use App\Exceptions\ResponseException;
-use Illuminate\Http\Response;
-use App\Facades\BackendMessage as Message;
+use App\Exceptions\BackendException;
+use App\Facades\BackendMessage;
 
 class Handler extends ExceptionHandler
 {
@@ -23,7 +22,7 @@ class Handler extends ExceptionHandler
         \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
-        ResponseException::class,
+        BackendException::class,
     ];
 
     /**
@@ -48,17 +47,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if($exception instanceof ResponseException){
-            if($request->ajax() || $request->wantsJson()){
-                $response = new Response();
-                $content = json_encode(array(
-                    'code'=>$exception->getCode(),
-                    'message'=>$exception->getMessage(),
-                    'data'=>$exception->getData(),
-                ), JSON_UNESCAPED_UNICODE);
-                $response->setContent($content);
+        if($exception instanceof BackendException){
+            if($request->expectsJson()){
+                $response = BackendMessage::json($exception->getCode(),$exception->getMessage(),$exception->getData());
             }else{
-                $response = Message::error($exception->getMessage());
+                $response = BackendMessage::error($exception->getMessage());
             }
             return $response;
         }

@@ -57,7 +57,7 @@
             <li><a href="{{route("adminlist")}}" target="main"><i class="arrow"></i>后台用户列表</a></li>
             @endpermission
             @permission('role.list')
-            <li><a href="{{route("adminlist")}}" target="main"><i class="arrow"></i>角色列表</a></li>
+            <li><a href="{{route("rolelist")}}" target="main"><i class="arrow"></i>角色列表</a></li>
             @endpermission
         </ul>
     </div>

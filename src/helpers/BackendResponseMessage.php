@@ -37,9 +37,9 @@ class BackendResponseMessage
     public function json($code,$msg,$data=[])
     {
         return response()->json([
-            'status'=>$code,
+            'ret'=>$code,
             'message'=>$msg,
             'data'=>$data,
-        ],200);
+        ],200,[],JSON_UNESCAPED_UNICODE);
     }
 }
