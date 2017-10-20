@@ -2,7 +2,7 @@
     <h2>常用菜单</h2>
     <div class="nochild">
         <ul>
-            <li onclick="jump('dashboard')"><a><i class="arrow"></i>后台中心</a></li>
+            <li><a href="{{route("dashboard")}}" target="main"><i class="arrow"></i>后台中心</a></li>
         </ul>
     </div>
 <!--		<div>
@@ -26,9 +26,9 @@
     <div>
         <h3><a><i class="arrow"></i>用户管理</a></h3>
         <ul>
-            <li onclick="jump('c=user&amp;a=index')"><a><i class="arrow"></i>用户列表</a></li>
-            <li onclick="jump('c=user_group&amp;a=index')"><a><i class="arrow"></i>用户组</a></li>
-            <li onclick="jump('c=user_account_log&amp;a=index')"><a><i class="arrow"></i>账户日志</a></li>
+            <li><a><i class="arrow"></i>用户列表</a></li>
+            <li><a><i class="arrow"></i>用户组</a></li>
+            <li><a><i class="arrow"></i>账户日志</a></li>
         </ul>
     </div>
 <!--		<div>
@@ -54,10 +54,10 @@
         <h3><a><i class="arrow"></i>权限管理</a></h3>
         <ul>
             @permission('admin.list')
-            <li onclick="jump('{{route("adminlist")}}')"><a><i class="arrow"></i>后台用户列表</a></li>
+            <li><a href="{{route("adminlist")}}" target="main"><i class="arrow"></i>后台用户列表</a></li>
             @endpermission
             @permission('role.list')
-            <li onclick="jump('{{route("rolelist")}}')"><a><i class="arrow"></i>角色列表</a></li>
+            <li><a href="{{route("adminlist")}}" target="main"><i class="arrow"></i>角色列表</a></li>
             @endpermission
         </ul>
     </div>
@@ -65,11 +65,11 @@
     <div>
         <h3><a><i class="arrow"></i>系统配置</a></h3>
         <ul>
-            <li onclick="jump('c=setting&amp;a=index')"><a><i class="arrow"></i>系统设置</a></li>
-            <li onclick="jump('c=nav&amp;a=index')"><a><i class="arrow"></i>导航设置</a></li>
-            <li onclick="jump('c=shipping_method&amp;a=index')"><a><i class="arrow"></i>配送方式</a></li>
-            <li onclick="jump('c=payment_method&amp;a=index')"><a><i class="arrow"></i>支付方式</a></li>
-            <li onclick="jump('c=shipping_carrier&amp;a=index')"><a><i class="arrow"></i>物流承运商</a></li>
+            <li><a><i class="arrow"></i>系统设置</a></li>
+            <li><a><i class="arrow"></i>导航设置</a></li>
+            <li><a><i class="arrow"></i>配送方式</a></li>
+            <li><a><i class="arrow"></i>支付方式</a></li>
+            <li><a><i class="arrow"></i>物流承运商</a></li>
         </ul>
     </div>
 <!--		<div>
@@ -82,9 +82,4 @@
     </div>-->
 </div>
 @push("inline")
-<script>
-    function jump(uri){
-        parent.$('#main').attr('src', uri);
-    }
-</script>
 @endpush

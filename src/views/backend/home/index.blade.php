@@ -77,9 +77,9 @@
 	<div class="poinfo cut">
 		<ul id="clean-select">
 			<li><label onclick="checkAllClean()"><input type="checkbox"/><font>全部清理</font></label></li>
-			<li><label><input name="clean" type="checkbox" value="data"/><font>清理数据缓存</font></label></li>
+			<li><label><input name="clean" type="checkbox" value="config"/><font>清理配置缓存</font></label></li>
 			<li><label><input name="clean" type="checkbox" value="template"/><font>清理模板缓存</font></label></li>
-			<li><label><input name="clean" type="checkbox" value="static"/><font>清理静态缓存</font></label></li>
+			<li><label><input name="clean" type="checkbox" value="data"/><font>清理数据缓存</font></label></li>
 		</ul>
 		<div class="cleaning cut hide" id="cleaning">
 			<h3 class="c888 f14">正在清理</h3>
@@ -88,7 +88,7 @@
 		</div>
 	</div>
 	<div class="ta-c">
-		<button type="button" class="ubtn sm btn" onclick="cleanCache('/index.php?m=backend&c=cleaner&a=wiping')">确定清理</button>
+		<button type="button" class="ubtn sm btn clearcache">确定清理</button>
 		<span class="sep20"></span>
 		<button type="button" class="fbtn sm btn" onclick="closeAc('pop-clean')">取消</button>
 	</div>
@@ -128,6 +128,39 @@ $(document).ready(function(){
             $('#nav').show();
         }
         $(this).blur();
+    });
+    $('.clearcache').click(function(){
+        var selected = $('#clean-select input[name="clean"]:checked');
+        if(selected.size() < 1){
+          $('body').vdsAlert({msg:'请选择至少一种您需要清理的类型', time:2});
+          return false;
+        }
+        var clean = [];
+        selected.each(function(){
+          clean.push($(this).val());
+        });
+        $.ajax({
+          type: 'post',
+          dataType: 'json',
+          url: "{{route('clearsystemcache')}}",
+          data: {clean:clean,_token:"{{csrf_token()}}"},
+          beforeSend: function(){$('#clean-select').hide();$('#cleaning').show();},
+          success: function(res){
+            closeAc('pop-clean');
+            $('#clean-select').show();
+            $('#cleaning').hide();
+            if(res.status === 'success'){
+              $('body').vdsAlert({msg:'清理完成', time:1});
+            }else{
+              $('body').vdsAlert({msg:res.msg, time:2});
+            }
+          },
+          error: function(){
+            $('#clean-select').show();
+            $('#cleaning').hide();
+            $('body').vdsAlert({msg:"处理请求时发生错误"});
+          }
+        });
     });
 });
 </script>

@@ -51,40 +51,6 @@ function checkAllClean(){
   }
 }
 
-function cleanCache(url){
-  var selected = $('#clean-select input[name="clean"]:checked');
-  if(selected.size() < 1){
-    $('body').vdsAlert({msg:'请选择至少一种您需要清理的类型', time:2});
-    return false;
-  }
-  var clean = [];
-  selected.each(function(){  
-    clean.push($(this).val());  
-  });
-  $.ajax({
-    type: 'post',
-    dataType: 'json',
-    url: url,
-    data: {clean:clean},
-    beforeSend: function(){$('#clean-select').hide();$('#cleaning').show();},
-    success: function(res){
-      closeAc('pop-clean');
-      $('#clean-select').show();
-      $('#cleaning').hide();
-      if(res.status === 'success'){
-        $('body').vdsAlert({msg:'清理完成', time:1});
-      }else{
-        $('body').vdsAlert({msg:res.msg, time:2}); 
-      }
-    },
-    error: function(){ 
-      $('#clean-select').show();
-      $('#cleaning').hide();
-      $('body').vdsAlert({msg:"处理请求时发生错误"});
-    }
-  });
-}
-
 function submitPwd(){
   $('#old_password').vdsFieldChecker({rules: {required:[true, '请输入旧密码']}, tipsPos:'br'});
   $('#new_password').vdsFieldChecker({rules: {required:[true, '请设置新密码'], password:[true, '新密码不符合格式要求']}, tipsPos:'br'});

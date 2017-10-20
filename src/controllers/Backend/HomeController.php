@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use App\Facades\Documents;
 use App\Helpers\BytesFormat;
 use App\Facades\Captcha;
+use Illuminate\Support\Facades\Artisan;
+use App\Exceptions\ResponseException;
 
 class HomeController extends Controller
 {
@@ -29,6 +31,26 @@ class HomeController extends Controller
             'db_version'=>$version,
             'format_size'=>$bytes_format->format($bytes_size),
         ]);
+    }
+    
+    public function clearcache(Request $request)
+    {
+        $clean = $request->input("clean");
+        if(empty($clean)){
+            throw new ResponseException(10000);
+        }
+        if(!empty($clean['data'])){
+            Artisan::call("cache:clear");
+        }
+        if(!empty($clean['template'])){
+            Artisan::call("view:clear");
+        }
+        if(!empty($clean['config'])){
+            Artisan::call("clear-compiled");
+            Artisan::call("config:clear");
+            Artisan::call("route:clear");
+        }
+        
     }
     
     public function captcha(Request $request)

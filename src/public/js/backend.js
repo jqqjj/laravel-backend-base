@@ -154,7 +154,8 @@ function formatTimestamp(time, format) {
 		
     opts.time = opts.time * 1000;
 		
-    this.remove('#vds-alert');
+    //this.remove('#vds-alert');
+    $('#vds-alert').remove();
     $("<div id='vds-alert'></div>").html(opts.msg).appendTo(this).css({ 
       position: 'absolute',
       width: 300,
