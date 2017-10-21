@@ -34,11 +34,11 @@
         <div class="module poinfo cut">
             <dl>
                 <dt>姓名</dt>
-                <dd>@if(Auth::guard("backend")->user()->nick_name) Auth::guard("backend")->user()->nick_name @else<font class="c999">未设置</font>@endif</dd>
+                <dd>@if(Auth::guard("backend")->user()->nick_name){{Auth::guard("backend")->user()->nick_name}}@else<font class="c999">未设置</font>@endif</dd>
             </dl>
             <dl>
                 <dt>邮箱</dt>
-                <dd>@if(Auth::guard("backend")->user()->email) Auth::guard("backend")->user()->email @else<font class="c999">未设置</font>@endif</dd>
+                <dd>@if(Auth::guard("backend")->user()->email){{Auth::guard("backend")->user()->email}}@else<font class="c999">未设置</font>@endif</dd>
             </dl>
             <dl>
                 <dt>上次登录时间</dt>

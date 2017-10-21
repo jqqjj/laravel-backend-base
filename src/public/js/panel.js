@@ -1,7 +1,7 @@
 $(function(){
-    $('#nav li').click(function(){
+    $('#nav li a').click(function(){
       $('#nav li.on').removeClass('on');
-      $(this).addClass('on');
+      $(this).parent().addClass('on');
     });
     $('#nav h3').click(function(){
       if($(this).hasClass('on')) $(this).removeClass('on').next('ul').slideUp(); else $(this).addClass('on').next('ul').slideDown();
