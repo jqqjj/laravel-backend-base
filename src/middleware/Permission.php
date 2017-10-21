@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use App\Facades\BackendMessage as Message;
+use App\Facades\BackendMessage;
 
 class Permission
 {
@@ -22,18 +22,18 @@ class Permission
     public function handle($request, Closure $next, $arg)
     {
         if (Auth::guard('backend')->guest()) {
-            if ($request->ajax() || $request->wantsJson()) {
-                return response('Unauthorized.', 401);
+            if ($request->expectsJson()) {
+                return BackendMessage::json(401,"权限不足");
             } else {
                 return redirect()->route('adminlogin');
             }
         }
         
         if(!Auth::guard('backend')->user()->hasPermission($arg) && Auth::guard('backend')->id()!=1){
-            if ($request->ajax() || $request->wantsJson()) {
-                return response('Unauthorized.', 401);
+            if ($request->expectsJson()) {
+                return BackendMessage::json(401,"权限不足");
             } else {
-                return Message::error("权限不足");
+                return BackendMessage::error("权限不足");
             }
         }
         

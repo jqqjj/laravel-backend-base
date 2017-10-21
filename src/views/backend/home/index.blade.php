@@ -19,7 +19,9 @@
 		<a title="前端首页" class="icon front" target="_blank" href="/">前端首页</a>
 		<a title="设置" class="icon sets" href="javascript:;">设置</a>
 		<a title="用户信息" class="icon user" onclick="popAc('pop-user')">用户信息</a>
+        @permission('cache.clear')
 		<a title="清理缓存" class="icon wipe" onclick="popAc('pop-clean')">清理缓存</a>
+        @endpermission
 		<a title="退出登录" class="icon logout" href="{{route("adminlogout")}}">退出登录</a>
 	</div>
 </div>

@@ -14,4 +14,10 @@ return [
             'role.delete'=>'删除角色',
         ],
     ],
+    [
+        'name'=>"系统管理",
+        "list"=>[
+            'cache.clear'=>"缓存清理",
+        ],
+    ],
 ];
