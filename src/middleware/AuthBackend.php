@@ -20,14 +20,18 @@ class AuthBackend
         $user = Auth::guard($guard)->user();
         if (empty($user)) {
             if ($request->expectsJson()) {
-                return BackendMessage::json(401,"权限不足");
+                return BackendMessage::json(401,"您未登录");
             } else {
-                return redirect()->route('adminlogin');
+                return BackendMessage::error('您未登录', ['label'=>'','url'=>route('adminlogin')]);
             }
         }
         if(!$user->enabled){
             Auth::guard($guard)->logout();
-            return BackendMessage::error('账号被冻结', ['label'=>'','url'=>route('adminlogin')]);
+            if ($request->expectsJson()) {
+                return BackendMessage::json(401,"账号被冻结");
+            } else {
+                return BackendMessage::error('账号被冻结', ['label'=>'','url'=>route('adminlogin')]);
+            }
         }
         return $next($request);
     }

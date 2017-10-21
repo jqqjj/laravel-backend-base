@@ -23,9 +23,9 @@ class Permission
     {
         if (Auth::guard('backend')->guest()) {
             if ($request->expectsJson()) {
-                return BackendMessage::json(401,"权限不足");
+                return BackendMessage::json(401,"您未登录");
             } else {
-                return redirect()->route('adminlogin');
+                return BackendMessage::error('您未登录', ['label'=>'','url'=>route('adminlogin')]);
             }
         }
         
