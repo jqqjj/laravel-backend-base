@@ -24,6 +24,7 @@ class BackendBaseProvider extends ServiceProvider
             __DIR__ . "/facades"=> app_path("Facades"),
             __DIR__ . "/helpers"=> app_path("Helpers"),
             __DIR__ . "/exceptions"=> app_path("Exceptions"),
+            __DIR__ . "/listeners"=> app_path("Listeners"),
             __DIR__ . "/business"=> app_path("Http/Business"),
             __DIR__ . "/controllers"=> app_path("Http/Controllers"),
             __DIR__ . "/middleware"=> app_path("Http/Middleware"),

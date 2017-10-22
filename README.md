@@ -35,6 +35,12 @@ Register Middleware to the routeMiddleware array in app/Http/Kernel.php
 'auth.backend' => \App\Http\Middleware\AuthBackend::class,
 'permission' => \App\Http\Middleware\Permission::class,
 ```
+Register Event to the listen array in app/Providers/EventServiceProvider.php
+```php
+'Illuminate\Auth\Events\Login'=>[
+    'App\Listeners\BacknedLoginListener',
+],
+```
 Add one more guard to the guards array in config/auth.php
 ```php
 'backend' => [
