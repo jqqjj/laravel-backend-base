@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Facades\Documents;
 use App\Helpers\BytesFormat;
 use App\Facades\Captcha;
+use App\Facades\Human;
 use Illuminate\Support\Facades\Artisan;
 use App\Exceptions\BackendException;
 use App\Facades\BackendMessage as Message;
@@ -45,6 +46,7 @@ class HomeController extends Controller
         }
         if(in_array('data', $clean)){
             Artisan::call("cache:clear");
+            Human::clearTrash();
         }
         if(in_array('template', $clean)){
             Artisan::call("view:clear");

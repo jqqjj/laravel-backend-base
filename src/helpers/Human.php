@@ -36,6 +36,11 @@ class Human
         }
     }
     
+    public function clearTrash()
+    {
+        return $this->manager->clearTrash();
+    }
+    
     public function queueCookie()
     {
         Cookie::queue(
