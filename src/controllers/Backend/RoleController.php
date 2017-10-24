@@ -47,6 +47,7 @@ class RoleController extends Controller
     public function update(Request $req,RoleBusiness $b_role,RolePermissionsBusiness $b_role_permission)
     {
         $id = $req->input('id');
+        $referer = $req->input("_referer");
         $params = $req->all();
         $detail = $b_role->getDetail($id, ['*'], ['permissions']);
         if(empty($detail)){
@@ -83,7 +84,7 @@ class RoleController extends Controller
             }
         }
         
-        return Message::success("更新成功!",['label'=>'返回列表','url'=>route('rolelist')]);
+        return Message::success("更新成功!",['label'=>'返回上一页','url'=>$referer?:route('rolelist')]);
     }
     
     public function add()
@@ -96,6 +97,7 @@ class RoleController extends Controller
     
     public function store(Request $req,RoleBusiness $b_role,RolePermissionsBusiness $b_role_permission)
     {
+        $referer = $req->input("_referer");
         $params = $req->all();
         
         $validator = Validator::make($params, [
@@ -144,10 +146,10 @@ class RoleController extends Controller
                 ]);
             }
         }
-        return Message::success("添加成功",['label'=>'返回列表','url'=>route('rolelist')],[['label'=>'继续添加','url'=>route('roleadd')]]);
+        return Message::success("添加成功",['label'=>'返回一上页','url'=>$referer?:route('rolelist')],[['label'=>'继续添加','url'=>route('roleadd')]]);
     }
     
-    public function deletebatch(Request $req,RolePermissionsBusiness $b_role_permission,RoleBusiness $b_role)
+    public function deletebatch(Request $req,RoleBusiness $b_role)
     {
         $input = $req->all();
         if(empty($input['id']) || !is_array($input['id'])){

@@ -47,6 +47,7 @@
 			<div class="submitbtn">
                 <button type="submit" class="ubtn btn">保存提交</button>
 				<button type="reset" class="fbtn btn">重置表单</button>
+                <input type="hidden" name="_referer" value="{{request()->server("HTTP_REFERER")}}">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 			</div>
 		</div>

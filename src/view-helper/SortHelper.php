@@ -35,7 +35,8 @@ class SortHelper
         $params[$column_key] = $column;
         $params[$sort_key] = $sort;
         
-        $url = $paginator->appends($params)->url(1);
+        $tmp_paginator = clone $paginator;
+        $url = $tmp_paginator->appends($params)->url(1);
         $html = '<a class="c666" href="'.$url.'">'.$label.'<i class="sort '.$class.'"></i>';
         return $html;
     }

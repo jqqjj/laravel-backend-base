@@ -62,6 +62,7 @@ class AdminController extends Controller
     public function update(Request $req,AdminBusiness $b_admin,RoleBusiness $b_role)
     {
         $admin_id = $req->input("id");
+        $referer = $req->input("_referer");
         $params = $req->all();
         $update_admin = $b_admin->getDetail($admin_id,['*'], ['roles']);
         if(Auth::guard('backend')->id()>1){
@@ -137,7 +138,7 @@ class AdminController extends Controller
                 $update_admin->roles()->attach($role_id);
             }
         }
-        return Message::success("更新成功",['label'=>'返回列表','url'=>route('adminlist')]);
+        return Message::success("更新成功",['label'=>'返回上一页','url'=>$referer?:route('adminlist')]);
     }
     
     public function add(AdminBusiness $b_admin,RoleBusiness $b_role)
@@ -159,6 +160,7 @@ class AdminController extends Controller
     
     public function store(Request $req,AdminBusiness $b_admin,RoleBusiness $b_role)
     {
+        $referer = $req->input("_referer");
         $params = $req->all();
         
         $validator = Validator::make($params, [
@@ -216,7 +218,7 @@ class AdminController extends Controller
                 $new_admin->roles()->attach($role_id);
             }
         }
-        return Message::success("添加成功",['label'=>'返回列表','url'=>route('adminlist')]);
+        return Message::success("添加成功",['label'=>'返回上一页','url'=>$referer?:route('adminlist')]);
     }
     
     public function deletebatch(Request $req,AdminBusiness $b_admin)
