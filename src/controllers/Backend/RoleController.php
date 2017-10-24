@@ -54,6 +54,23 @@ class RoleController extends Controller
             return Message::error("您的请求出错啦!");
         }
         
+        $validator = Validator::make($params, [
+            'role_name' => ['required','between:1,16'],
+        ], [
+            'required' => ':attribute 不能为空',
+            'between' => ':attribute 长度应在 :min - :max 之间',
+            'max' => ":attribute 不能超过 :max 个字",
+        ], [
+            'role_name'=>'角色名',
+            'role_desc'=>'角色描述',
+        ]);
+        $validator->sometimes("role_desc",['required','max:240'],function($input){
+            return !empty($input['role_desc']);
+        });
+        if ($validator->fails()) {
+            return Message::error($validator->messages()->first());
+        }
+        
         $save_data = [];
         if(!empty($params['role_name'])){
             //检查角色名是否被使用
@@ -105,9 +122,14 @@ class RoleController extends Controller
         ], [
             'required' => ':attribute 不能为空',
             'between' => ':attribute 长度应在 :min - :max 之间',
+            'max' => ":attribute 不能超过 :max 个字",
         ], [
             'role_name'=>'角色名',
+            'role_desc'=>'角色描述',
         ]);
+        $validator->sometimes("role_desc",['required','max:240'],function($input){
+            return !empty($input['role_desc']);
+        });
         if ($validator->fails()) {
             return Message::error($validator->messages()->first());
         }

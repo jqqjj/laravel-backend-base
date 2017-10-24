@@ -80,13 +80,18 @@ class AdminController extends Controller
         ], [
             'required' => ':attribute 不能为空',
             'between' => ':attribute 长度应在 :min - :max 之间',
+            'max' => ':attribute 长度不能超过 :max 字',
         ], [
             'name'=>'登录名称',
             'email'=>'电子邮箱',
             'password'=>"密码",
+            'nick_name'=>'昵称',
         ]);
         $validator->sometimes("password",['required','between:6,32'],function($input){
             return !empty($input['resetpwd']) && !empty($input['password']) && strlen($input['password'])>0;
+        });
+        $validator->sometimes("nick_name",['required','max:20'],function($input){
+            return !empty($input['nick_name']);
         });
         if ($validator->fails()) {
             return Message::error($validator->messages()->first());
@@ -170,11 +175,16 @@ class AdminController extends Controller
         ], [
             'required' => ':attribute 不能为空',
             'between' => ':attribute 长度应在 :min - :max 之间',
+            'max' => ':attribute 长度不能超过 :max 字',
         ], [
             'name'=>'登录名称',
             'email'=>'电子邮箱',
             'password'=>'密码',
+            'nick_name'=>'昵称',
         ]);
+        $validator->sometimes("nick_name",['required','max:20'],function($input){
+            return !empty($input['nick_name']);
+        });
         if ($validator->fails()) {
             return Message::error($validator->messages()->first());
         }

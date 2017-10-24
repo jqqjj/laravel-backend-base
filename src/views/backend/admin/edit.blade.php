@@ -157,6 +157,7 @@ $(document).ready(function(){
         }
         $('#repassword').vdsFieldChecker({rules:{equal:[$('#password').val(), '两次密码不一致']}});
         $('#email').vdsFieldChecker({rules:{required:[true, '电子邮箱不能为空'], email:[true, '无效的电子邮箱地址']}});
+        $('#nick_name').vdsFieldChecker({rules:{maxlen:[20, '昵称不能超过20个字符']}});
         return $('form').vdsFormChecker();
     });
 });
