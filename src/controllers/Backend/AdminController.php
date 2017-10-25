@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Facades\BackendMessage as Message;
 use App\Facades\Pagination;
+use App\Helpers\Referer;
 
 class AdminController extends Controller
 {
@@ -143,7 +144,7 @@ class AdminController extends Controller
                 $update_admin->roles()->attach($role_id);
             }
         }
-        return Message::success("更新成功",['label'=>'返回上一页','url'=>$referer?:route('adminlist')]);
+        return Message::success("更新成功",['label'=>'返回上一页','url'=>(new Referer)->get($referer, route('adminlist'))]);
     }
     
     public function add(AdminBusiness $b_admin,RoleBusiness $b_role)
@@ -228,7 +229,7 @@ class AdminController extends Controller
                 $new_admin->roles()->attach($role_id);
             }
         }
-        return Message::success("添加成功",['label'=>'返回上一页','url'=>$referer?:route('adminlist')]);
+        return Message::success("添加成功",['label'=>'返回上一页','url'=>(new Referer)->get($referer, route('adminlist'))]);
     }
     
     public function deletebatch(Request $req,AdminBusiness $b_admin)

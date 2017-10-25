@@ -9,6 +9,7 @@ use App\Http\Business\RolePermissionsBusiness;
 use Illuminate\Support\Facades\Validator;
 use App\Facades\BackendMessage as Message;
 use App\Facades\Pagination;
+use App\Helpers\Referer;
 
 class RoleController extends Controller
 {
@@ -101,7 +102,7 @@ class RoleController extends Controller
             }
         }
         
-        return Message::success("更新成功!",['label'=>'返回上一页','url'=>$referer?:route('rolelist')]);
+        return Message::success("更新成功!",['label'=>'返回上一页','url'=>(new Referer)->get($referer, route('rolelist'))]);
     }
     
     public function add()
@@ -168,7 +169,7 @@ class RoleController extends Controller
                 ]);
             }
         }
-        return Message::success("添加成功",['label'=>'返回一上页','url'=>$referer?:route('rolelist')],[['label'=>'继续添加','url'=>route('roleadd')]]);
+        return Message::success("添加成功",['label'=>'返回一上页','url'=>(new Referer)->get($referer, route('rolelist'))],[['label'=>'继续添加','url'=>route('roleadd')]]);
     }
     
     public function deletebatch(Request $req,RoleBusiness $b_role)
