@@ -70,7 +70,7 @@ input.w250 {width:250px;}
 input.w300 {width:300px;}
 input.w400 {width:400px;}
 input.w500 {width:500px;}
-input.txt {font-size:12px;padding:6px 0 6px 5px;border:1px solid;border-left-color:#a6a6a6;border-top-color:#999;border-bottom-color:#d6d6d6;border-right-color:#d6d6d6;background:#fffdf9;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
+input.txt {margin: 5px 0;font-size:12px;padding:6px 0 6px 5px;border:1px solid;border-left-color:#a6a6a6;border-top-color:#999;border-bottom-color:#d6d6d6;border-right-color:#d6d6d6;background:#fffdf9;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
 textarea.txtarea {font-size:12px;padding:5px 0 0 5px;border:1px solid;border-left-color:#a6a6a6;border-top-color:#999;border-bottom-color:#d6d6d6;border-right-color:#d6d6d6;background:#fffdf9;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
 textarea.disabled {color:#666;border:1px solid #e5e5e5;background:#f6f6f6;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
 input.disabled {color:#666;border:1px solid #d5d5d5;border-left-color:#bbb;border-top-color:#bbb;background:#f3f3f3;}

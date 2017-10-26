@@ -120,11 +120,10 @@ class HomeController extends Controller
         $url = !empty($forward['url']) ? $forward['url'] : '';
         $label = !empty($forward['label']) ? $forward['label'] : '';
         
-        $server = $request->server();
         return view('backend.home.message',[
             'msg'=>!empty($msg) ? $msg : '操作失败',
-            'url'=>!empty($url) ? $url : (!empty($server['HTTP_REFERER']) ? $server['HTTP_REFERER'] : route('adminindex')),
-            'label'=>!empty($label) ? $label : "点击继续",
+            'url'=>!empty($url) ? $url : "",
+            'label'=>!empty($label) ? $label : "返回上一页",
             'type'=>'error',
             'links'=>$request->input("_links"),
         ]);

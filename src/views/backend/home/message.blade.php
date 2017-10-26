@@ -37,7 +37,12 @@ function redirect(){
   countdown --;
   $('#countdown').text(countdown);
   if (countdown == 0){
-    window.location.href = $('a.link:first').attr('href');
+      var href = $('a.link:first').attr('href');
+      if(href){
+          window.location.href = $('a.link:first').attr('href');
+      }else{
+          window.history.back();
+      }
   }
 }
 </script>
