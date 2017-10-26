@@ -15,7 +15,7 @@
     <div class="prompt">
       <h3 class="{{$type}}">{{$msg}}</h3>
       <p class="c999 mt15">系统将在 <span id="countdown">3</span> 秒后自动跳转到系统指定页面</p>
-      <p class="mt15"><a class="link" href="{{$url}}">{{$label}}</a></p>
+      <p class="mt15"><a class="link" href="{{$url?:"javascript:window.history.back();"}}">{{$label}}</a></p>
       @foreach($links as $link)
       <p class="mt5"><a class="link" href="{{$link['url']}}">{{$link['label']}}</a></p>
       @endforeach
@@ -38,7 +38,7 @@ function redirect(){
   $('#countdown').text(countdown);
   if (countdown == 0){
       var href = $('a.link:first').attr('href');
-      if(href){
+      if(href && href.indexOf("javascript:")===-1){
           window.location.href = $('a.link:first').attr('href');
       }else{
           window.history.back();
