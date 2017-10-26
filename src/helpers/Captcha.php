@@ -21,9 +21,12 @@ class Captcha
     
     public function validate($path,$phrase)
     {
-        if(!Session::exists(config("backend.captcha_session_key_prefix").$path) || empty($phrase)){
+        $session_key = config("backend.captcha_session_key_prefix").$path;
+        if(!Session::exists($session_key) || empty($phrase)){
             return false;
         }
-        return Session::get(config("backend.captcha_session_key_prefix").$path) == $phrase;
+        $captcha = Session::get($session_key);
+        Session::forget($session_key);
+        return $captcha == $phrase;
     }
 }

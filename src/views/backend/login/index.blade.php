@@ -51,7 +51,7 @@
 										</div>
                                         <div class="captchaImage">
                                             <a title="点击刷新验证码" href="javascript:;">
-                                                <img id="captcha-img" src="{{route("admincaptcha",['path'=>'adminlogin'])}}" />
+                                                <img id="captcha-img" src="" />
                                             </a>
                                         </div>
 									</div>
@@ -108,6 +108,7 @@
             var src = "{{route('admincaptcha',['path'=>'adminlogin'])}}&"+rand;
             $('#captcha-img').attr('src', src);
         });
+        $('#captcha-img').trigger('click');
     });
 </script>
 @endpush
