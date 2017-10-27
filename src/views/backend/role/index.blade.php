@@ -12,8 +12,8 @@
     <div class="loc"><h2><i class="icon"></i>角色列表</h2></div>
     <div class="box">
         <div class="doacts">
-          <a class="ae add btn" href="{{route("roleadd")}}"><i></i><font>添加新角色</font></a>
-          <a class="ae btn" dobatch="confirm" primary="id" method="post" msg="确定要删除吗?" href="{{url("admin/roledeletebatch")}}"><i class="remove"></i><font>删除</font></a>
+          <a class="ae add btn" href="{{route("roleadd")}}"><i class="add mr5"></i><font>添加新角色</font></a>
+          <a class="ae btn" dobatch="confirm" primary="id" method="post" msg="确定要删除吗?" href="{{url("admin/roledeletebatch")}}"><i class="remove mr5"></i><font>删除</font></a>
         </div>
         @if(count($list))
         <div class="module mt5">
@@ -24,7 +24,7 @@
                     <th class="ta-l">描述</th>
                     <th width="200" class="ta-l">{!!ViewHelper::sort()->make($list,"创建时间","created_at")!!}</th>
                     <th width="200" class="ta-l">{!!ViewHelper::sort()->make($list,"修改时间","updated_at")!!}</th>
-                    <th width="250">操作</th>
+                    <th width="">操作</th>
                 </tr>
                 @foreach($list as $key=>$item)
                 <tr>
@@ -37,8 +37,8 @@
                     <td class="ta-l">{{$item->created_at}}</td>
                     <td class="ta-l">{{$item->updated_at}}</td>
                     <td class="c888">
-                        <a class="ae btn" href="{{route("roleedit",['id'=>$item->role_id])}}"><i class="edit"></i><font>编辑</font></a>
-                        <a class="ae btn" dobatch="confirm" primary="id" value="{{$item->role_id}}" method="post" href="{{url("admin/roledeletebatch")}}"><i class="remove"></i><font>删除</font></a>
+                        <a title="编辑" class="ae btn" href="{{route("roleedit",['id'=>$item->role_id])}}"><i class="edit"></i></a>
+                        <a title="删除" class="ae btn" dobatch="confirm" primary="id" value="{{$item->role_id}}" method="post" href="{{url("admin/roledeletebatch")}}"><i class="remove"></i></a>
                     </td>
                 </tr>
                 @endforeach

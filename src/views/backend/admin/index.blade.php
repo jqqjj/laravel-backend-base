@@ -12,8 +12,8 @@
     <div class="loc"><h2><i class="icon"></i>后台用户列表</h2></div>
     <div class="box">
         <div class="doacts">
-          <a class="ae add btn" href="{{route("adminadd")}}"><i></i><font>添加</font></a>
-          <a class="ae btn" dobatch="confirm" primary="id" method="post" href="{{url("admin/admindeletebatch")}}"><i class="remove"></i><font>删除</font></a>
+          <a class="ae add btn" href="{{route("adminadd")}}"><i class="mr5 add"></i><font>添加</font></a>
+          <a class="ae btn" dobatch="confirm" primary="id" method="post" href="{{url("admin/admindeletebatch")}}"><i class="remove mr5"></i><font>删除</font></a>
         </div>
         @if(count($list))
         <div class="module mt5">
@@ -27,7 +27,7 @@
                     <th width="">最后登录IP</th>
                     <th width="">{!!ViewHelper::sort()->make($list,"创建时间","created_at")!!}</th>
                     <th width="">{!!ViewHelper::sort()->make($list,"是否冻结","enabled")!!}</th>
-                    <th width="200">操作</th>
+                    <th width="">操作</th>
                 </tr>
                 @foreach($list as $key=>$admin)
                 <tr>
@@ -41,8 +41,8 @@
                     <td class="c888">{{$admin->created_at}}</td>
                     <td class="c888">{{$admin->enabled?"否":"是"}}</td>
                     <td class="c888">
-                        <a class="ae btn" href="{{route("adminedit",['id'=>$admin->admin_id])}}"><i class="edit"></i><font>编辑</font></a>
-                        <a class="ae btn" dobatch="confirm" primary="id" value="{{$admin->admin_id}}" method="post" href="{{url("admin/admindeletebatch")}}"><i class="remove"></i><font>删除</font></a>
+                        <a title="编辑" class="ae btn" href="{{route("adminedit",['id'=>$admin->admin_id])}}"><i class="edit"></i></a>
+                        <a title="删除" class="ae btn" dobatch="confirm" primary="id" value="{{$admin->admin_id}}" method="post" href="{{url("admin/admindeletebatch")}}"><i class="remove"></i></a>
                     </td>
                 </tr>
                 @endforeach

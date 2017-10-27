@@ -118,15 +118,15 @@ i.nopic.large {width:120px;height:60px;font-size:18px;line-height:60px;}
 .sbtn:hover {color:#FFCC00;background:#4D94F4;border-color:#3885ED}
 .btn.disabled {background:#eee;color:#bbb;border-color:#d5d5d5;cursor:default}
 .btn.sm {padding:5px 10px;}
-.ae {margin-right:10px;padding:4px 6px;border:1px solid #B9D0E3;cursor:pointer;border-color:#97BCCE;background:#F7FDFF;}
+.ae {margin:0 2px 2px 0;padding:4px 6px;border:1px solid #B9D0E3;cursor:pointer;border-color:#97BCCE;background:#F7FDFF;}
 .ae font {color:#44768E;font-weight:bold;vertical-align:middle;}
-.ae i {font-size:0;margin-right:8px;height:18px;background:url(../images/icons.png) no-repeat;}
+.ae i {font-size:0;height:18px;background:url(../images/icons.png) no-repeat;}
 .ae.add {padding:4px 10px 4px 8px;border-color:#008A00;background:#52A452;}
-.ae.add i {width:11px;height:18px;margin-right:10px;background-position:0 -57px;}
 .ae.add font {color:#fff;}
 .ae.add:hover {border-color:#008400;background:#4A934A;}
 .ae.add:hover i {background-position:0 -87px;}
 .ae.add:hover font {color:#FFE79B}
+.ae i.add {width:11px;background-position:0 -57px;}
 .ae i.edit {width:16px;background-position:-30px -60px;}
 .ae i.remove {width:15px;background-position:-60px -59px;}
 .ae i.view {width:13px;background-position:-90px -58px;}
