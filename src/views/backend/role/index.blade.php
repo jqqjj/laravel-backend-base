@@ -22,8 +22,8 @@
                     <th width="50" colspan="2">{!!ViewHelper::sort()->make($list,"编号","role_id")!!}</th>
                     <th width="" class="ta-l">{!!ViewHelper::sort()->make($list,"角色名","role_name")!!}</th>
                     <th class="ta-l">描述</th>
-                    <th width="200" class="ta-l">{!!ViewHelper::sort()->make($list,"创建时间","created_at")!!}</th>
-                    <th width="200" class="ta-l">{!!ViewHelper::sort()->make($list,"修改时间","updated_at")!!}</th>
+                    <th width="" class="ta-l">{!!ViewHelper::sort()->make($list,"创建时间","created_at")!!}</th>
+                    <th width="" class="ta-l">{!!ViewHelper::sort()->make($list,"修改时间","updated_at")!!}</th>
                     <th width="">操作</th>
                 </tr>
                 @foreach($list as $key=>$item)
