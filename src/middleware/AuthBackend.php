@@ -22,7 +22,7 @@ class AuthBackend
             if ($request->expectsJson()) {
                 return BackendMessage::json(401,"您未登录");
             } else {
-                return BackendMessage::error('您未登录', ['label'=>'','url'=>route('adminlogin')]);
+                return redirect()->to(route('adminlogin'));
             }
         }
         if(!$user->enabled){

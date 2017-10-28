@@ -109,6 +109,9 @@
             $('#captcha-img').attr('src', src);
         });
         $('#captcha-img').trigger('click');
+        if(self.frameElement && self.frameElement.tagName == "IFRAME"){
+            window.parent.location.href = '{{route("adminlogin")}}';
+        }
     });
 </script>
 @endpush
