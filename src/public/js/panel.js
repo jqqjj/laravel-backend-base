@@ -30,6 +30,9 @@ function resetPwd(){
   $('#pwd').slideDown(200);
   $('#pop-user div.ta-c button').eq(0).show();
   $('#pop-user div.ta-c button').eq(1).hide();
+  setTimeout(function(){
+      $(window).trigger('resize');
+  },500);
 }
 
 function popAc(id){
