@@ -227,8 +227,8 @@ function formatTimestamp(time, format) {
         $(this).addClass('vds-full-screen');
       }
       $(this).css({
-          width:$(window).width()+"px",
-          height:$(window).height()+"px",
+          width:Math.max($(window).width(),$("body").width())+"px",
+          height:Math.max($(window).height(),$("body").height())+"px",
       });
       return this;
   };
