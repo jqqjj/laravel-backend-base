@@ -115,7 +115,8 @@ function formatTimestamp(time, format) {
     if(sw){
       var loading = $('<div id="vdsloadingbar" class="loading absol"></div>');
       loading.css({'box-shadow':'0 0 8px #888'});
-      loading.appendTo($('body')).vdsMidst();
+      loading.appendTo($('body'));
+      $('div#vdsloadingbar').vdsHorizontal().vdsVertical();
       $.vdsMasker(true);
     }else{
       $('div#vdsloadingbar').remove();
@@ -131,19 +132,6 @@ function formatTimestamp(time, format) {
     }else{
       $('div#vdsmasker').remove();
     }
-  };
-  //横竖居中于窗口
-  $.fn.vdsMidst = function(options){
-    var defaults = {   
-      position: 'fixed', gotop: 0, goleft: 0
-    }, opts = $.extend(defaults, options);
-		
-    this.css({
-      position: opts.position, 
-      top: ($(window).height() - this.outerHeight()) /2 + opts.gotop,
-      left: ($(window).width() - this.outerWidth()) / 2 + opts.goleft,
-    });
-    return this;
   };
   //提示窗口
   $.fn.vdsAlert = function(options){
