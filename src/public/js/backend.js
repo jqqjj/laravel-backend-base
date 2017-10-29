@@ -95,22 +95,7 @@ function formatTimestamp(time, format) {
     }
     return false;
   };
-  //列表请求
-  $.asynList = function(url, dataset, success){
-    $.ajax({
-      type: 'post',
-      dataType: 'json',
-      url: url,
-      data: dataset,
-      beforeSend: function(){$.vdsLoadingBar(true)},
-      success: function(data){$.vdsLoadingBar(false);$('#rows').empty();success.call($(this), data);},
-      error: function(){ 
-        $.vdsLoadingBar(false);
-        $('body').vdsAlert({msg:'处理请求时发生错误'});
-      }
-    });
-  };
-  //进度条窗口
+  //loading条窗口
   $.vdsLoadingBar = function(sw){
     if(sw){
       var loading = $('<div id="vdsloadingbar" class="loading absol"></div>');
@@ -122,6 +107,53 @@ function formatTimestamp(time, format) {
       $('div#vdsloadingbar').remove();
       $.vdsMasker(false);
     }
+  };
+  //窗口加载
+  $.vdsLoadingWindow = function(options){
+      var defaults = {    
+        label: "",
+        url: "",
+        width:800,
+        height:480,
+        ok:function(){},
+        btn:"确定",
+        cancel:function(){},
+        autoClose:false,
+      }, opts = $.extend(defaults, options);
+      $.vdsMasker(true);
+      $('#vdsloadingwindow').remove();
+      var window = $('<div id="vdsloadingwindow" class="pop-media"><h2 class="c999 vds-label">'+opts.label+'</h2><a class="close">×</a><div class="module vds-content"></div></div>');
+      $('body').append(window);
+      $('#vdsloadingwindow .vds-content').css({
+          width:opts.width+'px',
+          height:opts.height+'px'
+      }).html('<div class="loading"></div>');
+      $('#vdsloadingwindow div.loading').css({
+          margin:"auto",
+          paddingTop:Math.max(opts.height - $('#vdsloadingwindow div.loading').height()*10,0)+"px"
+      });
+      $("#vdsloadingwindow").vdsHorizontal().vdsVertical().show();
+      $('#vdsloadingwindow .close').off('click').click(function(){
+          opts.cancel();
+          $('#vdsloadingwindow').remove();
+          $.vdsMasker(false);
+      });
+      $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: opts.url,
+        data: {},
+        success: function(res){
+            if(res.ret == 0){
+                $('#vdsloadingwindow .vds-content').html(res.data);
+            }else{
+                $('body').vdsAlert({msg:res.message || "处理请求时发生错误"});
+            }
+        },
+        error: function(){
+            $('body').vdsAlert({msg:"处理请求时发生错误"});
+        }
+      });
   };
   //遮罩层
   $.vdsMasker = function(sw){
@@ -144,11 +176,11 @@ function formatTimestamp(time, format) {
 		
     //this.remove('#vds-alert');
     $('#vds-alert').remove();
-    $("<div id='vds-alert'></div>").html(opts.msg).appendTo(this).css({ 
-      position: 'absolute',
+    $("<div id='vds-alert'></div>").html(opts.msg).appendTo(this).css({
+      position: 'fixed',
       width: 300,
       'text-align': 'center',
-      top: $(document).scrollTop() + 100,
+      top: 80,
       left: ($(window).width() - 300) / 2,
       color: '#CC3300',
       'font-size': '14px',
@@ -226,7 +258,7 @@ function formatTimestamp(time, format) {
       }
       var window_height = $(window).height();
       var box_height = $(this).height();
-      if($(this).css("position")==='absolute' || $(this).css("position")==='relative'){
+      if($(this).css("position")==='absolute' || $(this).css("position")==='relative' || $(this).css("position")==='fixed'){
         if(box_height<window_height){
           $(this).css({top:Math.floor((window_height - box_height) / 3)+'px'});
         }else{
@@ -247,7 +279,7 @@ function formatTimestamp(time, format) {
       }
       var window_width = $(window).width();
       var box_width = $(this).width();
-      if($(this).css("position")==='absolute' || $(this).css("position")==='relative'){
+      if($(this).css("position")==='absolute' || $(this).css("position")==='relative' || $(this).css("position")==='fixed'){
         if(box_width<window_width){
           $(this).css({left:Math.floor((window_width - box_width) / 2)+'px'});
         }else{
