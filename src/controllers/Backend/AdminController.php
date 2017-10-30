@@ -17,7 +17,8 @@ class AdminController extends Controller
     public function index(Request $req, AdminBusiness $admin_business)
     {
         /*排序相关*/
-        $condition = Pagination::sortFilter($req->all(),[
+        $condition = $req->all();
+        $sort_condition = Pagination::sortFilter($req->all(),[
             'admin_id',
             'name',
             'nick_name',
@@ -28,7 +29,7 @@ class AdminController extends Controller
             'updated_at',
         ]);
         
-        $list = $admin_business->getList($condition);
+        $list = $admin_business->getList(array_merge($condition,$sort_condition));
         return view('backend.admin.index',['list'=>$list]);
     }
     

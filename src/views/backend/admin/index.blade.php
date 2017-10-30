@@ -11,6 +11,12 @@
 <div class="content">
     <div class="loc"><h2><i class="icon"></i>后台用户列表</h2></div>
     <div class="box">
+        <form method="get" action="{{route("adminlist")}}">
+        <div class="stools mt5">
+          <input type="text" name="keyword" value="{{request()->input("keyword")}}" class="w300 txt" placeholder="输入关键词">
+          <button type="submit" class="sbtn btn">搜 索</button>
+        </div>
+        </form>
         <div class="doacts">
           <a class="ae add btn" href="{{route("adminadd")}}"><i class="mr5 add"></i><font>添加</font></a>
           <a class="ae btn" dobatch="confirm" primary="id" method="post" href="{{url("admin/admindeletebatch")}}"><i class="remove mr5"></i><font>删除</font></a>

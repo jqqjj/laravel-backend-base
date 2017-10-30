@@ -21,6 +21,16 @@ class AdminBusiness
         if(!empty($condition['email'])){
             $builder->where('email',$condition['email']);
         }
+        if(!empty($condition['nick_name'])){
+            $builder->where('nick_name',$condition['nick_name']);
+        }
+        if(!empty($condition['keyword'])){
+            $builder->where(function($query) use ($condition){
+                $query->where('email',"like","%{$condition['keyword']}%")
+                    ->orWhere('name',"like","%{$condition['keyword']}%")
+                    ->orWhere('nick_name',"like","%{$condition['keyword']}%");
+            });
+        }
         
         if(!empty($relatives)){
             $builder->with($relatives);
