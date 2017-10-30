@@ -37,7 +37,7 @@ class SortHelper
         
         $tmp_paginator = clone $paginator;
         $url = $tmp_paginator->appends($params)->url(1);
-        $html = '<a class="c666" href="'.$url.'">'.$label.'<i class="sort '.$class.'"></i>';
+        $html = '<a class="c666" href="'.$url.'">'.$label.'<i class="sort '.$class.'"></i></a>';
         return $html;
     }
 }
