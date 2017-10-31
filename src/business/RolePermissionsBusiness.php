@@ -6,6 +6,7 @@ namespace App\Http\Business;
 use App\Model\RolePermissions;
 use Illuminate\Support\Facades\Validator;
 use App\Facades\Pagination;
+use App\Exceptions\BackendException;
 
 class RolePermissionsBusiness
 {
@@ -37,16 +38,25 @@ class RolePermissionsBusiness
         $validator = Validator::make($data, [
             'role_id' => ['required','integer'],
             'permission'=>['required','string'],
+        ],[
+            'required'=>":attribute不能为空",
+            'integer'=>":attribute输入不正确",
+            "string"=>":attribute输入不正确",
+        ],[
+            'role_id'=>'角色ID',
+            'permission'=>'权限名称',
         ]);
         if ($validator->fails()) {
-            return false;
+            throw new BackendException(1000,$validator->messages()->first());
         }
         
         $builder = new RolePermissions();
         $builder->role_id = $data['role_id'];
         $builder->permission = $data['permission'];
         
-        return $builder->save() ? $builder : false;
+        $builder->save();
+        
+        return $builder;
     }
     
     public function delete($id)

@@ -5,6 +5,7 @@ namespace App\Http\Business;
 use App\Model\Admin;
 use Illuminate\Support\Facades\Validator;
 use App\Facades\Pagination;
+use App\Exceptions\BackendException;
 
 class AdminBusiness
 {
@@ -78,7 +79,9 @@ class AdminBusiness
         if(!empty($data['last_login_time'])){
             $builder->last_login_time = $data['last_login_time'];
         }
-        return $builder->save() ? $builder : false;
+        $builder->save();
+        
+        return $builder;
     }
     
     public function store($data)
@@ -87,9 +90,22 @@ class AdminBusiness
             'name' => ['required','between:4,16'],
             'email' => ['required','email'],
             'password' => ['required','between:6,32'],
+        ],[
+            'required'=>":attribute不能为空",
+            "between"=>":attribute字数必须大于:min小于:max",
+            'email'=>":attribute格式不正确",
+            "max"=>":attribute必须不多于:max字数",
+        ],[
+            'name'=>'登录名称',
+            'password'=>'登录密码',
+            'nick_name'=>'昵称',
+            'email'=>'电子邮件',
         ]);
+        $validator->sometimes("nick_name",["max:50"],function($input){
+            return !empty($input['nick_name']);
+        });
         if ($validator->fails()) {
-            return false;
+            throw new BackendException(1000,$validator->messages()->first());
         }
         
         $builder = new Admin();
@@ -111,7 +127,9 @@ class AdminBusiness
         if(!empty($data['last_login_time'])){
             $builder->last_login_time = $data['last_login_time'];
         }
-        return $builder->save() ? $builder : false;
+        $builder->save();
+        
+        return $builder;
     }
     
     public function delete($id)

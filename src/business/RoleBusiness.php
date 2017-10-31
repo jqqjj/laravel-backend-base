@@ -6,6 +6,7 @@ namespace App\Http\Business;
 use App\Model\Roles;
 use Illuminate\Support\Facades\Validator;
 use App\Facades\Pagination;
+use App\Exceptions\BackendException;
 
 class RoleBusiness
 {
@@ -35,7 +36,9 @@ class RoleBusiness
         if(!empty($data['remark'])){
             $builder->remark = $data['remark'];
         }
-        return $builder->save() ? $builder : false;
+        $builder->save();
+        
+        return $builder;
     }
     
     public function getDetail($id, array $select_columns = ['*'], array $relatives = [])
@@ -51,9 +54,16 @@ class RoleBusiness
     {
         $validator = Validator::make($data, [
             'role_name' => ['required','between:1,50'],
+        ],[
+            'required'=>":attribute不能为空",
+            "between"=>":attribute字数必须大于:min小于:max",
+            "max"=>":attribute必须不多于:max字数",
         ]);
+        $validator->sometimes("remark",["max:255"],function($input){
+            return !empty($input['remark']);
+        });
         if ($validator->fails()) {
-            return false;
+            throw new BackendException(1000,$validator->messages()->first());
         }
         
         $builder = new Roles();
@@ -61,7 +71,9 @@ class RoleBusiness
         if(isset($data['remark'])){
             $builder->remark = $data['remark'];
         }
-        return $builder->save() ? $builder : false;
+        $builder->save();
+        
+        return $builder;
     }
     
     public function delete($id)
