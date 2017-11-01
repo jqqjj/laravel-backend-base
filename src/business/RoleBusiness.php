@@ -30,11 +30,26 @@ class RoleBusiness
         if(empty($builder)){
             return false;
         }
-        if(!empty($data['role_name'])){
-            $builder->role_name = $data['role_name'];
+        
+        $validator = Validator::make($data, [
+            'role_name' => ['sometimes','required','max:50'],
+            'remark' => ['sometimes','max:255'],
+        ],[
+            'required'=>":attribute不能为空",
+            "max"=>":attribute 不得多于:max字数",
+        ],[
+            'role_name'=>'角色名称',
+            'remark'=>'描述',
+        ]);
+        if ($validator->fails()) {
+            throw new BackendException(1000,$validator->messages()->first());
         }
-        if(!empty($data['remark'])){
-            $builder->remark = $data['remark'];
+        
+        foreach(array_intersect_key($data, array_flip([
+            'name',
+            'remark',
+        ])) as $key=>$value){
+            $builder->$key = $value;
         }
         $builder->save();
         
@@ -53,23 +68,25 @@ class RoleBusiness
     public function store($data)
     {
         $validator = Validator::make($data, [
-            'role_name' => ['required','between:1,50'],
+            'role_name' => ['required','max:50'],
+            'remark' => ['sometimes','max:255'],
         ],[
             'required'=>":attribute不能为空",
-            "between"=>":attribute字数必须大于:min小于:max",
-            "max"=>":attribute必须不多于:max字数",
+            "max"=>":attribute 不得多于:max字数",
+        ],[
+            'role_name'=>'角色名称',
+            'remark'=>'描述',
         ]);
-        $validator->sometimes("remark",["max:255"],function($input){
-            return !empty($input['remark']);
-        });
         if ($validator->fails()) {
             throw new BackendException(1000,$validator->messages()->first());
         }
         
         $builder = new Roles();
-        $builder->role_name = $data['role_name'];
-        if(isset($data['remark'])){
-            $builder->remark = $data['remark'];
+        foreach(array_intersect_key($data, array_flip([
+            'name',
+            'remark',
+        ])) as $key=>$value){
+            $builder->$key = $value;
         }
         $builder->save();
         

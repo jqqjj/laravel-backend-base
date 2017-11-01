@@ -39,20 +39,24 @@ class RolePermissionsBusiness
             'role_id' => ['required','integer'],
             'permission'=>['required','string'],
         ],[
-            'required'=>":attribute不能为空",
-            'integer'=>":attribute输入不正确",
-            "string"=>":attribute输入不正确",
+            'required'=>":attribute 不能为空",
+            'integer'=>":attribute 输入不正确",
+            "string"=>":attribute 输入不正确",
         ],[
             'role_id'=>'角色ID',
-            'permission'=>'权限名称',
+            'permission'=>'权限',
         ]);
         if ($validator->fails()) {
             throw new BackendException(1000,$validator->messages()->first());
         }
         
         $builder = new RolePermissions();
-        $builder->role_id = $data['role_id'];
-        $builder->permission = $data['permission'];
+        foreach(array_intersect_key($data, array_flip([
+            'role_id',
+            'permission',
+        ])) as $key=>$value){
+            $builder->$key = $value;
+        }
         
         $builder->save();
         

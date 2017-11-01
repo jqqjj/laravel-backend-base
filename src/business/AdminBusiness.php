@@ -25,6 +25,9 @@ class AdminBusiness
         if(!empty($condition['nick_name'])){
             $builder->where('nick_name',$condition['nick_name']);
         }
+        if(isset($condition['enabled'])){
+            $builder->where('enabled',$condition['enabled']);
+        }
         if(!empty($condition['keyword'])){
             $builder->where(function($query) use ($condition){
                 $query->where('email',"like","%{$condition['keyword']}%")
@@ -55,30 +58,51 @@ class AdminBusiness
         if(empty($builder)){
             return false;
         }
-        if(!empty($data['name'])){
-            $builder->name = $data['name'];
+        
+        $validator = Validator::make($data, [
+            'name' => ['sometimes','required','between:4,16'],
+            'password' => ['sometimes','required','between:6,32'],
+            'nick_name' => ['sometimes','required','max:50'],
+            'email' => ['sometimes','required','email'],
+            'enabled' => ['sometimes','required','in:0,1'],
+            'last_login_ip' => ['sometimes','required','ip'],
+            'last_login_time' => ['sometimes','required','date_format:"Y-m-d H:i:s"'],
+        ],[
+            'required'=>":attribute 不能为空",
+            "between"=>":attribute 字数必须大于:min小于:max",
+            "in"=>":attribute 选项不正确",
+            'email'=>":attribute 格式不正确",
+            "max"=>":attribute 不得多于:max字数",
+            'ip'=>":attribute 格式不正确",
+            'date_format'=>":attribute 格式不正确",
+        ],[
+            'name'=>'登录名称',
+            'password'=>'登录密码',
+            'nick_name'=>'昵称',
+            'email'=>'电子邮件',
+            'enabled'=>'是否冻结',
+            'last_login_ip'=>'最后登录IP',
+            'last_login_time'=>'最后登录时间',
+        ]);
+        if ($validator->fails()) {
+            throw new BackendException(1000,$validator->messages()->first());
         }
-        if(!empty($data['email'])){
-            $builder->email = $data['email'];
-        }
-        if(isset($data['nick_name'])){
-            $builder->nick_name = $data['nick_name'];
-        }
-        if(isset($data['enabled'])){
-            $builder->enabled = $data['enabled'] ? 1 : 0;
+        
+        foreach(array_intersect_key($data, array_flip([
+            'name',
+            'password',
+            'nick_name',
+            'email',
+            'enabled',
+            'last_login_ip',
+            'last_login_time',
+        ])) as $key=>$value){
+            $builder->$key = $value;
         }
         if(!empty($data['password'])){
             $builder->password = bcrypt($data['password']);
         }
-        if(!empty($data['remember_token'])){
-            $builder->remember_token = $data['remember_token'];
-        }
-        if(!empty($data['last_login_ip'])){
-            $builder->last_login_ip = $data['last_login_ip'];
-        }
-        if(!empty($data['last_login_time'])){
-            $builder->last_login_time = $data['last_login_time'];
-        }
+        
         $builder->save();
         
         return $builder;
@@ -88,45 +112,49 @@ class AdminBusiness
     {
         $validator = Validator::make($data, [
             'name' => ['required','between:4,16'],
-            'email' => ['required','email'],
             'password' => ['required','between:6,32'],
+            'nick_name' => ['sometimes','required','max:50'],
+            'email' => ['required','email'],
+            'enabled' => ['sometimes','required','in:0,1'],
+            'last_login_ip' => ['sometimes','required','ip'],
+            'last_login_time' => ['sometimes','required','date_format:"Y-m-d H:i:s"'],
         ],[
-            'required'=>":attribute不能为空",
-            "between"=>":attribute字数必须大于:min小于:max",
-            'email'=>":attribute格式不正确",
-            "max"=>":attribute必须不多于:max字数",
+            'required'=>":attribute 不能为空",
+            "between"=>":attribute 字数必须大于:min小于:max",
+            "in"=>":attribute 选项不正确",
+            'email'=>":attribute 格式不正确",
+            "max"=>":attribute 不得多于:max字数",
+            'ip'=>":attribute 格式不正确",
+            'date_format'=>":attribute 格式不正确",
         ],[
             'name'=>'登录名称',
             'password'=>'登录密码',
             'nick_name'=>'昵称',
             'email'=>'电子邮件',
+            'enabled'=>'是否冻结',
+            'last_login_ip'=>'最后登录IP',
+            'last_login_time'=>'最后登录时间',
         ]);
-        $validator->sometimes("nick_name",["max:50"],function($input){
-            return !empty($input['nick_name']);
-        });
         if ($validator->fails()) {
             throw new BackendException(1000,$validator->messages()->first());
         }
         
         $builder = new Admin();
-        $builder->name = $data['name'];
-        $builder->email = $data['email'];
-        $builder->password = bcrypt($data['password']);
-        if(!empty($data['nick_name'])){
-            $builder->nick_name = $data['nick_name'];
+        foreach(array_intersect_key($data, array_flip([
+            'name',
+            'password',
+            'nick_name',
+            'email',
+            'enabled',
+            'last_login_ip',
+            'last_login_time',
+        ])) as $key=>$value){
+            $builder->$key = $value;
         }
-        if(isset($data['enabled'])){
-            $builder->enabled = $data['enabled'] ? 1 : 0;
+        if(!empty($data['password'])){
+            $builder->password = bcrypt($data['password']);
         }
-        if(!empty($data['remember_token'])){
-            $builder->remember_token = $data['remember_token'];
-        }
-        if(!empty($data['last_login_ip'])){
-            $builder->last_login_ip = $data['last_login_ip'];
-        }
-        if(!empty($data['last_login_time'])){
-            $builder->last_login_time = $data['last_login_time'];
-        }
+        
         $builder->save();
         
         return $builder;
