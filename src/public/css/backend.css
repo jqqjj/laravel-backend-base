@@ -172,6 +172,10 @@ a.dashedbtn:hover {color:#36c;border-color:#36c}
 /* 宽度 */
 .max-width {width:100%;}
 .max500 {max-width:500px;}
+.max400 {max-width:400px;}
+.max300 {max-width:300px;}
+.max200 {max-width:200px;}
+.max100 {max-width:100px;}
 /* 行高 */
 .lh150 {line-height:150%;}
 /* 系统提示 */
@@ -223,3 +227,5 @@ div.waiting {width:100px;height:auto;padding:10px 50px 0 50px;position:absolute;
 .no-sort{background: url(../images/icon_cbw.png) -163px -100px no-repeat;width: 10px;height:10px;display: inline-block;}
 .sort-desc{background: url(../images/icon_cbw.png) -149px -246px no-repeat;width: 10px;height:10px;display: inline-block;}
 .sort-asc{background: url(../images/icon_cbw.png) -149px -212px no-repeat;width: 10px;height:10px;display: inline-block;}
+/* 排版 */
+.break-word{word-wrap: break-word;}

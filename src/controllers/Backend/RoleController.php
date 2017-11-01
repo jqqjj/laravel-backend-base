@@ -81,7 +81,7 @@ class RoleController extends Controller
             }
             $save_data['role_name'] = trim($params['role_name']);
         }
-        if(!empty($params['role_desc'])){
+        if(isset($params['role_desc'])){
             $save_data['remark'] = trim($params['role_desc']);
         }
         

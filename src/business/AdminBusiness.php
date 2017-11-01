@@ -62,7 +62,7 @@ class AdminBusiness
         $validator = Validator::make($data, [
             'name' => ['sometimes','required','between:4,16'],
             'password' => ['sometimes','required','between:6,32'],
-            'nick_name' => ['sometimes','required','max:50'],
+            'nick_name' => ['sometimes','max:50'],
             'email' => ['sometimes','required','email'],
             'enabled' => ['sometimes','required','in:0,1'],
             'last_login_ip' => ['sometimes','required','ip'],

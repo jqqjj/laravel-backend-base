@@ -33,7 +33,7 @@
                     <td class="ta-l">
                         <a class="blue" href="{{route('roleedit',['id'=>$item->role_id])}}">{{$item->role_name}}</a>
                     </td>
-                    <td class="ta-l"><p class="c666">{{$item->remark}}</p></td>
+                    <td class="ta-l break-word max300">{{$item->remark}}</td>
                     <td class="ta-l">{{$item->created_at}}</td>
                     <td class="ta-l">{{$item->updated_at}}</td>
                     <td class="c888">

@@ -46,7 +46,7 @@ class RoleBusiness
         }
         
         foreach(array_intersect_key($data, array_flip([
-            'name',
+            'role_name',
             'remark',
         ])) as $key=>$value){
             $builder->$key = $value;
@@ -83,7 +83,7 @@ class RoleBusiness
         
         $builder = new Roles();
         foreach(array_intersect_key($data, array_flip([
-            'name',
+            'role_name',
             'remark',
         ])) as $key=>$value){
             $builder->$key = $value;

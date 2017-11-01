@@ -71,7 +71,7 @@ $(function(){
     }
   });
     $('form').submit(function(){
-        $('#role_name').vdsFieldChecker({rules:{required:[true, '角色名不能为空'], maxlen:[50, '角色名不能超过50个字符']}});
+        $('#role_name').vdsFieldChecker({rules:{required:[true, '角色名不能为空'], maxlen:[16, '角色名不能超过16个字符']}});
         $('#role_desc').vdsFieldChecker({rules:{maxlen:[240, '角色描述不能超过240个字符']}, tipsPos:'br'});
         return $('form').vdsFormChecker();
     });
