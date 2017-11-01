@@ -145,7 +145,7 @@ i.nopic.large {width:120px;height:60px;font-size:18px;line-height:60px;}
 .ae:hover font {color:#cc3333;}
 .ae:hover i.edit {background-position:-30px -90px;}
 .ae:hover i.remove {background-position:-60px -89px;}
-.ae:hover i.view {background-position:-90px -90px;}
+.ae:hover i.view {background-position:-90px -88px;}
 .ae:hover i.tag {background-position:-120px -90px;}
 .ae:hover i.adr {background-position:-150px -89px;}
 .ae:hover i.link {background-position:-180px -89px;}
