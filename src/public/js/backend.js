@@ -16,6 +16,9 @@ function formatTimestamp(time, format) {
 }
 
 (function($){
+    $.fn.isPlaceholderSupport = function(){  
+        return 'placeholder' in document.createElement('input');  
+    };
   //字段验证
   $.fn.vdsFieldChecker = function(options){
     var defaults = {
@@ -305,4 +308,26 @@ function formatTimestamp(time, format) {
           $(this).vdsHorizontal();
       });
   });
+  if(!$(document).isPlaceholderSupport()){
+    jQuery('[placeholder]').focus(function() {
+      var input = jQuery(this);
+      if (input.val() == input.attr('placeholder') && input.attr('type')==="text") {
+        input.val('');
+        input.removeClass('placeholder');
+      }
+    }).blur(function() {
+      var input = jQuery(this);
+      if ((input.val() == '' || input.val() == input.attr('placeholder')) && input.attr('type')==="text") {
+        input.addClass('placeholder');
+        input.val(input.attr('placeholder'));
+      }
+    }).blur().parents('form').submit(function() {
+      jQuery(this).find('[placeholder]').each(function() {
+        var input = jQuery(this);
+        if (input.val() == input.attr('placeholder') && input.attr('type')==="text") {
+          input.val('');
+        }
+      })
+    });
+  }
 })(jQuery);
