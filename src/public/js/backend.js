@@ -130,32 +130,16 @@ function formatTimestamp(time, format) {
       $('#vdsloadingwindow .vds-content').css({
           width:opts.width+'px',
           height:opts.height+'px'
-      }).html('<div class="loading"></div>');
-      $('#vdsloadingwindow div.loading').css({
-          margin:"auto",
-          paddingTop:Math.max(opts.height - $('#vdsloadingwindow div.loading').height()*10,0)+"px"
       });
+      $('#vdsloadingwindow div.vds-content').addClass('loading').html('<iframe src="'+opts.url+'" frameborder="0" scrolling="no" width="100%"></iframe>');
       $("#vdsloadingwindow").vdsHorizontal().vdsVertical().show();
       $('#vdsloadingwindow .close').off('click').click(function(){
           opts.cancel();
           $('#vdsloadingwindow').remove();
           $.vdsMasker(false);
       });
-      $.ajax({
-        type: 'get',
-        dataType: 'json',
-        url: opts.url,
-        data: {},
-        success: function(res){
-            if(res.ret == 0){
-                $('#vdsloadingwindow .vds-content').html(res.data);
-            }else{
-                $('body').vdsAlert({msg:res.message || "处理请求时发生错误"});
-            }
-        },
-        error: function(){
-            $('body').vdsAlert({msg:"处理请求时发生错误"});
-        }
+      $('#vdsloadingwindow iframe').load(function(){
+          $('#vdsloadingwindow div.vds-content').removeClass('loading')
       });
   };
   //遮罩层
