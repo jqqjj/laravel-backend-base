@@ -131,7 +131,7 @@ function formatTimestamp(time, format) {
           width:opts.width+'px',
           height:opts.height+'px'
       });
-      $('#vdsloadingwindow div.vds-content').addClass('loading').html('<iframe src="'+opts.url+'" frameborder="0" scrolling="no" width="100%"></iframe>');
+      $('#vdsloadingwindow div.vds-content').addClass('loading').html('<iframe src="'+opts.url+'" frameborder="0" width="100%" height="100%"></iframe>');
       $("#vdsloadingwindow").vdsHorizontal().vdsVertical().show();
       $('#vdsloadingwindow .close').off('click').click(function(){
           opts.cancel();
