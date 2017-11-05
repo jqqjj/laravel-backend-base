@@ -65,6 +65,23 @@ class Pagination
     }
     
     /**
+     * 根据需要排序的字段及排序方式生成排序条件
+     * @param string $column
+     * @param string $sort
+     * @return array
+     */
+    public function generateSort($column,$sort='desc')
+    {
+        $column_key = config("backend.list.column_key");
+        $sort_key = config("backend.list.sort_key");
+        
+        return [
+            $column_key=>$column,
+            $sort_key=>$sort,
+        ];
+    }
+    
+    /**
      * 处理排序相关处理
      * @param Builder $builder
      * @param array $condition
