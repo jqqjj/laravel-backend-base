@@ -26,59 +26,60 @@ function formatTimestamp(time, format) {
       tipsPos: '',
     }, opts = $.extend(defaults, options);
     
-    var field = this, val = this.val() || '';
+    var res = [];
     
-    var inRules = function(rule, right){
-      switch(rule){
-        case 'required': return right === (val.length > 0); break;
-        case 'minlen': return right <= val.length; break;
-        case 'maxlen': return right >= val.length; break;
-        case 'email': return right === /.+@.+\.[a-zA-Z]{2,4}$/.test(val); break;
-        case 'password': return right === /^$|^[\\~!@#$%^&*()-_=+|{}\[\],.?\/:;\'\"\d\w]{6,31}$/.test(val); break;
-        case 'equal': return right == val; break;
-        case 'nonegint': return right === /^$|^(0|\+?[1-9][0-9]*)$/.test(val); break;
-        case 'decimal': return right === /^$|^(0|[1-9][0-9]{0,9})(\.[0-9]{1,2})?$/.test(val); break;
-        case 'mobile': return right === /^$|^1[3|4|5|7|8]\d{9}$/.test(val); break;
-        case 'zip': return right === /^$|^[0-9]{6}$/.test(val); break;
-        case 'seq': return right === /^$|^([1-9]\d|\d)$/.test(val); break;
-        default: if(typeof(right) == 'boolean') return right; alert('Validation Rule "'+rule+'" is incorrect!');
-      }
-    };
-    
-    var tips = $("<span class='vdsfielderr'></span>").css({
-          display: 'inline-block',
-          'margin-left': '5px',
-          'line-height': '12px',
-          border: '1px solid #ff3366',
-          'border-radius': '3px',
-          background: '#ffdfdf',
+    this.each(function(){
+        var field = $(this), val = $(this).val() || '';
+        var inRules = function(rule, right){
+            switch(rule){
+              case 'required': return right === (val.length > 0); break;
+              case 'minlen': return right <= val.length; break;
+              case 'maxlen': return right >= val.length; break;
+              case 'email': return right === /.+@.+\.[a-zA-Z]{2,4}$/.test(val); break;
+              case 'password': return right === /^$|^[\\~!@#$%^&*()-_=+|{}\[\],.?\/:;\'\"\d\w]{6,31}$/.test(val); break;
+              case 'equal': return right == val; break;
+              case 'nonegint': return right === /^$|^(0|\+?[1-9][0-9]*)$/.test(val); break;
+              case 'decimal': return right === /^$|^(0|[1-9][0-9]{0,9})(\.[0-9]{1,2})?$/.test(val); break;
+              case 'mobile': return right === /^$|^1[3|4|5|7|8]\d{9}$/.test(val); break;
+              case 'zip': return right === /^$|^[0-9]{6}$/.test(val); break;
+              case 'seq': return right === /^$|^([1-9]\d|\d)$/.test(val); break;
+              default: if(typeof(right) == 'boolean') return right; alert('Validation Rule "'+rule+'" is incorrect!');
+            }
+        };
+
+        var tips = $("<span class='vdsfielderr'></span>").css({
+              display: 'inline-block',
+              'margin-left': '5px',
+              'line-height': '12px',
+              border: '1px solid #ff3366',
+              'border-radius': '3px',
+              background: '#ffdfdf',
+            });
+
+        if(opts.tipsPos == 'abs'){
+          tips.css({
+            'margin-left': 0,
+            position: 'absolute',
+            left: field.offset().left + field.outerWidth() + 5,
+            top: field.offset().top,
+            'z-index': 999,
+          });
+        }else if(opts.tipsPos == 'br'){
+          tips.css({display:'table', margin:'8px 0 0 0', 'border-collapse':'separate'});
+        }else if(opts.tipsPos == 'cr'){
+          tips.css({display:'table', margin:'8px auto 0 auto', 'border-collapse':'separate'});
+        }
+
+        field.next('span.vdsfielderr').remove();
+
+        $.each(opts.rules, function(k, v){
+          if(!inRules(k, v[0])){
+            var font = $("<font></font>").css({display:'block', color:'#911', 'font-size':'12px', padding:'6px 10px'});
+            font.text(v[1]).appendTo(tips);
+            field.after(tips);
+            res.push(v[1]);
+          }
         });
-
-    if(opts.tipsPos == 'abs'){
-      tips.css({
-        'margin-left': 0,
-        position: 'absolute',
-        left: field.offset().left + field.outerWidth() + 5,
-        top: field.offset().top,
-        'z-index': 999,
-      });
-    }else if(opts.tipsPos == 'br'){
-      tips.css({display:'table', margin:'8px 0 0 0', 'border-collapse':'separate'});
-    }else if(opts.tipsPos == 'cr'){
-      tips.css({display:'table', margin:'8px auto 0 auto', 'border-collapse':'separate'});
-    }
-			
-    field.next('span.vdsfielderr').remove();
-
-    var res = null;
-    $.each(opts.rules, function(k, v){
-      if(!inRules(k, v[0])){
-        var font = $("<font></font>").css({display:'block', color:'#911', 'font-size':'12px', padding:'6px 10px'});
-        font.text(v[1]).appendTo(tips);
-        field.after(tips);
-        res = v[1];
-        return false;
-      }
     });
     return res;
   };
