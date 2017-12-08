@@ -121,26 +121,31 @@ function formatTimestamp(time, format) {
         height:480,
         ok:function(){},
         btn:"确定",
-        cancel:function(){},
-        autoClose:false,
+        onClose:function(){},
+        onUnload:function(){},
       }, opts = $.extend(defaults, options);
       $.vdsMasker(true);
-      $('#vdsloadingwindow').remove();
-      var window = $('<div id="vdsloadingwindow" class="pop-media"><h2 class="c999 vds-label">'+opts.label+'</h2><a class="close">×</a><div class="module vds-content"></div></div>');
-      $('body').append(window);
-      $('#vdsloadingwindow .vds-content').css({
+      $('#vdsloadingcontainer').remove();
+      var container = $('<div id="vdsloadingcontainer" class="pop-media"><h2 class="c999 vds-label">'+opts.label+'</h2><a class="close">×</a><div class="module vds-content"></div></div>');
+      $('body').append(container);
+      $('#vdsloadingcontainer .vds-content').css({
           width:opts.width+'px',
           height:opts.height+'px'
       });
-      $('#vdsloadingwindow div.vds-content').addClass('loading').html('<iframe src="'+opts.url+'" frameborder="0" width="100%" height="100%"></iframe>');
-      $("#vdsloadingwindow").vdsHorizontal().vdsVertical().show();
-      $('#vdsloadingwindow .close').off('click').click(function(){
-          opts.cancel();
-          $('#vdsloadingwindow').remove();
+      $('#vdsloadingcontainer div.vds-content').addClass('loading').html('<iframe src="'+opts.url+'" frameborder="0" width="100%" height="100%"></iframe>');
+      $("#vdsloadingcontainer").vdsHorizontal().vdsVertical().show();
+      $('#vdsloadingcontainer .close').off('click').click(function(){
+          $('#vdsloadingcontainer').remove();
           $.vdsMasker(false);
+          opts.onClose();
       });
-      $('#vdsloadingwindow iframe').load(function(){
-          $('#vdsloadingwindow div.vds-content').removeClass('loading')
+      $('#vdsloadingcontainer iframe').load(function(){
+          $('#vdsloadingcontainer iframe').off('load');
+          $('#vdsloadingcontainer div.vds-content').removeClass('loading');
+          var contextwindow = $('#vdsloadingcontainer iframe')[0].contentWindow || window.frames[0].window;
+          $(contextwindow).unload(function(){
+            opts.onUnload();
+          });
       });
   };
   //遮罩层
