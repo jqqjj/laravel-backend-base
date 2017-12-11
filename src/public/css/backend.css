@@ -61,6 +61,14 @@ label, .vtcmid {vertical-align:middle}
 .ta-l {text-align:left}
 .ta-r {text-align:right}
 .ta-c {text-align:center}
+/* 定位 */
+.position-a{position: absolute;}
+.position-f{position: fixed;}
+.position-r{position: relative;}
+.position-s{position: static;}
+/* 显示 */
+.overflow-visible{overflow: visible;}
+.overflow-hidden{overflow: hidden;}
 /* input */
 input.w50 {width:50px;}
 input.w100 {width:100px;}
@@ -141,6 +149,7 @@ i.nopic.large {width:120px;height:60px;font-size:18px;line-height:60px;}
 .ae i.list {width:14px;background-position:-390px -58px;}
 .ae i.accept {width:15px;background-position:-420px -58px;}
 .ae i.forbid {width:15px;background-position:-450px -58px;}
+.ae i.more {width:16px;background-position:-448px -117px;}
 .ae:hover {border-color:#cc3333;background:#fff;}
 .ae:hover font {color:#cc3333;}
 .ae:hover i.edit {background-position:-30px -90px;}
@@ -157,6 +166,7 @@ i.nopic.large {width:120px;height:60px;font-size:18px;line-height:60px;}
 .ae:hover i.list {background-position:-390px -88px;}
 .ae:hover i.accept {background-position:-420px -88px;}
 .ae:hover i.forbid {background-position:-450px -88px;}
+.ae:hover i.more {background-position:-448px -136px;}
 .ae.cur {border-color:#bbb;cursor:inherit}
 .ae.cur font {color:#aaa;}
 a.dashedbtn {display:inline-block;padding:10px 15px;color:#4fa7ff;border:1px dashed #c2c2c2;background:#fff;}
@@ -229,3 +239,7 @@ div.waiting {width:100px;height:auto;padding:10px 50px 0 50px;position:absolute;
 .sort-asc{background: url(../images/icon_cbw.png) -149px -212px no-repeat;width: 10px;height:10px;display: inline-block;}
 /* 排版 */
 .break-word{word-wrap: break-word;}
+/* 更多 */
+.vds-sub-menu{position: absolute;background: #F7FDFF;border: 1px solid #B9D0E3;color: #666;}
+.vds-sub-menu dd{height: 20px;line-height: 20px;padding: 2px 14px;word-break: keep-all;}
+.vds-sub-menu dd:hover{background: #d5ecee;}
