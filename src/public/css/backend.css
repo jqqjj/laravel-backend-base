@@ -241,5 +241,5 @@ div.waiting {width:100px;height:auto;padding:10px 50px 0 50px;position:absolute;
 .break-word{word-wrap: break-word;}
 /* 更多 */
 .vds-sub-menu{position: absolute;background: #F7FDFF;border: 1px solid #B9D0E3;color: #666;}
-.vds-sub-menu dd{height: 20px;line-height: 20px;padding: 2px 14px;word-break: keep-all;}
+.vds-sub-menu dd{height: 20px;line-height: 20px;padding: 2px 14px;word-break: keep-all;cursor: pointer;}
 .vds-sub-menu dd:hover{background: #d5ecee;}
