@@ -3,105 +3,97 @@
 
 @push('css')
 <link rel="stylesheet" type="text/css" href="{{asset('backend/css/login.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{asset('formvalidation/css/formValidation.min.css')}}" />
 @endpush
 
 @push('script')
-<script type="text/javascript" src="{{asset('backend/js/backend.js')}}"></script>
-<script type="text/javascript" src="{{asset('backend/js/ani.js')}}"></script>
+<script type="text/javascript" src="{{asset('formvalidation/js/formValidation.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('formvalidation/js/framework/bootstrap.min.js')}}"></script>
 @endpush
 
 @section("content")
-<div class="frontHome page" id="loginbox">
-	<div class="wrap-container">
-		<div id="home_container" class="clearfix">
-			<div id="home_main">
-				<div class="inner-main">
-					<div class="login_box">
-						<div class="form-title">
-							<h3>登录</h3>
-							<h4>LOGIN</h4>
-						</div>
-						<form class="well form-horizontal" method="post" action="{{route("adminlogin")}}" style="background:#FFF">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}" />
-							<div class="logininput">
-								<fieldset>
-									<div id="div_id_username" class="clearfix control-group">
-										<label for="username" class="control-label requiredField">帐号
-										<span class="asteriskField">*</span>
-										</label>
-										<div class="controls">
-											<input class="textinput textInput" id="username" maxlength="30" name="username" placeholder="用户名" type="text"/>
-										</div>
-									</div>
-									<div id="div_id_password" class="clearfix control-group">
-										<label for="password" class="control-label requiredField">密码
-										<span class="asteriskField">*</span>
-										</label>
-										<div class="controls">
-											<input class="textinput textInput" id="password" name="password" placeholder="密码" type="password"/>
-										</div>
-									</div>
-                                    @if($captcha)
-                                    <div id="div_id_captcha" class="clearfix control-group">
-										<label for="password" class="control-label requiredField">验证码
-										<span class="asteriskField">*</span>
-										</label>
-										<div class="controls">
-                                            <input class="textinput textInput" id="captcha" name="captcha" placeholder="验证码" type="text"/>
-										</div>
-                                        <div class="captchaImage">
-                                            <a title="点击刷新验证码" href="javascript:;">
-                                                <img id="captcha-img" src="" />
-                                            </a>
-                                        </div>
-									</div>
-                                    @endif
-									<div id="div_id_remember" class="clearfix control-group">
-										<div class="controls">
-											<label for="id_remember" class="checkbox ">
-                                                <input style="vertical-align: middle;" class="checkboxinput" id="id_remember" name="remember" type="checkbox"/>保持登录
-											</label>
-										</div>
-									</div>
-								</fieldset>
-							</div>
-							<fieldset class="form-actions" style="position:relative; margin-top:15px;">
-								<div class="lfAutoLogin">
-									<div class="form-field form-field-rc">
-										<label><a href="javascript:void(0)">忘记密码？</a></label>
-									</div>
-								</div>
-								<div class="loginFormBtn clearfix">
-									<button class="login_btn js_login_btn" type="submit" style="width:100%;">登录</button>
-								</div>
-							</fieldset>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div id="container" class="mpage">
-	<div id="anitOut" class="anitOut"></div>
+<div class="container-fluid login">
+    <div class="container">
+        <div class="login-area">
+            @if(request()->get('error')=='captcha')
+            <div class="alert alert-danger text-center">验证码不正确</div>
+            @endif
+            @if(request()->get('error')=='account')
+            <div class="alert alert-danger text-center">账户或密码错误，请重试。</div>
+            @endif
+            @if(request()->get('error')=='freeze')
+            <div class="alert alert-danger text-center">账号被冻结</div>
+            @endif
+            <h3 class="text-center">后台管理系统</h3>
+            <form method="post" action="{{route("adminlogin")}}">
+                <input type="hidden" name="_token" value="{{csrf_token()}}" />
+                <div class="form-group">
+                    <label>账号</label>
+                    <input name="username" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>密码</label>
+                    <input name="password" type="password" class="form-control" />
+                </div>
+                @if($captcha)
+                <div class="row">
+                    <div class="col-xs-7">
+                        <div class="form-group">
+                            <label>验证码</label>
+                            <input name="captcha" class="form-control" type="text" />
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="form-group">
+                            <a title="点击刷新验证码" href="javascript:;">
+                                <img class="img-responsive" id="captcha-img" src="" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @endif
+                <div class="checkbox">
+                    <label><input name="remember" type="checkbox"><small>保持登录</small></label>
+                </div>
+                <button type="submit" class="btn btn-primary ">登录</button>
+            </form>
+        </div>
+    </div>
 </div>
 @endsection
 
 @push("inline")
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#home_container').vdsVertical();
-        $('form').submit(function(){
-            $('#username').vdsFieldChecker({rules: {required:[true, '请输入登录名']}, tipsPos:'abs'});
-            $('#password').vdsFieldChecker({rules: {required:[true, '请输入密码']}, tipsPos:'abs'});
-            if($('#captcha').size() > 0){
-              $('#captcha').vdsFieldChecker({rules: {required:[true, '请输入验证码']}, tipsPos:'abs'});
+        $('form').bootstrapValidator({
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                username: {
+                    validators: {
+                        notEmpty: {
+                            message: '账号不能为空'
+                        }
+                    }
+                },
+                password: {
+                    validators: {
+                        notEmpty: {
+                            message: '密码不能为空'
+                        }
+                    }
+                },
+                captcha:{
+                    validators:{
+                        notEmpty: {
+                            message: '验证码不能为空'
+                        }
+                    }
+                }
             }
-            return $('form').vdsFormChecker({
-              beforeSubmit: function(){
-                $(".login_btn").addClass('disabled').text('正在登录').prop('disabled', true);
-              }
-            });
         });
         $('#captcha-img').click(function(){
             var rand = Math.random();

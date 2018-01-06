@@ -9,6 +9,7 @@ use App\Helpers\Pagination;
 use App\Helpers\Documents;
 use App\Helpers\Human;
 use App\Helpers\Captcha;
+use App\Helpers\Referer;
 use App\Http\ViewHelper\Base\ViewHelper;
 
 class BackendBaseProvider extends ServiceProvider
@@ -33,9 +34,9 @@ class BackendBaseProvider extends ServiceProvider
             __DIR__ . "/config"=> base_path("config"),
             __DIR__ . "/database/migrations"=> database_path("migrations"),
             __DIR__ . "/database/seeds"=> database_path("seeds"),
-            __DIR__ . "/public/css"=> public_path("backend/css"),
-            __DIR__ . "/public/js"=> public_path("backend/js"),
-            __DIR__ . "/public/images"=> public_path("backend/images"),
+            __DIR__ . "/public/backend/css"=> public_path("backend/css"),
+            __DIR__ . "/public/backend/js"=> public_path("backend/js"),
+            __DIR__ . "/public/backend/images"=> public_path("backend/images"),
             __DIR__ . "/views"=> resource_path("views"),
             __DIR__ . "/routes"=> base_path("routes"),
         ]);
@@ -66,6 +67,9 @@ class BackendBaseProvider extends ServiceProvider
         });
         $this->app->bind('captcha', function(){
             return new Captcha();
+        });
+        $this->app->bind('referer', function(){
+            return new Referer();
         });
         $this->app->singleton('human', function(){
             return new Human();

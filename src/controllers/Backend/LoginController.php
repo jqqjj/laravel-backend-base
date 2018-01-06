@@ -11,7 +11,6 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Facades\BackendMessage as Message;
 use App\Facades\Human;
 use App\Facades\Captcha;
 
@@ -33,18 +32,18 @@ class LoginController extends Controller
         $captcha = $reqeust->get('captcha');
         if(!Human::check() && !Captcha::validate("adminlogin",$captcha)){
             Human::attempt();
-            return Message::error('验证码不正确', ['label'=>'','url'=>route('adminlogin')]);
+            return redirect()->route('adminlogin',['error'=>'captcha']);
         }
         if (Auth::guard('backend')->attempt(['name' => $name, 'password' => $password,'enabled'=>1],(bool)$remember)) {
             Human::attempt(true);
             return redirect()->route("adminindex");
         }
         elseif (Auth::guard('backend')->attempt(['name' => $name, 'password' => $password],false,false)) {
-            return Message::error('账号被冻结', ['label'=>'','url'=>route('adminlogin')]);
+            return redirect()->route('adminlogin',['error'=>'freeze']);
         }
         else{
             Human::attempt();
-            return Message::error('账号或者密码错误', ['label'=>'','url'=>route('adminlogin')]);
+            return redirect()->route('adminlogin',['error'=>'account']);
         }
     }
     

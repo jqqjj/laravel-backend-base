@@ -10,14 +10,14 @@ $router->group(['prefix' => 'admin', 'namespace' => 'Backend'], function($router
     $router->post('/login', 'LoginController@login')->name('adminlogin');
     $router->get('/logout', 'LoginController@logout')->name('adminlogout');
     $router->get('/captcha', 'HomeController@captcha')->name('admincaptcha');
-    $router->get('/success-message', 'HomeController@successMessage')->name('success-message');
-    $router->get('/error-message', 'HomeController@errorMessage')->name('error-message');
+    $router->get('/success-message', 'HomeController@successMessage');
+    $router->get('/error-message', 'HomeController@errorMessage');
     
     $router->group(['middleware'=>'auth.backend:backend'],function($router){
         $router->get('/index', ['uses'=>'HomeController@index'])->name('adminindex');
         $router->get('/dashboard', ['uses'=>'HomeController@dashboard'])->name('dashboard');
-        $router->post('/clearcache', ['uses'=>'HomeController@clearcache','middleware'=>'permission:cache.clear'])->name('clearsystemcache');
-        $router->post('/change-password', ['uses'=>'HomeController@changePassword'])->name('admin-change-password');
+        $router->match(['get', 'post'],'/clearcache', ['uses'=>'HomeController@clearcache','middleware'=>'permission:cache.clear'])->name('clearsystemcache');
+        $router->match(['get', 'post'],'/profile', ['uses'=>'HomeController@profile'])->name('admin-profile');
         //管理员
         $router->get('/adminlist', ['uses'=>'AdminController@index','middleware'=>'permission:admin.list'])->name('adminlist');
         $router->get('/adminadd', ['uses'=>'AdminController@add','middleware'=>'permission:admin.add'])->name('adminadd');

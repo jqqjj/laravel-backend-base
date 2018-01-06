@@ -1,0 +1,21 @@
+body , .form-control{font-size: 12px;}
+i.iconfont{font-size: 12px;}
+.form-horizontal .control-label{padding-top: 7px;text-align: right;}
+.popover{font-size: 12px;}
+.dropdown-menu{font-size: 12px;}
+
+.data-topbar{margin: 15px 0 0;background: #f9f9f9;padding: 15px 10px;overflow: hidden;}
+.data-header{margin: 15px 0 0;border-bottom: 1px solid #009688;padding: 10px 0; overflow: hidden;}
+.data-title{font-size: 18px;margin: 0;padding: 1px 0;}
+.data-header .btn{margin-left: 10px;}
+.data{margin: 20px 0 0;}
+table.table tbody th{vertical-align: middle;}
+td .info{overflow:hidden;white-space:nowrap;text-overflow:ellipsis; float: left;margin: 0;padding: 0;}
+td .info + i{margin-left: 5px;cursor: pointer;}
+td .info + i.active{color: #d9534f;}
+@media (max-width:768px){.info{max-width: 50px;}}
+@media (min-width:768px){.info{max-width: 100px;}}
+@media (min-width:992px){.info{max-width: 160px;}}
+@media (min-width:1170px){.info{max-width: 250px;}}
+.pagination-count{float: left;margin: 20px 0px;padding: 6px 12px;}
+.pagination{float: left;}

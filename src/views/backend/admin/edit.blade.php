@@ -1,170 +1,193 @@
 @extends("layouts.backend.layout")
-@section("title","编辑后台用户")
+@section("title","编辑管理员")
+
 @push('css')
+<link rel="stylesheet" type="text/css" href="{{asset('formvalidation/css/formValidation.min.css')}}" />
 @endpush
 
 @push('script')
+<script type="text/javascript" src="{{asset('formvalidation/js/formValidation.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('formvalidation/js/framework/bootstrap.min.js')}}"></script>
 @endpush
 
 @section("content")
-<div class="content">
-	<div class="loc">
-		<h2><i class="icon"></i>编辑后台用户:<font class="ml5"></font></h2>
-	</div>
-	<form method="post" action="{{route('adminupdate',['id'=>$admin->admin_id])}}">
-		<div class="box">
-			<div class="module">
-				<table class="dataform">
-				<tr>
-					<th width="110">
-						登录名称
-					</th>
-					<td>
-						<input class="w200 txt" name="name" id="username" type="text" value="{{$admin->name}}"/>
-						<p class="c999 mt10">
-							可以包含字母、数字或下划线，须以字母开头，长度为4-16个字符
-						</p>
-					</td>
-				</tr>
-				<tr>
-					<th>
-						重设密码
-					</th>
-					<td>
-						<button type="button" class="cbtn sm btn" onclick="resetPwd(this)">点击重新设置密码</button>
-						<input type="hidden" name="resetpwd" id="resetpwd" value=""/>
-						<p class="c999 mt10">
-							如需重设密码请点击以上按钮，否则密码保持不变
-						</p>
-					</td>
-				</tr>
-				<tr class="setpwd hide">
-					<th>
-						密码
-					</th>
-					<td>
-						<input class="w200 txt" name="password" id="password" type="password"/>
-						<p class="c999 mt10">
-							可以包含字母、数字以及特殊符号，长度为6-32个字符
-						</p>
-					</td>
-				</tr>
-				<tr class="setpwd hide">
-					<th>
-						确认密码
-					</th>
-					<td>
-						<input class="w200 txt" name="repassword" id="repassword" type="password"/>
-					</td>
-				</tr>
-                <tr>
-					<th>
-						昵称
-					</th>
-					<td>
-						<input class="w200 txt" name="nick_name" id="nick_name" type="text" value="{{$admin->nick_name}}"/>
-					</td>
-				</tr>
-				<tr>
-					<th>
-						电子邮箱
-					</th>
-					<td>
-						<input class="w200 txt" name="email" id="email" type="text" value="{{$admin->email}}"/>
-					</td>
-				</tr>
-				<tr>
-					<th>
-						分配角色
-					</th>
-					<td>
-						<div class="ckrow mt5 pad5 cut">
-							<ul class="c666">
-                                @foreach($role_list as $role)
-                                @if(in_array($role->role_id,$admin_roles))
-								<li><label><input checked="checked" type="checkbox" name="role_ids[]" value="{{$role->role_id}}"/><font class="ml5">{{$role->role_name}}</font></label></li>
-                                @else
-                                <li><label><input type="checkbox" name="role_ids[]" value="{{$role->role_id}}"/><font class="ml5">{{$role->role_name}}</font></label></li>
-                                @endif
-                                @endforeach
-							</ul>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<th>
-						冻结
-					</th>
-					<td>
-						<div class="ckrow mt5 pad5 cut">
-							<ul class="c666">
-                                <li style="width: 45px;"><label><input type="radio" @if(!$admin->enabled)checked="checked"@endif name="enabled" value="0"/><font class="ml5">是</font></label></li>
-                                <li style="width: 45px;"><label><input type="radio" @if($admin->enabled)checked="checked"@endif name="enabled" value="1"/><font class="ml5">否</font></label></li>
-							</ul>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<th>
-						最后登录时间
-					</th>
-					<td>
-						<p class="pad5 c999">
-							{{$admin->last_login_time}}
-						</p>
-					</td>
-				</tr>
-				<tr>
-					<th>
-						最后登录IP
-					</th>
-					<td>
-						<p class="pad5 c999">
-                            {{$admin->last_login_ip}}
-						</p>
-					</td>
-				</tr>
-				<tr>
-					<th>
-						创建日期
-					</th>
-					<td>
-						<p class="pad5 c999">
-							{{$admin->created_at}}
-						</p>
-					</td>
-				</tr>
-				</table>
-			</div>
-			<div class="submitbtn">
-                <button type="submit" class="ubtn btn">保存并更新</button>
-				<button type="reset" class="fbtn btn">重置表单</button>
-                <input type="hidden" name="_referer" value="{{request()->server("HTTP_REFERER")}}">
-                <input type="hidden" name="_token" value="{{csrf_token()}}">
-			</div>
-		</div>
-	</form>
+<div class="container-fluid">
+    <div class="data-header">
+        <h4 class="data-title pull-left">编辑管理员</h4>
+    </div>
+    <div class="data">
+        <form class="form-horizontal" method="post" action="{{route('adminupdate',['id'=>$admin->admin_id])}}">
+            <div class="form-group">
+                <label class="col-xs-3 col-md-2 col-lg-2 control-label">登录名称</label>
+                <div class="col-xs-6 col-md-3 col-lg-3">
+                    <input class="form-control input-sm" name="name" type="text" value="{{$admin->name}}"/>
+                    <small class="help-block">可以包含字母、数字或下划线，须以字母开头，长度为4-16个字符</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 col-md-2 col-lg-2 control-label"></label>
+                <div class="col-xs-6 col-md-3 col-lg-3">
+                    <button type="button" class="btn btn-default btn-sm reset-password">重新设置密码</button>
+                </div>
+            </div>
+            <div class="form-group hidden">
+                <label class="col-xs-3 col-md-2 col-lg-2 control-label">密码</label>
+                <div class="col-xs-6 col-md-3 col-lg-3">
+                    <input class="form-control input-sm" name="password" type="password" />
+                    <small class="help-block">可以包含字母、数字以及特殊符号，长度为6-32个字符</small>
+                </div>
+            </div>
+            <div class="form-group hidden">
+                <label class="col-xs-3 col-md-2 col-lg-2 control-label">确认密码</label>
+                <div class="col-xs-6 col-md-3 col-lg-3">
+                    <input class="form-control input-sm" name="repassword" type="password" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 col-md-2 col-lg-2 control-label">昵称</label>
+                <div class="col-xs-6 col-md-3 col-lg-3">
+                    <input class="form-control input-sm" name="nick_name" type="text" value="{{$admin->nick_name}}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 col-md-2 col-lg-2 control-label">邮箱</label>
+                <div class="col-xs-6 col-md-3 col-lg-3">
+                    <input class="form-control input-sm" name="email" type="text" value="{{$admin->email}}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-3 col-md-2 col-lg-2">冻结</label>
+                <div class="col-xs-6 col-md-3 col-lg-3">
+                    <label class=" radio-inline">
+                        @if(!$admin->enabled)
+                        <input type="radio" checked="checked" name="enabled" value="0" />是
+                        @else
+                        <input type="radio" name="enabled" value="0" />是
+                        @endif
+                    </label>
+                    <label class=" radio-inline">
+                        @if($admin->enabled)
+                        <input type="radio" checked="checked" name="enabled" value="1" />否
+                        @else
+                        <input type="radio" name="enabled" value="1" />否
+                        @endif
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 col-md-2 col-lg-2 control-label">分配角色</label>
+                <div class="col-xs-6 col-md-3 col-lg-3">
+                    @foreach($role_list as $role)
+                    <label class=" checkbox-inline">
+                        @if(in_array($role->role_id,$admin_roles))
+                        <input name="role_ids[]" checked="checked" type="checkbox" value="{{$role->role_id}}" /> {{$role->role_name}}
+                        @else
+                        <input name="role_ids[]" type="checkbox" value="{{$role->role_id}}" /> {{$role->role_name}}
+                        @endif
+                    </label>
+                    @endforeach
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 col-md-2 col-lg-2 control-label">最后登录时间</label>
+                <div class="col-xs-6 col-md-3 col-lg-3">
+                    <p class="form-control-static">{{$admin->last_login_time}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 col-md-2 col-lg-2 control-label">最后登录IP</label>
+                <div class="col-xs-6 col-md-3 col-lg-3">
+                    <p class="form-control-static">{{$admin->last_login_ip}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 col-md-2 col-lg-2 control-label">创建日期</label>
+                <div class="col-xs-6 col-md-3 col-lg-3">
+                    <p class="form-control-static">{{$admin->created_at}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-3 col-md-2 col-lg-2"></label>
+                <div class="col-xs-6 col-md-3 col-lg-3">
+                    <button type="submit" class="btn btn-primary btn-sm">提交</button>
+                    <a href="{{Referer::match(route("adminlist"))}}" class="btn btn-default btn-sm">返回</a>
+                </div>
+            </div>
+            <input type="hidden" name="_referer" value="{{Referer::match(route("adminlist"))}}">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
+        </form>
+    </div>
 </div>
 @endsection
 
 @push("inline")
 <script type="text/javascript">
-$(document).ready(function(){
-    $('form').submit(function(){
-        $('#username').vdsFieldChecker({rules:{username:[/^[_a-zA-Z0-9]{4,15}$/.test($('#username').val()), '登录名称不符合格式要求']}});
-        if($('#resetpwd').val() == 1){
-          $('#password').vdsFieldChecker({rules:{required:[true, '请设置密码'], password:[true, '密码不符合格式要求']}});
-        }
-        $('#repassword').vdsFieldChecker({rules:{equal:[$('#password').val(), '两次密码不一致']}});
-        $('#email').vdsFieldChecker({rules:{required:[true, '电子邮箱不能为空'], email:[true, '无效的电子邮箱地址']}});
-        $('#nick_name').vdsFieldChecker({rules:{maxlen:[20, '昵称不能超过20个字符']}});
-        return $('form').vdsFormChecker();
+    $(document).ready(function(){
+        $('.reset-password').click(function(){
+            $(this).parents('.form-group').addClass('hidden').siblings().removeClass('hidden');
+        });
+        $('form').bootstrapValidator({
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                name: {
+                    validators: {
+                        notEmpty: {
+                            message: '不能为空'
+                        },
+                        stringLength: {
+                            min: 4,
+                            max: 16,
+                            message: '长度必须在4到16位之间'
+                        }
+                    }
+                },
+                password: {
+                    validators: {
+                        notEmpty: {
+                            message: '不能为空'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 32,
+                            message: '长度必须在6到32位之间'
+                        }
+                    }
+                },
+                repassword:{
+                    validators:{
+                        notEmpty: {
+                            message: '不能为空'
+                        },
+                        identical: {
+                            field: 'password',
+                            message: '两次密码输入不一致'
+                        }
+                    }
+                },
+                nick_name:{
+                    validators:{
+                        stringLength: {
+                            max: 20,
+                            message: '长度不超过20个字符'
+                        }
+                    }
+                },
+                email:{
+                    validators:{
+                        notEmpty:{
+                            message:"不能为空"
+                        },
+                        emailAddress:{
+                            message:"格式不正确"
+                        }
+                    }
+                }
+            }
+        });
     });
-});
-function resetPwd(btn){
-  $('.setpwd').removeClass('hide');
-  $('#resetpwd').val(1);
-  $(btn).parentsUntil('tr').parent().addClass('hide');
-}
 </script>
 @endpush

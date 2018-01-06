@@ -1,0 +1,5 @@
+body{background: #f6f6f6;}
+.login{padding-top: 50px;}
+#captcha-img{padding-top: 26px;}
+.login-area{max-width: 400px;margin: auto;background: #FFF;padding: 20px;box-shadow: 10px 10px 5px #e6e6e6;border: 1px solid #eaeaea;}
+label{font-size: 14px;}

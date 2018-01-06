@@ -10,17 +10,53 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Referer
 {
-    public function get($referer,$default)
+    private $_referer = "";
+    
+    public function __construct($base="")
     {
+        if(!empty($base)){
+            $this->match($base);
+        }
+    }
+    
+    public function match($base)
+    {
+        $this->_referer = $this->fetchRequestReferer($base) ? : ($this->fetchServerReferer($base) ? : $base);
+        return $this->_referer;
+    }
+    
+    private function fetchRequestReferer($base)
+    {
+        $referer = Request::input("_referer");
+        return ($base=="*" && !empty($referer)) || $this->routesCompare($referer, $base) ? $referer : null;
+    }
+    
+    private function fetchServerReferer($base)
+    {
+        $referer = Request::server("HTTP_REFERER");
+        return ($base=="*" && !empty($referer)) || $this->routesCompare($referer, $base) ? $referer : null;
+    }
+    
+    private function routesCompare($route_path,$other_route_path)
+    {
+        if(empty($route_path) || empty($other_route_path)){
+            return false;
+        }
+        
         try {
-            $source_path = Route::getRoutes()->match(Request::create($referer))->getUri();
-            $default_path = Route::getRoutes()->match(Request::create($default))->getUri();
-            return $source_path == $default_path ? $referer : $default;
+            $route_path_uri = Route::getRoutes()->match(Request::create($route_path))->getUri();
+            $other_route_uri = Route::getRoutes()->match(Request::create($other_route_path))->getUri();
+            return $route_path_uri == $other_route_uri;
         } catch (NotFoundHttpException $ex) {
-            return $default;
+            return false;
         }
         catch (MethodNotAllowedHttpException $ex){
-            return $default;
+            return false;
         }
+    }
+    
+    public function __toString()
+    {
+        return $this->_referer;
     }
 }

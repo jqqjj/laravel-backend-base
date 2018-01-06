@@ -26,10 +26,10 @@ class SortHelper
         if(isset($params[$column_key]) && $params[$column_key]==$column){
             $sort = isset($params[$sort_key])&&in_array(strtolower($params[$sort_key]),['desc','asc']) ? 
                     array_values(array_diff(['desc','asc'],[strtolower($params[$sort_key])]))[0] : $current_sort;
-            $class = $sort=='desc' ? "sort-asc" : "sort-desc";
+            $class = $sort=='desc' ? "icon-conowssortasc" : "icon-conowssortdesc";
         }else{
             $sort = $current_sort;
-            $class = "no-sort";
+            $class = "icon-conowssort";
         }
         
         $params[$column_key] = $column;
@@ -37,7 +37,7 @@ class SortHelper
         
         $tmp_paginator = clone $paginator;
         $url = $tmp_paginator->appends($params)->url(1);
-        $html = '<a class="c666" href="'.$url.'">'.$label.'<i class="sort '.$class.'"></i></a>';
+        $html = '<a class="text-muted" href="'.$url.'">'.$label.'<i class="iconfont '.$class.'"></i></a>';
         return $html;
     }
 }

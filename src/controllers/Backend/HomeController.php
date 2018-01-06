@@ -40,6 +40,10 @@ class HomeController extends Controller
     
     public function clearcache(Request $request)
     {
+        if($request->isMethod('get')){
+            return view('backend.home.clearcache');
+        }
+        
         $clean = $request->input("clean");
         if(empty($clean) || !is_array($clean)){
             throw new BackendException(10000,"请选择清理类型");
@@ -59,30 +63,68 @@ class HomeController extends Controller
         return Message::json(0,"清理完成");
     }
     
-    public function changePassword(Request $request,AdminBusiness $b_admin)
+    public function profile(Request $request,AdminBusiness $b_admin)
     {
+        $profile = Auth::guard('backend')->user();
+        
+        if($request->isMethod('get')){
+            return view('backend.home.profile',['profile'=>$profile]);
+        }
+        
         $params = $request->all();
         
         $validator = Validator::make($params, [
-            'new_password' => ['required','between:6,32'],
-            'old_password' => ['required'],
+            'nick_name' => ['max:20'],
+            'email' => ['required','email'],
         ], [
             'required' => ':attribute 不能为空',
             'between' => ':attribute 长度应在 :min - :max 之间',
+            'max' => ':attribute 不能超过 :max 字',
+            'email' => ':attribute 格式不正确',
         ], [
+            'nick_name'=>'昵称',
+            'email'=>'邮箱',
             'old_password'=>'旧密码',
             'new_password'=>'新密码',
         ]);
+        $validator->sometimes("old_password",['required'],function($input){
+            return !empty($input['new_password']);
+        });
+        $validator->sometimes("new_password",['required','between:6,32'],function($input){
+            return !empty($input['new_password']) || !empty($input['old_password']);
+        });
         if ($validator->fails()) {
             return Message::error($validator->messages()->first());
         }
+        
         $id = Auth::guard('backend')->id();
-        if(Auth::guard('backend')->attempt(['admin_id' => $id, 'password' => $params['old_password']],false,false)){
-            $b_admin->update($id, ['password'=>$params['new_password']]);
-            return Message::success("修改密码成功");
-        }else{
-            return Message::error("原始密码不正确");
+        
+        //检查邮箱是否被使用
+        if(!empty($params['email'])){
+            $exsist_admin_email = $b_admin->getList(['email'=>trim($params['email'])]);
+            if(count($exsist_admin_email) && $exsist_admin_email[0]->admin_id!=$id){
+                return Message::error("邮箱已被使用");
+            }
         }
+        
+        if(!empty($params['old_password'])){
+            if(!Auth::guard('backend')->attempt(['admin_id' => $id, 'password' => $params['old_password']],false,false)){
+                return Message::error("原始密码不正确");
+            }
+        }
+        
+        $save_data = [];
+        $save_data['nick_name'] = $params['nick_name'];
+        if(!empty($params['email'])){
+            $save_data['email'] = $params['email'];
+        }
+        if(!empty($params['new_password'])){
+            $save_data['password'] = $params['new_password'];
+        }
+        
+        $b_admin->update($id, $save_data);
+        
+        return Message::success("资料修改成功");
     }
     
     public function captcha(Request $request)

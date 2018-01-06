@@ -9,7 +9,7 @@ use App\Http\Business\RolePermissionsBusiness;
 use Illuminate\Support\Facades\Validator;
 use App\Facades\BackendMessage as Message;
 use App\Facades\Pagination;
-use App\Helpers\Referer;
+use App\Facades\Referer;
 
 class RoleController extends Controller
 {
@@ -48,7 +48,6 @@ class RoleController extends Controller
     public function update(Request $req,RoleBusiness $b_role,RolePermissionsBusiness $b_role_permission)
     {
         $id = $req->input('id');
-        $referer = $req->input("_referer");
         $params = $req->all();
         $detail = $b_role->getDetail($id, ['*'], ['permissions']);
         if(empty($detail)){
@@ -102,7 +101,7 @@ class RoleController extends Controller
             }
         }
         
-        return Message::success("更新成功!",['label'=>'返回上一页','url'=>(new Referer)->get($referer, route('rolelist'))]);
+        return Message::success("更新成功!",['label'=>'返回上一页','url'=>Referer::match(route('rolelist'))]);
     }
     
     public function add()
@@ -115,7 +114,6 @@ class RoleController extends Controller
     
     public function store(Request $req,RoleBusiness $b_role,RolePermissionsBusiness $b_role_permission)
     {
-        $referer = $req->input("_referer");
         $params = $req->all();
         
         $validator = Validator::make($params, [
@@ -169,7 +167,18 @@ class RoleController extends Controller
                 ]);
             }
         }
-        return Message::success("添加成功",['label'=>'返回一上页','url'=>(new Referer)->get($referer, route('rolelist'))],[['label'=>'继续添加','url'=>route('roleadd')]]);
+        
+        return Message::success("添加成功",[
+            'label'=>'返回一上页',
+            'url'=>Referer::match(route('rolelist')),
+        ],[
+            [
+                'label'=>'继续添加',
+                'url'=>route('roleadd',[
+                    '_referer'=>Referer::match(route('rolelist'))
+                ]),
+            ],
+        ]);
     }
     
     public function deletebatch(Request $req,RoleBusiness $b_role)

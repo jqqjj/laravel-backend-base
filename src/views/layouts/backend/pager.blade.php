@@ -1,33 +1,26 @@
-@if ($paginator->hasPages())
-<div class="libom mt5">
-<div class="paging">
-	<span class="tot">共计<b>{{$paginator->total()}}</b>项</span>
+<ul class="pagination">
     @if ($paginator->onFirstPage())
-    <span class="disabled">上一页</span>
+    <li class="disabled"><a href="javascript:;">上一页</a></li>
     @else
-    <a href="{{$paginator->previousPageUrl()}}">上一页</a>
+    <li><a href="{{$paginator->previousPageUrl()}}">上一页</a></li>
     @endif
-    
     @foreach ($elements as $element)
         @if(is_array($element))
             @foreach ($element as $page => $url)
                 @if ($page == $paginator->currentPage())
-                <span class="cur">{{$page}}</span>
+                <li class="active"><a href="javascript:;">{{$page}}</a></li>
                 @else
-                <a href="{{$url}}">{{$page}}</a>
+                <li><a href="{{$url}}">{{$page}}</a></li>
                 @endif
             @endforeach
         @else
-            <a href="javascript:;">{{$element}}</a>
+        <li class="disabled"><a href="javascript:;">{{$element}}</a></li>
         @endif
     @endforeach
-    
     @if ($paginator->hasMorePages())
-    <a href="{{$paginator->nextPageUrl()}}">下一页</a>
+    <li><a href="{{$paginator->nextPageUrl()}}">下一页</a></li>
     @else
-    <span class="disabled">下一页</span>
+    <li class="disabled"><a href="javascript:;">下一页</a></li>
     @endif
-    <span class="pct">页码 <b>{{$paginator->currentPage()}}</b> / {{$paginator->lastPage()}}</span>
-</div>
-</div>
-@endif
+</ul>
+<div class="pagination-count">共 <b>{{$paginator->total()}}</b> 条</div>

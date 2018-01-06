@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Facades\BackendMessage as Message;
 use App\Facades\Pagination;
-use App\Helpers\Referer;
+use App\Facades\Referer;
 
 class AdminController extends Controller
 {
@@ -64,7 +64,6 @@ class AdminController extends Controller
     public function update(Request $req,AdminBusiness $b_admin,RoleBusiness $b_role)
     {
         $admin_id = $req->input("id");
-        $referer = $req->input("_referer");
         $params = $req->all();
         $update_admin = $b_admin->getDetail($admin_id,['*'], ['roles']);
         if(Auth::guard('backend')->id()>1){
@@ -145,7 +144,7 @@ class AdminController extends Controller
                 $update_admin->roles()->attach($role_id);
             }
         }
-        return Message::success("更新成功",['label'=>'返回上一页','url'=>(new Referer)->get($referer, route('adminlist'))]);
+        return Message::success("更新成功",['label'=>'返回上一页','url'=>Referer::match(route('adminlist'))]);
     }
     
     public function add(AdminBusiness $b_admin,RoleBusiness $b_role)
@@ -167,7 +166,6 @@ class AdminController extends Controller
     
     public function store(Request $req,AdminBusiness $b_admin,RoleBusiness $b_role)
     {
-        $referer = $req->input("_referer");
         $params = $req->all();
         
         $validator = Validator::make($params, [
@@ -184,7 +182,7 @@ class AdminController extends Controller
             'password'=>'密码',
             'nick_name'=>'昵称',
         ]);
-        $validator->sometimes("nick_name",['required','max:20'],function($input){
+        $validator->sometimes("nick_name",['max:20'],function($input){
             return !empty($input['nick_name']);
         });
         if ($validator->fails()) {
@@ -219,7 +217,9 @@ class AdminController extends Controller
         $save_data['email'] = trim($params['email']);
         $save_data['password'] = $params['password'];
         $save_data['enabled'] = !empty($params['enabled']) ? 1 : 0;//冻结
-        $save_data['nick_name'] = trim($params['nick_name']);//昵称
+        if(!empty($params['nick_name'])){
+            $save_data['nick_name'] = trim($params['nick_name']);//昵称
+        }
         $new_admin = $b_admin->store($save_data);
         if(!$new_admin){
             return Message::error("添加失败");
@@ -230,7 +230,7 @@ class AdminController extends Controller
                 $new_admin->roles()->attach($role_id);
             }
         }
-        return Message::success("添加成功",['label'=>'返回上一页','url'=>(new Referer)->get($referer, route('adminlist'))]);
+        return Message::success("添加成功",['label'=>'返回上一页','url'=>Referer::match(route('adminlist'))]);
     }
     
     public function deletebatch(Request $req,AdminBusiness $b_admin)

@@ -1,0 +1,39 @@
+body{overflow: hidden;}
+.navbar-left{color: #fff;width: 190px;overflow-x: hidden;padding-bottom: 50px;background: #2f4050;}
+.navbar-left button.close{display: none;}
+.avatar i.icon-group{font-size: 60px;color: #a7ad6b;}
+.menu-list{margin-top: 30px;padding: 0;}
+.menu-item{border-left: 4px solid #2f4050;}
+.menu-item:hover{background: #293846;border-left: 4px solid #293846;}
+.menu-item.active{background: #293846;border-left: 4px solid #19aa8d;}
+.menu-item a{display: block;text-decoration: none;font-size: 13px;padding: 12px 0 12px 20px;color: #a7b1c2;font-weight: bold;}
+.menu-item a:hover{color: #fff;}
+.menu-item i{font-size: 13px;margin-right: 8px;}
+
+.sub-menu-list{display: none;overflow: hidden;padding: 5px 0 20px 50px;}
+.menu-item.active .sub-menu-list{display: block;}
+.sub-menu-item a{border-left: 0;font-size: 12px;padding: 5px 0 5px 0;font-weight: normal;}
+.sub-menu-item a.active{color: #fff;}
+
+.top-bar{height: 50px;border-bottom: 1px solid #e7e7e7;background: #f8f8f8;}
+.container-fluid div.navbar-header{margin-right: 0;margin-left: 0;}
+.navbar-header button{border-color: #1ab394;background-color: #1ab394;height: 30px;width: 40px;padding-top: 8px;margin-right: 0;}
+.navbar-header button:hover{border-color: #18a689;background-color: #18a689 !important;}
+.navbar-header button:focus{border-color: #18a689;background-color: #18a689 !important;}
+.navbar-header button .icon-bar{background: #fff;height: 1px;width: 20px;}
+.navbar-brand{padding-top: 13px;}
+.navbar-left-margin{margin-left: 190px;}
+.navbar-left-collapse{display: none;}
+.navbar-toggle{display: block;}
+.navbar-right{margin-right: 0;}
+
+@media (max-width: 768px){
+    .navbar-left-margin{margin-left: 0;}
+    .navbar-left{display: none;position: fixed;left: 0;top: 0;z-index: 1110;height: 100%;}
+    .navbar-left-collapse{display: block;}
+    .navbar-left button.close{display: block;position: absolute;right: 5px;top: 3px;color: #fff;padding: 5px 10px;}
+    .navbar-header{float: left;}
+    .navbar-nav{float: right;margin: 0;}
+    .navbar-nav .open .dropdown-menu{position: absolute;right: 0;left: auto;background: #FFF;border: 1px solid rgba(0,0,0,.15);box-shadow: 0 6px 12px rgba(0,0,0,.175);}
+    .navbar-nav>li>a{padding-top: 15px;padding-bottom: 15px;}
+}
