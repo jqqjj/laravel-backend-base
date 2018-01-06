@@ -29,6 +29,7 @@ php artisan db:seed --class=RbacSeeder
 Register Facade to the aliases array in config/app.php
 ```php
 'ViewHelper' => App\Facades\ViewHelper::class,
+'Referer' => App\Facades\Referer::class,
 ```
 Register Middleware to the routeMiddleware array in app/Http/Kernel.php
 ```php
