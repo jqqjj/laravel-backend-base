@@ -65,6 +65,7 @@ Route::group([
     require base_path('routes/backend.php');
 });
 ```
+Others: time zones setting,session setting(expire_on_close),key generate
 ### Inspection
 backend url: yourdomain/admin/  
 login name:admin  
