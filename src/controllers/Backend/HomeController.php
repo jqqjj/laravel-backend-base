@@ -60,7 +60,7 @@ class HomeController extends Controller
             Artisan::call("config:clear");
             Artisan::call("route:clear");
         }
-        return Message::json(0,"清理完成");
+        return Message::success("清理缓存完成");
     }
     
     public function profile(Request $request,AdminBusiness $b_admin)
