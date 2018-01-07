@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('bootstrap/css/bootstrap.min.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('jquery-confirm/jquery-confirm.min.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('backend/css/common.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('iconfont/iconfont.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('backend/iconfont/iconfont.css')}}" />
     @stack('css')
   </head>
 <body>
