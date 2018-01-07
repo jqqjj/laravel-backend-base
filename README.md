@@ -10,37 +10,10 @@ Register the ServiceProvider to the providers array in config/app.php
 ```php
 Jqqjj\BackendBase\BackendBaseProvider::class,
 ```
-Publish files
-```php
-php artisan vendor:publish --provider="Jqqjj\BackendBase\BackendBaseProvider" --force
-```
-Run migrations
-```php
-php artisan migrate
-```
-Composer dump-autoload
-```php
-composer dump-autoload
-```
-Seed database data
-```php
-php artisan db:seed --class=RbacSeeder
-```
 Register Facade to the aliases array in config/app.php
 ```php
 'ViewHelper' => App\Facades\ViewHelper::class,
 'Referer' => App\Facades\Referer::class,
-```
-Register Middleware to the routeMiddleware array in app/Http/Kernel.php
-```php
-'auth.backend' => \App\Http\Middleware\AuthBackend::class,
-'permission' => \App\Http\Middleware\Permission::class,
-```
-Register Event to the listen array in app/Providers/EventServiceProvider.php
-```php
-'Illuminate\Auth\Events\Login'=>[
-    'App\Listeners\BacknedLoginListener',
-],
 ```
 Add one more guard to the guards array in config/auth.php
 ```php
@@ -56,6 +29,17 @@ Add another provider to providers array in config/auth.php
     'model' => App\Model\Admin::class,
 ],
 ```
+Register Middleware to the routeMiddleware array in app/Http/Kernel.php
+```php
+'auth.backend' => \App\Http\Middleware\AuthBackend::class,
+'permission' => \App\Http\Middleware\Permission::class,
+```
+Register Event to the listen array in app/Providers/EventServiceProvider.php
+```php
+'Illuminate\Auth\Events\Login'=>[
+    'App\Listeners\BacknedLoginListener',
+],
+```
 Load routes in function mapWebRoutes in file app/Providers/RouteServiceProvider.php
 ```php
 Route::group([
@@ -64,6 +48,22 @@ Route::group([
 ],function($router){
     require base_path('routes/backend.php');
 });
+```
+Publish files
+```php
+php artisan vendor:publish --provider="Jqqjj\BackendBase\BackendBaseProvider" --force
+```
+Run migrations
+```php
+php artisan migrate
+```
+Composer dump-autoload
+```php
+composer dump-autoload
+```
+Seed database data
+```php
+php artisan db:seed --class=RbacSeeder
 ```
 Others: time zones setting,session setting(expire_on_close),key generate
 ### Inspection
