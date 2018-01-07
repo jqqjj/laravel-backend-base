@@ -39,7 +39,6 @@
                 <th>{!!ViewHelper::sort()->make($list,"是否冻结","enabled")!!}</th>
                 <th><span class="text-muted">操作</span></th>
             </tr>
-            @if(count($list))
             @foreach($list as $key=>$admin)
             <tr>
                 <td><input name="id" type="checkbox" value="{{$admin->admin_id}}" /></td>
@@ -57,10 +56,10 @@
                 </td>
             </tr>
             @endforeach
-            @else
-            <td colspan="10" class="text-muted bg-warning text-center">无记录</td>
-            @endif
         </table>
+        @if(!count($list))
+        <div class="table-no-data text-muted bg-warning text-center">无记录</div>
+        @endif
         {!! $list->appends(\Illuminate\Support\Facades\Input::get())->links("layouts.backend.pager") !!}
     </div>
 </div>

@@ -3,6 +3,7 @@ i.iconfont{font-size: 12px;}
 .form-horizontal .control-label{padding-top: 7px;text-align: right;}
 .popover{font-size: 12px;}
 .dropdown-menu{font-size: 12px;}
+.table{margin-bottom:0;}
 
 .data-topbar{margin: 15px 0 0;background: #f9f9f9;padding: 15px 10px;overflow: hidden;}
 .data-header{margin: 15px 0 0;border-bottom: 1px solid #009688;padding: 10px 0; overflow: hidden;}
@@ -17,5 +18,6 @@ td .info + i.active{color: #d9534f;}
 @media (min-width:768px){.info{max-width: 100px;}}
 @media (min-width:992px){.info{max-width: 160px;}}
 @media (min-width:1170px){.info{max-width: 250px;}}
+.table-no-data{padding: 8px 0;border-top: 1px solid #ddd;}
 .pagination-count{float: left;margin: 20px 0px;padding: 6px 12px;}
 .pagination{float: left;}
