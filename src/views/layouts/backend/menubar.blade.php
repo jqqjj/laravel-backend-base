@@ -9,8 +9,10 @@
         <li class="menu-item">
             <a href="javascript:;"><i class="iconfont icon-setup"></i>设置</a>
             <ul class="sub-menu-list">
-                <li class="sub-menu-item"><a href="#!/main/category/index">管理员列表</a></li>
-                <li class="sub-menu-item"><a href="#!/main/category/create">角色列表</a></li>
+                @permission('cache.clear')
+                <li class="sub-menu-item"><a href="{{route("clearsystemcache")}}" target="main">清理缓存</a></li>
+                @endpermission
+                <li class="sub-menu-item"><a href="{{route("admin-profile")}}" target="main">修改资料密码</a></li>
             </ul>
         </li>
         @permission('admin.list|role.list')
