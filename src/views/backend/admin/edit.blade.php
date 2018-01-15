@@ -56,20 +56,20 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-3 col-md-2 col-lg-2">冻结</label>
+                <label class="control-label col-xs-3 col-md-2 col-lg-2">是否可用</label>
                 <div class="col-xs-6 col-md-3 col-lg-3">
                     <label class=" radio-inline">
-                        @if(!$admin->enabled)
-                        <input type="radio" checked="checked" name="enabled" value="0" />是
+                        @if($admin->enabled)
+                        <input type="radio" checked="checked" name="enabled" value="1" />是
                         @else
-                        <input type="radio" name="enabled" value="0" />是
+                        <input type="radio" name="enabled" value="1" />是
                         @endif
                     </label>
                     <label class=" radio-inline">
-                        @if($admin->enabled)
-                        <input type="radio" checked="checked" name="enabled" value="1" />否
+                        @if(!$admin->enabled)
+                        <input type="radio" checked="checked" name="enabled" value="0" />否
                         @else
-                        <input type="radio" name="enabled" value="1" />否
+                        <input type="radio" name="enabled" value="0" />否
                         @endif
                     </label>
                 </div>

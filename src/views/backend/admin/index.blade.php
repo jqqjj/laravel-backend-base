@@ -36,7 +36,7 @@
                 <th>{!!ViewHelper::sort()->make($list,"最后登录时间","last_login_time")!!}</th>
                 <th><span class="text-muted">最后登录IP</span></th>
                 <th>{!!ViewHelper::sort()->make($list,"创建时间","created_at")!!}</th>
-                <th>{!!ViewHelper::sort()->make($list,"是否冻结","enabled")!!}</th>
+                <th>{!!ViewHelper::sort()->make($list,"是否可用","enabled")!!}</th>
                 <th><span class="text-muted">操作</span></th>
             </tr>
             @foreach($list as $key=>$admin)
@@ -49,7 +49,13 @@
                 <td>{{$admin->last_login_time}}</td>
                 <td>{{$admin->last_login_ip}}</td>
                 <td>{{$admin->created_at}}</td>
-                <td>{{$admin->enabled?"否":"是"}}</td>
+                <td>
+					@if($admin->enabled)
+                    <i class="iconfont icon-chenggongtishi text-success"></i>
+                    @else
+                    <i class="iconfont icon-shibai text-danger"></i>
+                    @endif
+				</td>
                 <td>
                     <a href="{{route("adminedit",['id'=>$admin->admin_id])}}" class="btn btn-xs btn-primary">编辑</a>
                     <a dobatch="confirm" href="{{route("admindeletebatch")}}" method="post" value="{{$admin->admin_id}}" message="确定删除吗" class="btn btn-xs btn-danger">删除</a>
