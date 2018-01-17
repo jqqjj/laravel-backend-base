@@ -15,7 +15,7 @@ class Pagination
      */
     public function make(Builder $builder,array $condition=[])
     {
-        if (!empty($condition['all'])) {//获取全部列表
+        if (!empty($condition['all']) || !empty($condition['count'])) {//获取全部列表
             return $this->all($builder,$condition);
         }else{//返回分页对象
             return $this->paginate($builder,$condition);
@@ -29,7 +29,11 @@ class Pagination
      */
     public function all(Builder $builder,array $condition=[])
     {
-        return $this->sort($builder,$condition)->get();
+        if(!empty($condition['count'])){
+            return $builder->count();
+        }else{
+            return $this->sort($builder,$condition)->get();
+        }
     }
     
     /**
