@@ -137,9 +137,6 @@ $(document).ready(function(){
         })(this);
         cal_status(this);
     });
-    $('[data-toggle="popover"]').click(function(){
-        $(this).toggleClass('active');
-    }).popover({trigger:"hover click"});
 });
 $.error = function(msg){
     $.alert({

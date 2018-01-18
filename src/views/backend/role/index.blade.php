@@ -57,4 +57,11 @@
 @endsection
 
 @push('inline')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').click(function(){
+            $(this).toggleClass('active');
+        }).popover({trigger:"hover click"});
+    });
+</script>
 @endpush
