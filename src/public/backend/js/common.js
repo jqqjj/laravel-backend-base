@@ -40,7 +40,7 @@ $(document).ready(function(){
                 content: message,
                 buttons: {
                     confirm: {
-                        text:'删除',
+                        text:'确定',
                         btnClass:'btn-danger',
                         keys:['y','enter'],
                         action:function(){
@@ -88,7 +88,7 @@ $(document).ready(function(){
                 content: message,
                 buttons: {
                     confirm: {
-                        text:'删除',
+                        text:'确定',
                         btnClass:'btn-danger',
                         keys:['y','enter'],
                         action:function(){
