@@ -10,9 +10,9 @@ class Documents
     public function getPublicPathSize($path)
     {
         $size = 0;
-        $files = Storage::disk('public')->allFiles($path);
+        $files = Storage::disk('local')->allFiles($path);
         foreach ($files as $file){
-            $size += Storage::disk("public")->size($file);
+            $size += Storage::disk("local")->size($file);
         }
         return $size;
     }

@@ -8,7 +8,6 @@ return [
         'default_sort_type'=>'desc',//默认排序方式
         'page_size'=>15,
     ],
-    'public_upload_path'=>'upload',//文件上传的目录
     'captcha_session_key_prefix'=>'captcha_backend_',//验证码session索引前缀
     
     'helpers'=>[
