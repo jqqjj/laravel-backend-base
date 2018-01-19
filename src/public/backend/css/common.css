@@ -1,7 +1,7 @@
 body , .form-control{font-size: 12px;}
 i.iconfont{font-size: 12px;}
 .form-horizontal .control-label{padding-top: 7px;text-align: right;}
-.popover{font-size: 12px;}
+.popover{font-size: 12px;word-wrap: break-word;}
 .dropdown-menu{font-size: 12px;}
 .table{margin-bottom:0;}
 
