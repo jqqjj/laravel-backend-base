@@ -30,7 +30,7 @@ class HomeController extends Controller
         $version = $pdo->query('select version()')->fetchColumn();
         
         //统计上传文件的文件夹大小
-        $bytes_size = Documents::getPublicPathSize("/");
+        $bytes_size = Documents::getPathSize("/");
         
         return view('backend.home.dashboard',[
             'db_version'=>$version,

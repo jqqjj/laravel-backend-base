@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Documents
 {
-    public function getPublicPathSize($path)
+    public function getPathSize($path)
     {
         $size = 0;
         $files = Storage::disk('local')->allFiles($path);
