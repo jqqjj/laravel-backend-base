@@ -5,7 +5,7 @@ i.iconfont{font-size: 12px;}
 .dropdown-menu{font-size: 12px;}
 .table{margin-bottom:0;}
 
-.data-topbar{margin: 15px 0 0;background: #f9f9f9;padding: 15px 10px;overflow: hidden;}
+.data-topbar{margin: 15px 0 0;background: #f9f9f9;padding: 15px 10px 10px;overflow: hidden;}
 .data-header{margin: 15px 0 0;border-bottom: 1px solid #009688;padding: 10px 0; overflow: hidden;}
 .data-title{font-size: 18px;margin: 0;padding: 1px 0;}
 .data-header .btn{margin-left: 10px;}
@@ -15,7 +15,7 @@ td .info{overflow:hidden;white-space:nowrap;text-overflow:ellipsis; float: left;
 td .info + i{margin-left: 5px;cursor: pointer;}
 td .info + i.active{color: #d9534f;}
 @media (max-width:768px){.info{max-width: 50px;}}
-@media (min-width:768px){.info{max-width: 100px;}}
+@media (min-width:768px){.info{max-width: 100px;} .form-inline .form-group{margin-bottom:5px;}}
 @media (min-width:992px){.info{max-width: 160px;}}
 @media (min-width:1170px){.info{max-width: 250px;}}
 .table-no-data{padding: 8px 0;border-top: 1px solid #ddd;}
