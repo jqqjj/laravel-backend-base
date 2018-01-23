@@ -169,7 +169,7 @@ class RoleController extends Controller
         }
         
         return Message::success("添加成功",[
-            'label'=>'返回一上页',
+            'label'=>'返回上一页',
             'url'=>Referer::match(route('rolelist')),
         ],[
             [
