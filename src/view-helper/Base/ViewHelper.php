@@ -7,7 +7,6 @@ use RuntimeException;
 class ViewHelper
 {
     private $_alias = [];
-    private $_instance = [];
     
     public function __construct()
     {
@@ -25,10 +24,6 @@ class ViewHelper
             throw new RuntimeException("ViewHelper '{$helper_name}' doesn't exists.");
         }
         
-        if(!isset($this->_instance[$helper_name])){
-            $this->_instance[$helper_name] = app()->make($this->_alias[$helper_name], $arguments);
-        }
-        
-        return $this->_instance[$helper_name];
+        return app()->make($this->_alias[$helper_name], $arguments);
     }
 }
