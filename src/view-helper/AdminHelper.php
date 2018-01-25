@@ -15,7 +15,7 @@ class AdminHelper
         if($admin instanceof Admin){
             $this->admin = $admin;
         }elseif(!empty($admin)){
-            $this->admin = Admin::findOrFail($admin);
+            $this->admin = Admin::withTrashed()->findOrFail($admin);
         }else{
             $this->admin = Auth::guard("backend")->user();
         }
