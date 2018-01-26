@@ -100,15 +100,15 @@ class AdminController extends Controller
         
         $save_data = [];
         //检查名称是否被使用
-        $exsist_admin = $b_admin->getList(['name'=>trim($params['name'])]);
-        if(count($exsist_admin) && $exsist_admin[0]->admin_id!=$admin_id){
+        $exist_admin = $b_admin->getList(['name'=>trim($params['name'])]);
+        if(count($exist_admin) && array_diff($exist_admin->pluck("admin_id")->toArray(),[$admin_id])){
             return Message::error("登录名称已被使用");
         }
         $save_data['name'] = trim($params['name']);
         
         //检查邮箱是否被使用
-        $exsist_admin_email = $b_admin->getList(['email'=>trim($params['email'])]);
-        if(count($exsist_admin_email) && $exsist_admin_email[0]->admin_id!=$admin_id){
+        $exist_admin_email = $b_admin->getList(['email'=>trim($params['email'])]);
+        if(count($exist_admin_email) && array_diff($exist_admin_email->pluck("admin_id")->toArray(),[$admin_id])){
             return Message::error("邮箱已被使用");
         }
         $save_data['email'] = trim($params['email']);
@@ -190,13 +190,13 @@ class AdminController extends Controller
         }
         
         //检查名称是否被使用
-        $exsist_admin_name = $b_admin->getList(['name'=>trim($params['name'])]);
-        if(count($exsist_admin_name)){
+        $exist_admin_name = $b_admin->getList(['name'=>trim($params['name'])]);
+        if(count($exist_admin_name)){
             return Message::error("登录名称已被使用");
         }
         //检查邮箱是否被使用
-        $exsist_admin = $b_admin->getList(['email'=>trim($params['email'])]);
-        if(count($exsist_admin)){
+        $exist_admin = $b_admin->getList(['email'=>trim($params['email'])]);
+        if(count($exist_admin)){
             return Message::error("邮箱已被使用");
         }
         //检查角色

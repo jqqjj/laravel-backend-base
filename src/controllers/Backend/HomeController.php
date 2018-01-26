@@ -101,8 +101,8 @@ class HomeController extends Controller
         
         //检查邮箱是否被使用
         if(!empty($params['email'])){
-            $exsist_admin_email = $b_admin->getList(['email'=>trim($params['email'])]);
-            if(count($exsist_admin_email) && $exsist_admin_email[0]->admin_id!=$id){
+            $exist_admin_email = $b_admin->getList(['email'=>trim($params['email'])]);
+            if(count($exist_admin_email) && array_diff($exist_admin_email->pluck('admin_id')->toArray(),[$id])){
                 return Message::error("邮箱已被使用");
             }
         }

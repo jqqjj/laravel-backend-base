@@ -74,8 +74,8 @@ class RoleController extends Controller
         $save_data = [];
         if(!empty($params['role_name'])){
             //检查角色名是否被使用
-            $exsist_role = $b_role->getList(['role_name'=>trim($params['role_name'])]);
-            if(count($exsist_role) && $exsist_role[0]->role_id!=$id){
+            $exist_role = $b_role->getList(['role_name'=>trim($params['role_name'])]);
+            if(count($exist_role) && array_diff($exist_role->pluck("role_id")->toArray(),[$id])){
                 return Message::error("角色名已存在");
             }
             $save_data['role_name'] = trim($params['role_name']);
@@ -134,8 +134,8 @@ class RoleController extends Controller
         }
         
         //检查名称是否被使用
-        $exsist_role = $b_role->getList(['role_name'=>trim($params['role_name'])]);
-        if(count($exsist_role)){
+        $exist_role = $b_role->getList(['role_name'=>trim($params['role_name'])]);
+        if(count($exist_role)){
             return Message::error("角色名已存在");
         }
         
