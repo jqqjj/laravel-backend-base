@@ -3,7 +3,7 @@
 
 @push('css')
 <style type="text/css">
-    i.icon-success , i.icon-fail , i.icon-info{font-size: 60px;}
+    i.icon-success , i.icon-warn , i.icon-fail , i.icon-info{font-size: 60px;}
 </style>
 @endpush
 
@@ -19,6 +19,9 @@
         @if($type=="success")
         <div><i class="iconfont icon-success text-success"></i></div>
         <h3 class="text-success">{{$msg}}</h3>
+        @elseif($type=="warn")
+        <div><i class="iconfont icon-warn text-warning"></i></div>
+        <h3 class="text-warning">{{$msg}}</h3>
         @elseif($type=="error")
         <div><i class="iconfont icon-fail text-danger"></i></div>
         <h3 class="text-danger">{{$msg}}</h3>
@@ -26,7 +29,9 @@
         <div><i class="iconfont icon-info text-info"></i></div>
         <h3 class="text-info">{{$msg}}</h3>
         @endif
-        <p><span id="countdown">{{$type=="error"?5:3}}</span> 秒后自动跳转到第一个链接</p>
+        @if($type!="error")
+        <p><span id="countdown">{{$type=="warn"?30:3}}</span> 秒后自动跳转到第一个链接</p>
+        @endif
         <div><a class="btn btn-sm btn-link" href="{{$url?:"javascript:window.history.back();"}}">{{$label}}</a></div>
         @foreach($links as $link)
         <div><a class="btn btn-sm btn-link" href="{{$link['url']}}">{{$link['label']}}</a></div>
@@ -38,7 +43,7 @@
 @push("inline")
 <script type="text/javascript">
 $(function(){
-    window.setInterval(redirect, 1000); 
+    window.setInterval(redirect, 1000);
 })  
 
 function redirect(){

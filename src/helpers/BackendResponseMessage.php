@@ -21,6 +21,19 @@ class BackendResponseMessage
         return Route::dispatch($forward_request);
     }
     
+    public function warn($msg,array $forward=[],array $links=[])
+    {
+        $forward_request = Request::create('admin/warn-message', 'GET', array(
+            'msg'=>$msg,
+            '_forward'=>$forward,
+            '_links'=>$links,
+        ));
+        //$original_input = Request::input();
+        Request::replace($forward_request->input());
+        //Request::replace($original_input->input());
+        return Route::dispatch($forward_request);
+    }
+    
     public function error($msg,array $forward=[],array $links=[])
     {
         $forward_request = Request::create('admin/error-message', 'GET', array(

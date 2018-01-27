@@ -154,6 +154,24 @@ class HomeController extends Controller
         ]);
     }
     
+    public function warnMessage(Request $request)
+    {
+        $forward = $request->get('_forward');
+        
+        $msg = $request->get('msg');
+        $url = !empty($forward['url']) ? $forward['url'] : '';
+        $label = !empty($forward['label']) ? $forward['label'] : '';
+        
+        $server = $request->server();
+        return view('backend.home.message',[
+            'msg'=>!empty($msg) ? $msg : '部分操作失败',
+            'url'=>!empty($url) ? $url : (!empty($server['HTTP_REFERER']) ? $server['HTTP_REFERER'] : route('adminindex')),
+            'label'=>!empty($label) ? $label : "点击继续",
+            'type'=>'warn',
+            'links'=>$request->input("_links"),
+        ]);
+    }
+    
     public function errorMessage(Request $request)
     {
         $forward = $request->get('_forward');

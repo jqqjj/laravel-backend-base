@@ -11,6 +11,7 @@ $router->group(['prefix' => 'admin', 'namespace' => 'Backend'], function($router
     $router->get('/logout', 'LoginController@logout')->name('adminlogout');
     $router->get('/captcha', 'HomeController@captcha')->name('admincaptcha');
     $router->get('/success-message', 'HomeController@successMessage');
+    $router->get('/warn-message', 'HomeController@warnMessage');
     $router->get('/error-message', 'HomeController@errorMessage');
     
     $router->group(['middleware'=>'auth.backend:backend'],function($router){
