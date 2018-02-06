@@ -40,6 +40,10 @@ Register Event to the listen array in app/Providers/EventServiceProvider.php
     'App\Listeners\BacknedLoginListener',
 ],
 ```
+Publish files
+```php
+php artisan vendor:publish --provider="Jqqjj\BackendBase\BackendBaseProvider" --force
+```
 Load routes in function mapWebRoutes in file app/Providers/RouteServiceProvider.php
 ```php
 Route::group([
@@ -49,10 +53,7 @@ Route::group([
     require base_path('routes/backend.php');
 });
 ```
-Publish files
-```php
-php artisan vendor:publish --provider="Jqqjj\BackendBase\BackendBaseProvider" --force
-```
+Others: time zones setting,session setting(expire_on_close),db engine setting,key generate
 Run migrations
 ```php
 php artisan migrate
@@ -65,7 +66,6 @@ Seed database data
 ```php
 php artisan db:seed --class=RbacSeeder
 ```
-Others: time zones setting,session setting(expire_on_close),key generate
 ### Inspection
 backend url: yourdomain/admin/  
 login name:admin  

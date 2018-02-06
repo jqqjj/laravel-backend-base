@@ -13,5 +13,8 @@ return [
     'helpers'=>[
         'sort'=>App\Http\ViewHelper\SortHelper::class,
         'admin'=>App\Http\ViewHelper\AdminHelper::class,
+        'mask'=>App\Http\ViewHelper\MaskHelper::class,
+        'time'=>App\Http\ViewHelper\TimeHelper::class,
+        'selection'=> App\Http\ViewHelper\SelectionHelper::class,
     ],
 ];
