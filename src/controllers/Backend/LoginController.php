@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Facades\Human;
 use App\Facades\Captcha;
+use App\Events\AdminAccessedEvent;
 
 class LoginController extends Controller
 {
@@ -36,6 +37,7 @@ class LoginController extends Controller
         }
         if (Auth::guard('backend')->attempt(['name' => $name, 'password' => $password,'enabled'=>1],(bool)$remember)) {
             Human::attempt(true);
+            event(new AdminAccessedEvent(Auth::guard('backend')->user()));
             return redirect()->route("adminindex");
         }
         elseif (Auth::guard('backend')->attempt(['name' => $name, 'password' => $password],false,false)) {

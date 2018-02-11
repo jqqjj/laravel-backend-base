@@ -36,8 +36,8 @@ Register Middleware to the routeMiddleware array in app/Http/Kernel.php
 ```
 Register Event to the listen array in app/Providers/EventServiceProvider.php
 ```php
-'Illuminate\Auth\Events\Login'=>[
-    'App\Listeners\BacknedLoginListener',
+'App\Events\AdminAccessedEvent' => [
+	'App\Listeners\Backend\RecordLoginInfo',
 ],
 ```
 Publish files

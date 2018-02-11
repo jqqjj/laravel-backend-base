@@ -24,6 +24,7 @@ class BackendBaseProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . "/facades"=> app_path("Facades"),
             __DIR__ . "/helpers"=> app_path("Helpers"),
+			__DIR__ . "/events"=> app_path("Events"),
             __DIR__ . "/exceptions"=> app_path("Exceptions"),
             __DIR__ . "/listeners"=> app_path("Listeners"),
             __DIR__ . "/business"=> app_path("Http/Business"),
