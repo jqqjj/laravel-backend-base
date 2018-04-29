@@ -55,6 +55,12 @@ class Handler extends ExceptionHandler
             }
             return $response;
         }
+        
+        //custom error pages
+        if(!$exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException && !config('app.debug')){
+            return response()->view('errors.500', ['trace'=>$exception->getTraceAsString(),'error'=>$exception->getMessage()], 500);
+        }
+        
         return parent::render($request, $exception);
     }
 
