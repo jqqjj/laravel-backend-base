@@ -22,33 +22,43 @@
     </div>
     <div class="data-header">
         <h4 class="data-title pull-left">管理员列表</h4>
+        @permission('admin.delete')
         <a dobatch="confirm" href="{{route("admindeletebatch")}}" method="post" message="确定要删除吗?" selector="input[name='id']:checked" class="btn btn-danger btn-xs pull-left">删除</a>
+        @endpermission
+        @permission('admin.add')
         <a href="{{route("adminadd")}}" class="btn btn-success btn-xs pull-left">添加</a>
+        @endpermission
     </div>
     <div class="data">
         <table class="table table-hover table-striped">
             <tr>
                 <th><input class="checkbox-control" data-target="input[name='id']" type="checkbox" /></th>
-                <th>{!!ViewHelper::sort()->make($list,"编号","admin_id")!!}</th>
+                <th class="hidden-xs">{!!ViewHelper::sort()->make($list,"编号","admin_id")!!}</th>
                 <th>{!!ViewHelper::sort()->make($list,"登录名称","name")!!}</th>
                 <th>{!!ViewHelper::sort()->make($list,"昵称","nick_name")!!}</th>
-                <th>{!!ViewHelper::sort()->make($list,"电子邮箱","email")!!}</th>
-                <th>{!!ViewHelper::sort()->make($list,"最后登录时间","last_login_time")!!}</th>
-                <th><span class="text-muted">最后登录IP</span></th>
-                <th>{!!ViewHelper::sort()->make($list,"创建时间","created_at")!!}</th>
+                <th class="hidden-xs">{!!ViewHelper::sort()->make($list,"电子邮箱","email")!!}</th>
+                <th class="hidden-xs">{!!ViewHelper::sort()->make($list,"最后登录时间","last_login_time")!!}</th>
+                <th class="hidden-xs"><span class="text-muted">最后登录IP</span></th>
+                <th class="hidden-xs hidden-sm">{!!ViewHelper::sort()->make($list,"创建时间","created_at")!!}</th>
                 <th>{!!ViewHelper::sort()->make($list,"是否可用","enabled")!!}</th>
                 <th><span class="text-muted">操作</span></th>
             </tr>
             @foreach($list as $key=>$admin)
             <tr>
-                <td><input name="id" type="checkbox" value="{{$admin->admin_id}}" /></td>
+                <td class="hidden-xs"><input name="id" type="checkbox" value="{{$admin->admin_id}}" /></td>
                 <td>{{$admin->admin_id}}</td>
-                <td><a href="{{route('adminedit',['id'=>$admin->admin_id])}}">{{$admin->name}}</a></td>
+                <td>
+                    @permission('admin.edit')
+                    <a href="{{route('adminedit',['id'=>$admin->admin_id])}}">{{$admin->name}}</a>
+                    @else
+                    {{$admin->name}}
+                    @endpermission
+                </td>
                 <td>{{$admin->nick_name}}</td>
-                <td>{{$admin->email}}</td>
-                <td>{{$admin->last_login_time}}</td>
-                <td>{{$admin->last_login_ip}}</td>
-                <td>{{$admin->created_at}}</td>
+                <td class="hidden-xs">{{$admin->email}}</td>
+                <td class="hidden-xs">{{$admin->last_login_time}}</td>
+                <td class="hidden-xs">{{$admin->last_login_ip}}</td>
+                <td class="hidden-xs hidden-sm">{{$admin->created_at}}</td>
                 <td>
 					@if($admin->enabled)
                     <i class="iconfont icon-chenggongtishi text-success"></i>
@@ -57,8 +67,12 @@
                     @endif
 				</td>
                 <td>
+                    @permission('admin.edit')
                     <a href="{{route("adminedit",['id'=>$admin->admin_id])}}" class="btn btn-xs btn-primary">编辑</a>
+                    @endpermission
+                    @permission('admin.delete')
                     <a dobatch="confirm" href="{{route("admindeletebatch")}}" method="post" value="{{$admin->admin_id}}" message="确定删除吗" class="btn btn-xs btn-danger">删除</a>
+                    @endpermission
                 </td>
             </tr>
             @endforeach

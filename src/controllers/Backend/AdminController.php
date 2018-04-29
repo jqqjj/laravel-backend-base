@@ -113,7 +113,7 @@ class AdminController extends Controller
         }
         $save_data['email'] = trim($params['email']);
         
-        if(!empty($params['resetpwd']) && !empty($params['password'])){
+        if(!empty($params['password'])){
             $save_data['password'] = $params['password'];
         }
         //检查角色

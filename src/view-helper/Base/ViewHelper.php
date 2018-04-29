@@ -2,11 +2,13 @@
 
 
 namespace App\Http\ViewHelper\Base;
+
 use RuntimeException;
 
 class ViewHelper
 {
     private $_alias = [];
+    private $_instances = [];
     
     public function __construct()
     {
@@ -24,6 +26,10 @@ class ViewHelper
             throw new RuntimeException("ViewHelper '{$helper_name}' doesn't exists.");
         }
         
-        return app()->make($this->_alias[$helper_name], $arguments);
+        if(!isset($this->_instances[$helper_name])){
+            $this->_instances[$helper_name] = app()->make($this->_alias[$helper_name], $arguments);
+        }
+        
+        return $this->_instances[$helper_name];
     }
 }

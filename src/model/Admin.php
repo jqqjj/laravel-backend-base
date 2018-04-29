@@ -18,10 +18,10 @@ class Admin extends Authenticatable
     public function hasPermission($expression)
     {
         $permissions = [];
-        foreach ($this->roles()->get() as $role){
+        foreach ($this->roles as $role){
             $permissions = array_merge($permissions,$role->permissions()->pluck('permission')->toArray());
         }
-        return array_intersect(explode('|', $expression),$permissions) || $this->admin_id==1;
+        return $this->admin_id==1 || array_intersect(explode('|', $expression),$permissions);
     }
     
     public function roles()

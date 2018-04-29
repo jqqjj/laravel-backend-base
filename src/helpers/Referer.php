@@ -21,7 +21,7 @@ class Referer
     
     public function match($base)
     {
-        $this->_referer = $this->fetchRequestReferer($base) ? : ($this->fetchServerReferer($base) ? : ($base=="*"?'/':$base));
+        $this->_referer = $this->fetchRequestReferer($base) ? : ($this->fetchServerReferer($base) ? : $base);
         return $this->_referer;
     }
     

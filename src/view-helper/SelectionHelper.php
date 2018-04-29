@@ -1,9 +1,5 @@
 <?php
 
-/**
- * {!!ViewHelper::selection()->collection([array|LengthAwarePaginator],[selected value],[first item],"[name of select in form]",'[dom element class value]')!!}
- */
-
 
 namespace App\Http\ViewHelper;
 

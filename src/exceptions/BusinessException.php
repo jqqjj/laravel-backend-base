@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 
-class BackendException extends Exception
+class BusinessException extends Exception
 {
     private $data;
     

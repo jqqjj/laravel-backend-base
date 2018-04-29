@@ -5,7 +5,7 @@ namespace App\Http\Business;
 use App\Model\Admin;
 use Illuminate\Support\Facades\Validator;
 use App\Facades\Pagination;
-use App\Exceptions\BackendException;
+use App\Exceptions\BusinessException;
 
 class AdminBusiness
 {
@@ -85,7 +85,7 @@ class AdminBusiness
             'last_login_time'=>'最后登录时间',
         ]);
         if ($validator->fails()) {
-            throw new BackendException(1000,$validator->messages()->first());
+            throw new BusinessException(1000,$validator->messages()->first());
         }
         
         foreach(array_intersect_key($data, array_flip([
@@ -136,7 +136,7 @@ class AdminBusiness
             'last_login_time'=>'最后登录时间',
         ]);
         if ($validator->fails()) {
-            throw new BackendException(1000,$validator->messages()->first());
+            throw new BusinessException(1000,$validator->messages()->first());
         }
         
         $builder = new Admin();

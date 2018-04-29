@@ -6,7 +6,7 @@ namespace App\Http\Business;
 use App\Model\Roles;
 use Illuminate\Support\Facades\Validator;
 use App\Facades\Pagination;
-use App\Exceptions\BackendException;
+use App\Exceptions\BusinessException;
 
 class RoleBusiness
 {
@@ -42,7 +42,7 @@ class RoleBusiness
             'remark'=>'描述',
         ]);
         if ($validator->fails()) {
-            throw new BackendException(1000,$validator->messages()->first());
+            throw new BusinessException(1000,$validator->messages()->first());
         }
         
         foreach(array_intersect_key($data, array_flip([
@@ -78,7 +78,7 @@ class RoleBusiness
             'remark'=>'描述',
         ]);
         if ($validator->fails()) {
-            throw new BackendException(1000,$validator->messages()->first());
+            throw new BusinessException(1000,$validator->messages()->first());
         }
         
         $builder = new Roles();

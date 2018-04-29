@@ -3,14 +3,16 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
+use App\Helpers\Permission as PermissionHelper;
 use App\Facades\BackendMessage;
 
 class Permission
 {
-    public function __construct()
+    private $_permission;
+    
+    public function __construct(PermissionHelper $h_permission)
     {
-        
+        $this->_permission = $h_permission;
     }
     /**
      * Handle an incoming request.
@@ -21,15 +23,7 @@ class Permission
      */
     public function handle($request, Closure $next, $arg)
     {
-        if (Auth::guard('backend')->guest()) {
-            if ($request->expectsJson()) {
-                return BackendMessage::json(401,"您未登录");
-            } else {
-                return BackendMessage::error('您未登录', ['label'=>'','url'=>route('adminlogin')]);
-            }
-        }
-        
-        if(!Auth::guard('backend')->user()->hasPermission($arg) && Auth::guard('backend')->id()!=1){
+        if(!$this->_permission->has($arg)){
             if ($request->expectsJson()) {
                 return BackendMessage::json(401,"权限不足");
             } else {

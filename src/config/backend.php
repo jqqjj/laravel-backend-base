@@ -11,6 +11,7 @@ return [
     'captcha_session_key_prefix'=>'captcha_backend_',//验证码session索引前缀
     
     'helpers'=>[
+        'permission'=> App\Http\ViewHelper\PermissionHelper::class,
         'sort'=>App\Http\ViewHelper\SortHelper::class,
         'admin'=>App\Http\ViewHelper\AdminHelper::class,
         'mask'=>App\Http\ViewHelper\MaskHelper::class,

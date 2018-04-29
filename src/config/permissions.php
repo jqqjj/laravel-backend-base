@@ -4,7 +4,7 @@ return [
     [
         'name'=>'权限管理',
         'list'=>[
-            'admin.list'=>'查看管理员列表',
+            'admin.list'=>'查看管理员',
             'admin.add'=>'添加管理员',
             'admin.edit'=>'编辑管理员',
             'admin.delete'=>'删除管理员',

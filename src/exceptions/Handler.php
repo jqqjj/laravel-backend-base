@@ -5,7 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use App\Exceptions\BackendException;
+use App\Exceptions\BusinessException;
 use App\Facades\BackendMessage;
 
 class Handler extends ExceptionHandler
@@ -22,7 +22,7 @@ class Handler extends ExceptionHandler
         \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
-        BackendException::class,
+        BusinessException::class,
     ];
 
     /**
@@ -47,7 +47,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if($exception instanceof BackendException){
+        if($exception instanceof BusinessException){
             if($request->expectsJson()){
                 $response = BackendMessage::json($exception->getCode(),$exception->getMessage(),$exception->getData());
             }else{

@@ -8,31 +8,32 @@ use App\Model\Admin;
 
 class AdminHelper
 {
-    private $admin;
+    public function autoname($admin = null)
+    {
+        $adminModel = $this->_getAdmin($admin);
+        return $adminModel->nick_name ? : $adminModel->name;
+    }
     
-    public function __construct($admin = null)
+    public function nickname($admin = null)
+    {
+        $adminModel = $this->_getAdmin($admin);
+        return $adminModel->nick_name;
+    }
+    
+    public function name($admin = null)
+    {
+        $adminModel = $this->_getAdmin($admin);
+        return $adminModel->name;
+    }
+    
+    private function _getAdmin($admin)
     {
         if($admin instanceof Admin){
-            $this->admin = $admin;
+            return $admin;
         }elseif(!empty($admin)){
-            $this->admin = Admin::withTrashed()->findOrFail($admin);
+            return Admin::withTrashed()->findOrFail($admin);
         }else{
-            $this->admin = Auth::guard("backend")->user();
+            return Auth::guard("backend")->user();
         }
-    }
-    
-    public function autoname()
-    {
-        return $this->admin->nick_name ? : $this->admin->name;
-    }
-    
-    public function nickname()
-    {
-        return $this->admin->nick_name;
-    }
-    
-    public function name()
-    {
-        return $this->admin->name;
     }
 }

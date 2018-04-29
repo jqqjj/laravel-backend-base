@@ -10,7 +10,7 @@ use App\Helpers\BytesFormat;
 use App\Facades\Captcha;
 use App\Facades\Human;
 use Illuminate\Support\Facades\Artisan;
-use App\Exceptions\BackendException;
+use App\Exceptions\BusinessException;
 use App\Facades\BackendMessage as Message;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +46,7 @@ class HomeController extends Controller
         
         $clean = $request->input("clean");
         if(empty($clean) || !is_array($clean)){
-            throw new BackendException(10000,"请选择清理类型");
+            throw new BusinessException(10000,"请选择清理类型");
         }
         if(in_array('data', $clean)){
             Artisan::call("cache:clear");
