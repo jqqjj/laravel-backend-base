@@ -74,6 +74,7 @@ class BackendBaseProvider extends ServiceProvider
         $this->app->singleton('human', function(){
             return new Human();
         });
+		
 		$this->app->singleton('request_client', function(){
             return new RequestClient();
         });
