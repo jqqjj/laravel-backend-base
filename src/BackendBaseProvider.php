@@ -10,6 +10,7 @@ use App\Helpers\Documents;
 use App\Helpers\Human;
 use App\Helpers\Captcha;
 use App\Helpers\Referer;
+use App\Helpers\RequestClient;
 use App\Http\ViewHelper\Base\ViewHelper;
 
 class BackendBaseProvider extends ServiceProvider
@@ -72,6 +73,9 @@ class BackendBaseProvider extends ServiceProvider
         });
         $this->app->singleton('human', function(){
             return new Human();
+        });
+		$this->app->singleton('request_client', function(){
+            return new RequestClient();
         });
         
         $this->app->singleton('viewhelper', ViewHelper::class);

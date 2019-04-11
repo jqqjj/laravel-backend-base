@@ -15,7 +15,19 @@ class Pagination
      */
     public function make(Builder $builder,array $condition=[])
     {
-        if (!empty($condition['all']) || !empty($condition['count'])) {//获取全部列表
+        if(!empty($condition['count'])){
+            return $builder->count(is_string($condition['count']) || is_array($condition['count']) ? $condition['count'] : '*');
+        }
+        if(!empty($condition['sum'])){
+            return $builder->sum($condition['sum']);
+        }
+        if(!empty($condition['max'])){
+            return $builder->max($condition['max']);
+        }
+        if(!empty($condition['min'])){
+            return $builder->min($condition['min']);
+        }
+        if (!empty($condition['all'])){//获取全部列表
             return $this->all($builder,$condition);
         }else{//返回分页对象
             return $this->paginate($builder,$condition);
@@ -29,11 +41,7 @@ class Pagination
      */
     public function all(Builder $builder,array $condition=[])
     {
-        if(!empty($condition['count'])){
-            return $builder->count();
-        }else{
-            return $this->sort($builder,$condition)->get();
-        }
+        return $this->sort($builder,$condition)->get();
     }
     
     /**
@@ -45,7 +53,7 @@ class Pagination
     public function paginate(Builder $builder,array $condition=[])
     {
         $page_size = !empty($condition['page_size']) ? $condition['page_size'] : config("backend.list.page_size");
-        return $this->sort($builder,$condition)->paginate($page_size);
+        return $this->sort($builder,$condition)->paginate($page_size, ['*'], 'page', !empty($condition['page'])?$condition['page']:null);
     }
     
     /**

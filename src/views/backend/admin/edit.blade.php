@@ -20,7 +20,7 @@
             <div class="form-group">
                 <label class="col-xs-3 col-md-2 col-lg-2 control-label">登录名称</label>
                 <div class="col-xs-6 col-md-3 col-lg-3">
-                    <input class="form-control input-sm" name="name" type="text" value="{{$admin->name}}"/>
+                    <input class="form-control input-sm" name="name" type="text" value="{{$admin->name}}" autocomplete="off" />
                     <small class="help-block">可以包含字母、数字或下划线，须以字母开头，长度为4-16个字符</small>
                 </div>
             </div>
@@ -33,26 +33,26 @@
             <div class="form-group hidden">
                 <label class="col-xs-3 col-md-2 col-lg-2 control-label">密码</label>
                 <div class="col-xs-6 col-md-3 col-lg-3">
-                    <input class="form-control input-sm" name="password" type="password" />
+                    <input class="form-control input-sm" name="password" type="password" autocomplete="off" />
                     <small class="help-block">可以包含字母、数字以及特殊符号，长度为6-32个字符</small>
                 </div>
             </div>
             <div class="form-group hidden">
                 <label class="col-xs-3 col-md-2 col-lg-2 control-label">确认密码</label>
                 <div class="col-xs-6 col-md-3 col-lg-3">
-                    <input class="form-control input-sm" name="repassword" type="password" />
+                    <input class="form-control input-sm" name="repassword" type="password" autocomplete="off" />
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-xs-3 col-md-2 col-lg-2 control-label">昵称</label>
                 <div class="col-xs-6 col-md-3 col-lg-3">
-                    <input class="form-control input-sm" name="nick_name" type="text" value="{{$admin->nick_name}}" />
+                    <input class="form-control input-sm" name="nick_name" type="text" value="{{$admin->nick_name}}" autocomplete="off" />
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-xs-3 col-md-2 col-lg-2 control-label">邮箱</label>
                 <div class="col-xs-6 col-md-3 col-lg-3">
-                    <input class="form-control input-sm" name="email" type="text" value="{{$admin->email}}" />
+                    <input class="form-control input-sm" name="email" type="text" value="{{$admin->email}}" autocomplete="off" />
                 </div>
             </div>
             <div class="form-group">

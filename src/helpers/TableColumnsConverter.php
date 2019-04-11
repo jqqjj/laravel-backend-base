@@ -7,7 +7,7 @@ class TableColumnsConverter
 {
     public function format($key,$value)
     {
-        $config = config("site.columns");
+        $config = config("column.columns");
         list($table,$column) = explode('.', $key, 2);
         return key_exists($table, $config) 
                 && key_exists($column, $config[$table]) 
@@ -17,7 +17,7 @@ class TableColumnsConverter
     
     public function getConfig($key)
     {
-        $config = config("site.columns");
+        $config = config("column.columns");
         list($table,$column) = explode('.', $key, 2);
         return key_exists($table, $config) 
                 && key_exists($column, $config[$table]) 

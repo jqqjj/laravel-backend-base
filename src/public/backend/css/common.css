@@ -4,6 +4,16 @@ i.iconfont{font-size: 12px;}
 .popover{font-size: 12px;word-wrap: break-word;}
 .dropdown-menu{font-size: 12px;}
 .table{margin-bottom:0;}
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 2px 0 0;
+}
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  margin-left: -16px;
+}
 
 .data-topbar{margin: 15px 0 0;background: #f9f9f9;padding: 15px 10px 10px;overflow: hidden;}
 .data-header{margin: 15px 0 0;border-bottom: 1px solid #009688;padding: 10px 0; overflow: hidden;}
@@ -12,12 +22,13 @@ i.iconfont{font-size: 12px;}
 .data{margin: 20px 0 0;}
 table.table tbody th{vertical-align: middle;}
 td .info{overflow:hidden;white-space:nowrap;text-overflow:ellipsis; float: left;margin: 0;padding: 0;}
-td .info + i{margin-left: 5px;cursor: pointer;}
-td .info + i.active{color: #d9534f;}
+i.icon-infocircle{cursor: pointer;}
+i.icon-infocircle.active{color: #d9534f;}
+td .info + i{margin-left: 5px;}
 @media (max-width:768px){.info{max-width: 50px;}}
-@media (min-width:768px){.info{max-width: 100px;} .form-inline .form-group{margin-bottom:5px;}}
-@media (min-width:992px){.info{max-width: 160px;}}
-@media (min-width:1170px){.info{max-width: 250px;}}
+@media (min-width:768px){.info{max-width: 80px;} .form-inline .form-group{margin-bottom:5px;}}
+@media (min-width:992px){.info{max-width: 120px;}}
+@media (min-width:1170px){.info{max-width: 150px;}}
 .table-no-data{padding: 8px 0;border-top: 1px solid #ddd;}
 .pagination-count{float: left;margin: 20px 0px;padding: 6px 12px;}
 .pagination{float: left;}

@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('formvalidation/css/formValidation.min.css')}}" />
 <style type="text/css">
     .permission{overflow: hidden;padding-bottom: 20px;}
-    .permission-label{float: left;width: 90px;}
+    .permission-label{float: left;width: 100px;}
     .permission-list{float: left;}
 </style>
 @endpush
@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label class="col-xs-3 col-md-2 col-lg-2 control-label">角色名</label>
                 <div class="col-xs-6 col-md-3 col-lg-3">
-                    <input class="form-control input-sm" name="role_name" type="text" value=""/>
+                    <input class="form-control input-sm" name="role_name" type="text" value="" autocomplete="off" />
                 </div>
             </div>
             <div class="form-group">
