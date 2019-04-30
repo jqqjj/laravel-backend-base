@@ -33,7 +33,7 @@ class RoleBusiness
         
         $validator = Validator::make($data, [
             'role_name' => ['sometimes','required','max:50'],
-            'remark' => ['sometimes','max:255'],
+            'remark' => ['sometimes','max:190'],
         ],[
             'required'=>":attribute不能为空",
             "max"=>":attribute 不得多于:max字数",
@@ -69,7 +69,7 @@ class RoleBusiness
     {
         $validator = Validator::make($data, [
             'role_name' => ['required','max:50'],
-            'remark' => ['sometimes','max:255'],
+            'remark' => ['sometimes','max:190'],
         ],[
             'required'=>":attribute不能为空",
             "max"=>":attribute 不得多于:max字数",

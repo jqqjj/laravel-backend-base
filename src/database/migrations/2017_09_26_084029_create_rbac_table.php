@@ -15,10 +15,10 @@ class CreateRbacTable extends Migration
     {
         Schema::create('admin', function (Blueprint $table) {
             $table->increments('admin_id');
-            $table->string('name',255);
-            $table->string('password',255);
-            $table->string('nick_name',255)->default('');
-            $table->string('email',255);
+            $table->string('name',190);
+            $table->string('password',190);
+            $table->string('nick_name',190)->default('');
+            $table->string('email',190);
             $table->integer('enabled')->unsigned()->default(1);
             $table->rememberToken();
             $table->timestamps();
@@ -26,8 +26,8 @@ class CreateRbacTable extends Migration
         });
         Schema::create('roles', function (Blueprint $table) {
             $table->increments('role_id');
-            $table->string('role_name',255)->unique();
-            $table->text('remark',255);
+            $table->string('role_name',190)->unique();
+            $table->text('remark',190);
             $table->timestamps();
         });
         Schema::create('admin_roles', function (Blueprint $table) {
@@ -42,12 +42,12 @@ class CreateRbacTable extends Migration
             $table->increments('role_permission_id');
             $table->integer('role_id')->unsigned();
             $table->foreign('role_id')->references('role_id')->on('roles');
-            $table->string('permission',255);
+            $table->string('permission',190);
             $table->timestamps();
         });
         //change
         Schema::table('admin', function (Blueprint $table) {
-            $table->string('last_login_ip')->default("")->after('remember_token');
+            $table->string('last_login_ip',190)->default("")->after('remember_token');
             $table->timestamp('last_login_time')->nullable()->after('last_login_ip');
         });
     }

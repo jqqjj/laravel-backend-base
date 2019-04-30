@@ -99,8 +99,8 @@
                 role_desc: {
                     validators: {
                         stringLength: {
-                            max: 255,
-                            message: '长度不能超过255位'
+                            max: 190,
+                            message: '长度不能超过190位'
                         }
                     }
                 }
